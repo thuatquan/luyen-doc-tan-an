@@ -86,10 +86,12 @@ MINECRAFT_TREASURES = [
 ]
 
 VOICES = {
-    "Cô Hoài My (Giọng nữ chuẩn phổ thông)": "vi-VN-HoaiMyNeural",
-    "Thầy Nam Minh (Giọng nam chuẩn phổ thông)": "vi-VN-NamMinhNeural",
+    "👩‍🏫 Cô Hoài My (Giọng chuẩn ấm áp)": ("vi-VN-HoaiMyNeural", "+0Hz"),
+    "👧 Cô Thảo Vy (Giọng trẻ trung, kể chuyện)": ("vi-VN-HoaiMyNeural", "+6Hz"),
+    "👨‍🏫 Thầy Nam Minh (Giọng nam chuẩn, rõ chữ)": ("vi-VN-NamMinhNeural", "+0Hz"),
+    "🎙️ Thầy Minh Khang (Giọng nam trầm ấm)": ("vi-VN-NamMinhNeural", "-5Hz"),
 }
-SPEEDS = {"Đọc chậm (dễ nghe từng tiếng)": "-20%", "Đọc vừa (tốc độ tự nhiên)": "-8%"}
+SPEEDS = {"Đọc chậm (dễ nghe)": "-20%", "Đọc vừa (tự nhiên)": "-8%"}
 
 st.set_page_config(
     page_title=f"Luyện Đọc & Đấu Trường Dino - {SCHOOL_DISPLAY}",
@@ -98,14 +100,15 @@ st.set_page_config(
 )
 
 # =====================================================================
-# HỆ THỐNG GIAO DIỆN TỐI GIẢN, GỌN GÀNG, HIỆN ĐẠI (CLEAN EDTECH × CHROME DINO)
+# HỆ THỐNG GIAO DIỆN HIỆN ĐẠI CHUYÊN NGHIỆP (MOBILE-FIRST READING STUDIO)
+# Giải quyết triệt để lỗi khuất bài đọc khi thu âm trên điện thoại
 # =====================================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@700&display=swap');
 
     :root {
-        --bg-page: #F8FAFC;
+        --bg-page: #F4F7FB;
         --bg-card: #FFFFFF;
         --ink-main: #0F172A;
         --ink-sub: #475569;
@@ -113,10 +116,10 @@ st.markdown("""
         --border-mid: #CBD5E1;
         --emerald: #10B981;
         --emerald-dark: #059669;
-        --radius-lg: 16px;
+        --radius-lg: 18px;
         --radius-md: 12px;
-        --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
-        --shadow-sm: 0 1px 4px rgba(15, 23, 42, 0.04);
+        --shadow-card: 0 8px 24px -4px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+        --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
     }
 
     html, body, [class*="css"] {
@@ -151,12 +154,13 @@ st.markdown("""
     }
 
     .stApp {
-        background-color: var(--bg-page);
+        background: linear-gradient(180deg, #ECFDF5 0%, #F4F7FB 260px);
+        background-attachment: fixed;
     }
     .block-container {
-        padding-top: 0.75rem;
+        padding-top: 0.6rem;
         padding-bottom: 2.2rem;
-        max-width: 980px;
+        max-width: 960px;
     }
 
     button, a, input, select, [role="tab"], [data-testid="stAudioInput"] {
@@ -164,15 +168,14 @@ st.markdown("""
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* Nhãn và ô chọn gọn gàng, chữ rõ ràng dễ đọc */
     label[data-testid="stWidgetLabel"] p {
-        font-size: 15.5px !important;
+        font-size: 15px !important;
         font-weight: 800 !important;
         color: #1E293B !important;
     }
     div[data-baseweb="select"] > div {
-        min-height: 44px !important;
-        font-size: 16px !important;
+        min-height: 43px !important;
+        font-size: 15.5px !important;
         font-weight: 700 !important;
         border: 1.5px solid var(--border-mid) !important;
         border-radius: 10px !important;
@@ -181,54 +184,49 @@ st.markdown("""
     }
     div[data-baseweb="select"] > div:focus-within {
         border-color: var(--emerald-dark) !important;
-        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
-    }
-    input[type="text"] {
-        font-size: 16px !important;
-        font-weight: 700 !important;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16) !important;
     }
 
-    /* ================= 1. HEADER GỌN GÀNG (1 DÒNG DUY NHẤT) ================= */
+    /* ================= 1. HEADER HIỆN ĐẠI, GỌN GÀNG ================= */
     .compact-header {
         background: #FFFFFF;
         border: 1px solid var(--border-soft);
-        border-left: 6px solid var(--emerald);
         border-radius: var(--radius-lg);
-        padding: 14px 20px;
+        padding: 12px 18px;
         box-shadow: var(--shadow-card);
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 14px;
+        gap: 12px;
         flex-wrap: wrap;
     }
     .header-left {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
     }
     .dino-avatar {
-        width: 50px;
-        height: 50px;
+        width: 46px;
+        height: 46px;
         border-radius: 12px;
-        background: #F1F5F9;
-        border: 1px solid var(--border-mid);
+        background: linear-gradient(135deg, #059669 0%, #10B981 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
     }
     .school-sub {
-        font-size: 12.5px;
+        font-size: 12px;
         font-weight: 800;
         color: var(--emerald-dark);
         text-transform: uppercase;
-        letter-spacing: 0.4px;
+        letter-spacing: 0.5px;
     }
     .app-title {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 23px;
+        font-size: 21px;
         font-weight: 800;
         color: var(--ink-main);
         line-height: 1.15;
@@ -238,13 +236,13 @@ st.markdown("""
         background: #F8FAFC;
         border: 1px solid var(--border-mid);
         border-radius: 999px;
-        padding: 7px 16px;
-        font-size: 14.5px;
+        padding: 6px 14px;
+        font-size: 14px;
         font-weight: 800;
         color: var(--ink-main);
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
     }
     .student-status-pill.active {
         background: #ECFDF5;
@@ -252,12 +250,12 @@ st.markdown("""
         color: #065F46;
     }
 
-    /* ================= 2. THANH BẢNG XẾP HẠNG MINI NGAY ĐẦU TRANG ================= */
+    /* ================= 2. BẢNG XẾP HẠNG TRỰC TIẾP CUỘN NGANG MƯỢT MÀ ================= */
     .top-leaderboard-strip {
         background: #FFFFFF;
         border: 1px solid var(--border-soft);
         border-radius: var(--radius-lg);
-        padding: 12px 16px;
+        padding: 10px 14px;
         margin-bottom: 8px;
         box-shadow: var(--shadow-card);
     }
@@ -265,33 +263,34 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 14px;
+        font-size: 13.5px;
         font-weight: 800;
         color: var(--ink-sub);
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     .podium-strip-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
+        gap: 8px;
     }
     .mini-podium {
         border: 1px solid var(--border-soft);
         border-radius: 10px;
-        padding: 8px 12px;
+        padding: 7px 10px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         background: #F8FAFC;
+        min-width: 0;
     }
-    .mini-podium.mp-1 { background: #FEFCE8; border-color: #FDE047; }
+    .mini-podium.mp-1 { background: linear-gradient(135deg, #FEFCE8 0%, #FEF08A 100%); border-color: #FDE047; }
     .mini-podium.mp-2 { background: #F8FAFC; border-color: #CBD5E1; }
     .mini-podium.mp-3 { background: #FFF7ED; border-color: #FDBA74; }
     .mini-podium.mp-cls { background: #ECFDF5; border-color: #6EE7B7; }
-    .mp-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+    .mp-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
     .mp-body { min-width: 0; flex: 1; }
     .mp-title {
-        font-size: 14.5px;
+        font-size: 14px;
         font-weight: 800;
         color: var(--ink-main);
         white-space: nowrap;
@@ -299,58 +298,77 @@ st.markdown("""
         text-overflow: ellipsis;
     }
     .mp-sub {
-        font-size: 12.5px;
+        font-size: 12px;
         font-weight: 700;
         color: var(--ink-sub);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    /* ================= 3. KHUNG THẺ TRẮNG SẠCH SẼ, KHÔNG VIỀN ĐEN DÀY ================= */
+    /* ================= 3. KHUNG THẺ TRẮNG SẠCH SẼ ================= */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: #FFFFFF !important;
         border: 1px solid var(--border-soft) !important;
         border-radius: var(--radius-lg) !important;
-        padding: 14px 18px !important;
+        padding: 12px 16px !important;
         box-shadow: var(--shadow-card) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 10px !important;
     }
 
-    /* ================= 4. KHUNG BÀI ĐỌC NỔI BẬT, CHỮ TO RÕ NÉT ================= */
+    /* ================= 4. THANH GHI ÂM NỔI (STICKY AUDIO DOCK) & TRANG SÁCH =================
+       Đặt Micro ngay phía trên bài đọc và ghim nổi khi cuộn để học sinh trên điện thoại
+       VỪA BẤM GHI ÂM VỪA NHÌN THẤY TOÀN BỘ BÀI ĐỌC BÊN DƯỚI!
+    */
+    [data-testid="stAudioInput"] {
+        background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%) !important;
+        border: 2px solid #10B981 !important;
+        border-radius: 14px !important;
+        padding: 6px 12px !important;
+        box-shadow: 0 6px 16px rgba(16, 185, 129, 0.14) !important;
+        position: sticky !important;
+        top: 6px !important;
+        z-index: 98 !important;
+    }
+
     .reading-card-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 8px;
-        background: #0F172A;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
         color: #FFFFFF;
-        padding: 12px 20px;
+        padding: 11px 18px;
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        margin-top: 4px;
+        margin-top: 2px;
     }
     .reading-card-title {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 22px;
+        font-size: 21px;
         font-weight: 800;
         color: #FDE047;
     }
     .reading-card-meta {
-        font-size: 14px;
+        font-size: 13.5px;
         font-weight: 700;
-        color: #CBD5E1;
+        color: #A7F3D0;
     }
     .reading-box {
         font-size: 28px !important;
         font-weight: 800;
         color: var(--ink-main);
-        line-height: 2.0;
+        line-height: 1.95;
         letter-spacing: 0.2px;
-        background: #FFFDF9;
-        padding: 24px 28px;
+        background: #FFFDF8;
+        background-image: linear-gradient(transparent 96%, rgba(16, 185, 129, 0.08) 96%);
+        background-size: 100% 1.95em;
+        padding: 20px 24px;
         border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         border: 1.5px solid var(--border-mid);
         border-top: none;
         border-left: 6px solid var(--emerald);
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         box-shadow: var(--shadow-card);
     }
     .w-ok { color: #047857; }
@@ -372,10 +390,10 @@ st.markdown("""
         background: #FFFBEB;
         border: 1px solid #FDE68A;
         border-radius: var(--radius-md);
-        padding: 10px 14px;
-        margin-bottom: 14px;
+        padding: 8px 14px;
+        margin-bottom: 10px;
         font-weight: 800;
-        font-size: 15.5px;
+        font-size: 15px;
         color: #92400E;
     }
     .tags span {
@@ -384,10 +402,10 @@ st.markdown("""
         color: var(--ink-main);
         border: 1px solid #F59E0B;
         border-radius: 8px;
-        padding: 2px 12px;
-        margin: 3px 4px;
+        padding: 2px 10px;
+        margin: 2px 4px;
         font-weight: 800;
-        font-size: 16.5px;
+        font-size: 16px;
     }
 
     .comment {
@@ -396,14 +414,14 @@ st.markdown("""
         border-left: 5px solid var(--emerald);
         border-radius: var(--radius-md);
         padding: 14px 18px;
-        font-size: 16.5px;
+        font-size: 16px;
         line-height: 1.75;
         color: var(--ink-main);
     }
     .comment p { margin: 6px 0; }
     .heard {
         color: var(--ink-main);
-        font-size: 16px;
+        font-size: 15.5px;
         font-weight: 700;
         background: #F8FAFC;
         border-radius: 10px;
@@ -414,20 +432,20 @@ st.markdown("""
     .reward {
         text-align: center;
         border-radius: var(--radius-lg);
-        padding: 18px 16px;
-        margin: 10px 0 16px;
+        padding: 16px 14px;
+        margin: 8px 0 14px;
         background: linear-gradient(180deg, #FEFCE8 0%, #FEF08A 100%);
         border: 1.5px solid #FACC15;
         box-shadow: var(--shadow-card);
     }
     .reward .big {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 24px;
+        font-size: 23px;
         font-weight: 800;
         color: var(--ink-main);
     }
-    .reward .sub { color: #78350F; font-size: 16px; font-weight: 700; margin-top: 4px; }
-    .star { font-size: 40px; display: inline-block; margin: 0 2px; }
+    .reward .sub { color: #78350F; font-size: 15.5px; font-weight: 700; margin-top: 4px; }
+    .star { font-size: 38px; display: inline-block; margin: 0 2px; }
     .star.on { animation: pop .5s cubic-bezier(.2,1.6,.4,1) both; }
     .star.off { filter: grayscale(1); opacity: .22; }
     @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -458,9 +476,9 @@ st.markdown("""
 
     .chest-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-        gap: 10px;
-        margin: 10px 0;
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+        gap: 8px;
+        margin: 8px 0;
     }
     .chest-item {
         border-radius: var(--radius-md);
@@ -488,25 +506,24 @@ st.markdown("""
         box-shadow: var(--shadow-sm);
     }
 
-    /* Thanh Tab điều hướng gọn gàng, hiện đại */
     div[data-baseweb="tab-list"] {
-        gap: 8px !important;
-        background: #F1F5F9 !important;
+        gap: 6px !important;
+        background: #E2E8F0 !important;
         border-radius: 12px !important;
-        padding: 5px !important;
+        padding: 4px !important;
         overflow-x: auto !important;
         flex-wrap: nowrap !important;
         scrollbar-width: none;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
     }
     div[data-baseweb="tab-list"]::-webkit-scrollbar { display: none; }
     button[data-baseweb="tab"] {
         background: transparent !important;
         border: none !important;
         border-radius: 9px !important;
-        padding: 9px 16px !important;
+        padding: 8px 15px !important;
         font-weight: 800 !important;
-        font-size: 15.5px !important;
+        font-size: 15px !important;
         color: #475569 !important;
         white-space: nowrap !important;
         flex-shrink: 0 !important;
@@ -515,7 +532,7 @@ st.markdown("""
     button[data-baseweb="tab"][aria-selected="true"] {
         background: #FFFFFF !important;
         color: #059669 !important;
-        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08) !important;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08) !important;
     }
     div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
         display: none !important;
@@ -524,51 +541,56 @@ st.markdown("""
     div.stButton > button, div.stFormSubmitButton > button {
         border-radius: 10px !important;
         font-weight: 800 !important;
-        font-size: 16px !important;
-        padding: 0.55rem 1.2rem !important;
+        font-size: 15.5px !important;
+        padding: 0.5rem 1.1rem !important;
         border: 1.5px solid var(--border-mid) !important;
         box-shadow: var(--shadow-sm) !important;
         cursor: pointer !important;
     }
     div.stButton > button[kind="primary"], div.stFormSubmitButton > button[kind="primary"] {
-        background: var(--emerald-dark) !important;
+        background: linear-gradient(135deg, #059669 0%, #10B981 100%) !important;
         color: #FFFFFF !important;
-        border-color: var(--emerald-dark) !important;
-    }
-
-    [data-testid="stAudioInput"] {
-        background: #F0FDF4;
-        border: 1.5px solid #86EFAC;
-        border-radius: var(--radius-md);
-        padding: 8px 12px;
+        border-color: #059669 !important;
     }
 
     .footer-pro {
         text-align: center;
-        margin: 28px 0 8px;
-        padding: 14px 16px;
+        margin: 24px 0 8px;
+        padding: 12px 16px;
         border-radius: var(--radius-md);
         color: var(--ink-sub);
         background: #FFFFFF;
         border: 1px solid var(--border-soft);
         font-weight: 700;
-        font-size: 14.5px;
+        font-size: 14px;
     }
     .footer-pro .sch-name {
         color: #065F46;
         font-weight: 800;
-        font-size: 16px;
+        font-size: 15.5px;
     }
 
+    /* Tối ưu hoàn hảo trên màn hình Điện thoại */
     @media (max-width: 680px) {
-        .block-container { padding-top: 0.4rem; padding-left: 0.55rem; padding-right: 0.55rem; }
-        .compact-header { padding: 12px 14px; }
-        .app-title { font-size: 19px; }
-        .podium-strip-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .reading-card-title { font-size: 18.5px; }
-        .reading-box { font-size: 24px !important; padding: 18px 16px; line-height: 1.95; }
-        button[data-baseweb="tab"] { padding: 8px 12px !important; font-size: 14px !important; }
-        div.stButton > button, div.stFormSubmitButton > button { width: 100%; min-height: 46px !important; }
+        .block-container { padding-top: 0.35rem; padding-left: 0.5rem; padding-right: 0.5rem; }
+        .compact-header { padding: 10px 12px; margin-bottom: 8px; }
+        .app-title { font-size: 18px; }
+        .dino-avatar { width: 40px; height: 40px; }
+        /* Bảng xếp hạng cuộn ngang chỉ chiếm 1 hàng mỏng trên điện thoại */
+        .podium-strip-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+        }
+        .podium-strip-grid::-webkit-scrollbar { display: none; }
+        .mini-podium { min-width: 195px; flex-shrink: 0; }
+        .reading-card-header { padding: 9px 14px; }
+        .reading-card-title { font-size: 18px; }
+        .reading-box { font-size: 24px !important; padding: 16px 15px; line-height: 1.9; }
+        button[data-baseweb="tab"] { padding: 7px 12px !important; font-size: 14px !important; }
+        div.stButton > button, div.stFormSubmitButton > button { width: 100%; min-height: 44px !important; }
         .chest-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 </style>
@@ -645,15 +667,21 @@ def save_comprehension_to_sheet(class_name, student_name, lesson_title, answer, 
 
 
 # =====================================================================
-# 3. GIỌNG ĐỌC MẪU TIẾNG VIỆT
+# 3. GIỌNG ĐỌC MẪU TIẾNG VIỆT (HỖ TRỢ 4 GIỌNG ĐỌC + PITCH & RATE)
 # =====================================================================
-@st.cache_data(show_spinner=False, max_entries=60)
-def synth_edge(text, voice, rate):
+@st.cache_data(show_spinner=False, max_entries=80)
+def synth_edge(text, voice_cfg, rate):
     import edge_tts
+
+    if isinstance(voice_cfg, (tuple, list)):
+        voice_id, pitch = voice_cfg[0], voice_cfg[1]
+    else:
+        voice_id, pitch = str(voice_cfg), "+0Hz"
 
     async def run():
         buf = b""
-        async for chunk in edge_tts.Communicate(text, voice, rate=rate).stream():
+        comm = edge_tts.Communicate(text, voice_id, rate=rate, pitch=pitch)
+        async for chunk in comm.stream():
             if chunk["type"] == "audio":
                 buf += chunk["data"]
         return buf
@@ -676,9 +704,9 @@ def synth_gtts(text):
     return buf.getvalue()
 
 
-def synth_vi(text, voice, rate):
+def synth_vi(text, voice_cfg, rate):
     try:
-        return synth_edge(text, voice, rate), "edge", ""
+        return synth_edge(text, voice_cfg, rate), "edge", ""
     except Exception as e:
         edge_err = str(e) or e.__class__.__name__
     return synth_gtts(text), "gtts", edge_err
@@ -2150,21 +2178,61 @@ tab_read, tab_dino, tab_board, tab_teacher = st.tabs([
 
 
 # =====================================================================
-# TAB 1: LUYỆN ĐỌC BÀI (GỌN GÀNG, TẬP TRUNG VÀO VĂN BẢN & GHI ÂM)
+# TAB 1: PHÒNG LUYỆN ĐỌC HIỆN ĐẠI (MOBILE-FIRST STUDIO)
+#        Thanh Ghi Âm & Nghe Mẫu nằm NGAY PHÍA TRÊN bài đọc (ghim nổi khi cuộn)
+#        giúp học sinh dùng điện thoại vừa bấm Micro vừa nhìn trọn bài đọc bên dưới!
 # =====================================================================
 def reading_flow():
-    c_info, c_size = st.columns([2.0, 1.4])
-    with c_info:
-        st.markdown(
-            f'<div style="padding-top:6px;font-size:16px;font-weight:800;color:#334155">'
-            f'📌 Đang mở: <b style="color:#0F172A">{grade_label} · {selected_week}</b> · '
-            f'Chuẩn tốc độ: <b>{target_wpm} tiếng/phút</b></div>',
-            unsafe_allow_html=True,
-        )
-    with c_size:
-        st.radio("🔎 Cỡ chữ bài đọc:", list(FONT_SIZES), index=P["fs"], horizontal=True, key=f"fs_{grade_num}")
+    def reset_recording():
+        st.session_state["rec_n"] += 1
+        st.session_state.pop("result_key", None)
+        st.session_state.pop("result", None)
 
-    stu_badge_str = f"Lớp {selected_class} · {student_name}" if (selected_class and student_name) else "Chưa chọn học sinh"
+    # 1. Thanh công cụ mỏng: Nghe đọc mẫu (4 giọng AI) & Cỡ chữ
+    with st.expander("🎧 Nghe Thầy/Cô AI đọc mẫu (4 giọng đọc) & Chỉnh cỡ chữ", expanded=False):
+        c_v, c_s, c_fs = st.columns([1.5, 1.1, 1.2])
+        with c_v:
+            voice_label = st.selectbox("Chọn giọng đọc mẫu:", list(VOICES))
+        with c_s:
+            speed_label = st.radio("Tốc độ đọc mẫu:", list(SPEEDS), horizontal=True)
+        with c_fs:
+            st.radio("🔎 Cỡ chữ bài đọc:", list(FONT_SIZES), index=P["fs"], horizontal=True, key=f"fs_{grade_num}")
+
+        tts_key = f"{lesson_id}|{voice_label}|{speed_label}"
+        if st.button("▶️ Phát giọng đọc mẫu ngay", type="primary", use_container_width=True):
+            st.session_state["tts_play"] = tts_key
+
+    if st.session_state.get("tts_play") and st.session_state.get("tts_play", "").startswith(f"{lesson_id}|"):
+        parts_tts = st.session_state["tts_play"].split("|")
+        v_lbl = parts_tts[1] if len(parts_tts) > 1 and parts_tts[1] in VOICES else list(VOICES)[0]
+        s_lbl = parts_tts[2] if len(parts_tts) > 2 and parts_tts[2] in SPEEDS else list(SPEEDS)[0]
+        try:
+            with st.spinner("Đang chuẩn bị giọng đọc mẫu..."):
+                audio_bytes, engine, edge_err = synth_vi(lesson["text"], VOICES[v_lbl], SPEEDS[s_lbl])
+            try:
+                st.audio(audio_bytes, format="audio/mp3", autoplay=True)
+            except TypeError:
+                st.audio(audio_bytes, format="audio/mp3")
+        except Exception:
+            browser_tts_button(lesson["text"])
+
+    # 2. THANH MICRO THU ÂM ĐẶT NGAY PHÍA TRÊN BÀI ĐỌC (GHIM NỔI KHI CUỘN TRÊN ĐIỆN THOẠI)
+    mic_prompt = (
+        f"🎙️ Em {student_name} ({selected_class}) bấm Micro rồi nhìn bài đọc ngay bên dưới để đọc nhé:"
+        if (student_name and selected_class)
+        else "🎙️ Bấm Micro rồi nhìn bài đọc ngay bên dưới để đọc (Nhớ chọn Lớp & Tên ở trên nhé):"
+    )
+    audio_file = st.audio_input(
+        mic_prompt,
+        key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
+    )
+
+    # 3. KHUNG TRANG SÁCH BÀI ĐỌC NẰM NGAY SÁT DƯỚI NÚT GHI ÂM
+    stu_badge_str = (
+        f"Lớp {selected_class} · {student_name} · Chuẩn {target_wpm} tiếng/phút"
+        if (selected_class and student_name)
+        else f"{grade_label} · {selected_week} · Chuẩn {target_wpm} tiếng/phút"
+    )
     st.markdown(f"""
 <div class="reading-card-header" translate="no">
   <div class="reading-card-title">{P['emoji']} {lesson['title']}</div>
@@ -2176,47 +2244,6 @@ def reading_flow():
     if lesson.get("difficult_words"):
         tags = "".join(f"<span>{w}</span>" for w in lesson["difficult_words"])
         st.markdown(f'<div class="tags" translate="no">🌵 Từ khó cần lưu ý: {tags}</div>', unsafe_allow_html=True)
-
-    # ---- Bố cục 2 cột song song gọn gàng: Cột 1 Nghe mẫu | Cột 2 Ghi âm ----
-    col_listen, col_record = st.columns([1.0, 1.15])
-
-    with col_listen:
-        with st.container(border=True):
-            st.markdown("#### 🎧 Bước 1: Nghe đọc mẫu")
-            voice_label = st.selectbox("Giọng đọc:", list(VOICES), label_visibility="collapsed")
-            speed_label = st.radio("Tốc độ:", list(SPEEDS), horizontal=True)
-
-            tts_key = f"{lesson_id}|{voice_label}|{speed_label}"
-            if st.button("▶️ Nghe AI đọc mẫu", type="primary", use_container_width=True):
-                st.session_state["tts_play"] = tts_key
-            if st.session_state.get("tts_play") == tts_key:
-                try:
-                    with st.spinner("Đang tải giọng đọc..."):
-                        audio_bytes, engine, edge_err = synth_vi(lesson["text"], VOICES[voice_label], SPEEDS[speed_label])
-                    try:
-                        st.audio(audio_bytes, format="audio/mp3", autoplay=True)
-                    except TypeError:
-                        st.audio(audio_bytes, format="audio/mp3")
-                except Exception:
-                    browser_tts_button(lesson["text"])
-
-    with col_record:
-        with st.container(border=True):
-            if student_name and selected_class:
-                st.markdown(f"#### 🎙️ Bước 2: Em **{student_name}** ({selected_class}) đọc bài")
-            else:
-                st.markdown("#### 🎙️ Bước 2: Bấm Micro đọc bài")
-                st.caption("👆 Em nhớ chọn **Khối, Lớp & Tên** ở trên trước khi đọc nhé.")
-
-            def reset_recording():
-                st.session_state["rec_n"] += 1
-                st.session_state.pop("result_key", None)
-                st.session_state.pop("result", None)
-
-            audio_file = st.audio_input(
-                "Bấm biểu tượng Micro để bắt đầu đọc bài:",
-                key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
-            )
 
     if not audio_file:
         return
