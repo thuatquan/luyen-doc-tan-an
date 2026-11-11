@@ -98,35 +98,32 @@ st.set_page_config(
 )
 
 # =====================================================================
-# HỆ THỐNG GIAO DIỆN ĐỒNG NHẤT 100% (UNIFIED CHROME DINO × EDTECH PRO MAX)
-# Chữ to, rõ nét, bảng màu đồng bộ xuyên suốt mọi khung thẻ
+# HỆ THỐNG GIAO DIỆN TỐI GIẢN, GỌN GÀNG, HIỆN ĐẠI (CLEAN EDTECH × CHROME DINO)
 # =====================================================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@700&display=swap');
 
     :root {
-        --bg-page: #F1F5F9;
+        --bg-page: #F8FAFC;
         --bg-card: #FFFFFF;
-        --bg-dino: #F7F7F7;
         --ink-main: #0F172A;
-        --ink-dino: #535353;
-        --ink-sub: #334155;
-        --border-main: #1E293B;
+        --ink-sub: #475569;
+        --border-soft: #E2E8F0;
+        --border-mid: #CBD5E1;
         --emerald: #10B981;
         --emerald-dark: #059669;
-        --gold: #F59E0B;
-        --radius-lg: 18px;
-        --radius-md: 14px;
-        --shadow-card: 0 5px 0 #1E293B;
-        --shadow-sm: 0 3px 0 #1E293B;
+        --radius-lg: 16px;
+        --radius-md: 12px;
+        --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
+        --shadow-sm: 0 1px 4px rgba(15, 23, 42, 0.04);
     }
 
     html, body, [class*="css"] {
         translate: no !important;
         font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         color: var(--ink-main);
-        font-size: 17px;
+        font-size: 16.5px;
     }
     .skiptranslate { display: none !important; }
 
@@ -153,17 +150,13 @@ st.markdown("""
         pointer-events: none !important;
     }
 
-    /* Nền trang đồng nhất tông sáng sạch của Chrome Dino kết hợp lưới chấm bi mịn */
     .stApp {
         background-color: var(--bg-page);
-        background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
-        background-size: 22px 22px;
-        background-attachment: fixed;
     }
     .block-container {
-        padding-top: 0.9rem;
-        padding-bottom: 2.8rem;
-        max-width: 1000px;
+        padding-top: 0.75rem;
+        padding-bottom: 2.2rem;
+        max-width: 980px;
     }
 
     button, a, input, select, [role="tab"], [data-testid="stAudioInput"] {
@@ -171,393 +164,284 @@ st.markdown("""
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* Làm to và rõ chữ của mọi nhãn Selectbox / Radio / Input trong Streamlit */
+    /* Nhãn và ô chọn gọn gàng, chữ rõ ràng dễ đọc */
     label[data-testid="stWidgetLabel"] p {
-        font-size: 17px !important;
-        font-weight: 900 !important;
-        color: #0F172A !important;
+        font-size: 15.5px !important;
+        font-weight: 800 !important;
+        color: #1E293B !important;
     }
     div[data-baseweb="select"] > div {
-        min-height: 46px !important;
-        font-size: 16.5px !important;
-        font-weight: 800 !important;
-        border: 2.5px solid #1E293B !important;
-        border-radius: 12px !important;
+        min-height: 44px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        border: 1.5px solid var(--border-mid) !important;
+        border-radius: 10px !important;
         background: #FFFFFF !important;
+        box-shadow: none !important;
+    }
+    div[data-baseweb="select"] > div:focus-within {
+        border-color: var(--emerald-dark) !important;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
     }
     input[type="text"] {
-        font-size: 16.5px !important;
-        font-weight: 800 !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
     }
 
-    /* ================= 1. BANNER CHÍNH ĐỒNG NHẤT PHONG CÁCH CHROME DINO ================= */
-    .unified-hero {
+    /* ================= 1. HEADER GỌN GÀNG (1 DÒNG DUY NHẤT) ================= */
+    .compact-header {
         background: #FFFFFF;
-        border: 3px solid var(--border-main);
-        border-top: 10px solid var(--emerald);
+        border: 1px solid var(--border-soft);
+        border-left: 6px solid var(--emerald);
         border-radius: var(--radius-lg);
-        padding: 20px 24px 16px;
+        padding: 14px 20px;
         box-shadow: var(--shadow-card);
-        margin-bottom: 16px;
-    }
-    .hero-top-row {
+        margin-bottom: 12px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 14px;
         flex-wrap: wrap;
     }
-    .hero-brand {
+    .header-left {
         display: flex;
         align-items: center;
-        gap: 16px;
-        flex: 1;
-        min-width: 260px;
+        gap: 14px;
     }
-    .dino-logo-card {
-        width: 72px;
-        height: 72px;
-        border-radius: 16px;
-        background: var(--bg-dino);
-        border: 3px solid var(--border-main);
-        box-shadow: var(--shadow-sm);
+    .dino-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: #F1F5F9;
+        border: 1px solid var(--border-mid);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
     }
-    .school-badge {
-        display: inline-block;
-        background: #ECFDF5;
-        border: 2px solid #059669;
-        color: #065F46;
-        padding: 4px 14px;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0.5px;
+    .school-sub {
+        font-size: 12.5px;
+        font-weight: 800;
+        color: var(--emerald-dark);
         text-transform: uppercase;
-        margin-bottom: 4px;
+        letter-spacing: 0.4px;
     }
-    .unified-hero h1 {
+    .app-title {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 30px;
+        font-size: 23px;
         font-weight: 800;
-        line-height: 1.15;
-        margin: 0 0 4px 0;
-        padding: 0;
         color: var(--ink-main);
+        line-height: 1.15;
+        margin: 1px 0 0 0;
     }
-    .unified-hero .hero-sub {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--ink-sub);
-    }
-    .player-hud-bar {
-        margin-top: 14px;
-        padding-top: 12px;
-        border-top: 2px dashed #CBD5E1;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-    .hud-pill {
+    .student-status-pill {
         background: #F8FAFC;
-        border: 2px solid #CBD5E1;
-        border-radius: 12px;
-        padding: 6px 14px;
-        font-size: 15px;
+        border: 1px solid var(--border-mid);
+        border-radius: 999px;
+        padding: 7px 16px;
+        font-size: 14.5px;
         font-weight: 800;
         color: var(--ink-main);
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
     }
-    .hud-pill b {
-        color: #047857;
-        font-size: 16px;
+    .student-status-pill.active {
+        background: #ECFDF5;
+        border-color: #6EE7B7;
+        color: #065F46;
     }
 
-    /* ================= 2. BẢNG XẾP HẠNG TRỰC QUAN NGAY TRANG CHỦ ================= */
-    .live-board-wrap {
+    /* ================= 2. THANH BẢNG XẾP HẠNG MINI NGAY ĐẦU TRANG ================= */
+    .top-leaderboard-strip {
         background: #FFFFFF;
-        border: 3px solid var(--border-main);
+        border: 1px solid var(--border-soft);
         border-radius: var(--radius-lg);
-        padding: 16px 20px;
-        margin-bottom: 16px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
         box-shadow: var(--shadow-card);
     }
-    .live-board-header {
+    .strip-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #E2E8F0;
-    }
-    .live-board-title {
-        font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 22px;
+        font-size: 14px;
         font-weight: 800;
-        color: var(--ink-main);
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        color: var(--ink-sub);
+        margin-bottom: 8px;
     }
-    .podium-grid {
+    .podium-strip-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-bottom: 12px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
     }
-    .podium-card {
-        border: 2.5px solid var(--border-main);
-        border-radius: var(--radius-md);
-        padding: 12px 14px;
+    .mini-podium {
+        border: 1px solid var(--border-soft);
+        border-radius: 10px;
+        padding: 8px 12px;
         display: flex;
         align-items: center;
-        gap: 12px;
-        box-shadow: var(--shadow-sm);
+        gap: 10px;
+        background: #F8FAFC;
     }
-    .podium-1 { background: #FEF9C3; }
-    .podium-2 { background: #F1F5F9; }
-    .podium-3 { background: #FFEDD5; }
-    .podium-medal {
-        font-size: 32px;
-        line-height: 1;
-        flex-shrink: 0;
-    }
-    .podium-info {
-        min-width: 0;
-        flex: 1;
-    }
-    .podium-name {
-        font-weight: 900;
-        font-size: 16px;
+    .mini-podium.mp-1 { background: #FEFCE8; border-color: #FDE047; }
+    .mini-podium.mp-2 { background: #F8FAFC; border-color: #CBD5E1; }
+    .mini-podium.mp-3 { background: #FFF7ED; border-color: #FDBA74; }
+    .mini-podium.mp-cls { background: #ECFDF5; border-color: #6EE7B7; }
+    .mp-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+    .mp-body { min-width: 0; flex: 1; }
+    .mp-title {
+        font-size: 14.5px;
+        font-weight: 800;
         color: var(--ink-main);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .podium-meta {
-        font-size: 14px;
-        font-weight: 800;
+    .mp-sub {
+        font-size: 12.5px;
+        font-weight: 700;
         color: var(--ink-sub);
-        margin-top: 2px;
-    }
-    .class-chips-row {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        padding: 6px 2px 4px;
-        scrollbar-width: thin;
-    }
-    .class-chip {
-        background: #F8FAFC;
-        border: 2px solid #94A3B8;
-        border-radius: 10px;
-        padding: 6px 12px;
-        font-size: 14.5px;
-        font-weight: 800;
-        color: var(--ink-main);
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-    .class-chip.active-cls {
-        background: #DCFCE7;
-        border-color: #059669;
-        color: #065F46;
-        box-shadow: 0 2px 0 #059669;
     }
 
-    /* ================= 3. MỌI KHUNG THẺ ĐỒNG NHẤT VIỀN & ĐỔ BÓNG ================= */
+    /* ================= 3. KHUNG THẺ TRẮNG SẠCH SẼ, KHÔNG VIỀN ĐEN DÀY ================= */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: #FFFFFF !important;
-        border: 3px solid var(--border-main) !important;
+        border: 1px solid var(--border-soft) !important;
         border-radius: var(--radius-lg) !important;
         padding: 14px 18px !important;
         box-shadow: var(--shadow-card) !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 12px !important;
     }
 
-    /* Thanh 4 bước hướng dẫn to, rõ ràng */
-    .quest-bar {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin: 8px 0 16px;
-    }
-    .quest-step {
-        background: #FFFFFF;
-        border: 2.5px solid var(--border-main);
-        border-radius: var(--radius-md);
-        padding: 10px 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: var(--shadow-sm);
-        font-weight: 900;
-        font-size: 15px;
-        color: var(--ink-main);
-    }
-    .quest-step .q-num {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        border: 2px solid var(--border-main);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'JetBrains Mono', monospace;
-        font-weight: 800;
-        font-size: 15px;
-        flex-shrink: 0;
-    }
-    .qs-1 { background: #ECFDF5; } .qs-1 .q-num { background: #34D399; color: #064E3B; }
-    .qs-2 { background: #FEF3C7; } .qs-2 .q-num { background: #FBBF24; color: #78350F; }
-    .qs-3 { background: #E0F2FE; } .qs-3 .q-num { background: #38BDF8; color: #0C4A6E; }
-    .qs-4 { background: #F3E8FF; } .qs-4 .q-num { background: #C084FC; color: #4C1D95; }
-
-    /* ================= 4. KHUNG BÀI ĐỌC CHỮ TO, RÕ DẤU TIẾNG VIỆT ================= */
-    .reading-header-bar {
+    /* ================= 4. KHUNG BÀI ĐỌC NỔI BẬT, CHỮ TO RÕ NÉT ================= */
+    .reading-card-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 8px;
-        background: var(--border-main);
+        background: #0F172A;
         color: #FFFFFF;
         padding: 12px 20px;
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        border: 3px solid var(--border-main);
-        border-bottom: none;
-        margin-top: 6px;
+        margin-top: 4px;
     }
-    .reading-header-title {
+    .reading-card-title {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 800;
         color: #FDE047;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    }
+    .reading-card-meta {
+        font-size: 14px;
+        font-weight: 700;
+        color: #CBD5E1;
     }
     .reading-box {
         font-size: 28px !important;
         font-weight: 800;
         color: var(--ink-main);
-        line-height: 2.05;
-        letter-spacing: 0.25px;
-        background: #FFFDF7;
-        background-image: linear-gradient(transparent 96%, rgba(14, 165, 233, 0.09) 96%);
-        background-size: 100% 2.05em;
-        padding: 26px 28px 28px 32px;
+        line-height: 2.0;
+        letter-spacing: 0.2px;
+        background: #FFFDF9;
+        padding: 24px 28px;
         border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-        border: 3px solid var(--border-main);
-        border-left: 10px solid var(--emerald);
-        margin-bottom: 16px;
+        border: 1.5px solid var(--border-mid);
+        border-top: none;
+        border-left: 6px solid var(--emerald);
+        margin-bottom: 12px;
         box-shadow: var(--shadow-card);
     }
     .w-ok { color: #047857; }
     .w-near {
         color: #92400E;
         background: #FEF08A;
-        border: 1.5px solid #F59E0B;
-        border-radius: 8px;
-        padding: 1px 7px;
+        border-radius: 6px;
+        padding: 1px 6px;
     }
     .w-miss {
         color: #991B1B;
         background: #FECACA;
-        border: 1.5px solid #EF4444;
-        border-radius: 8px;
-        padding: 1px 7px;
+        border-radius: 6px;
+        padding: 1px 6px;
         text-decoration: underline wavy #DC2626;
     }
 
     .tags {
         background: #FFFBEB;
-        border: 2.5px solid var(--border-main);
+        border: 1px solid #FDE68A;
         border-radius: var(--radius-md);
-        padding: 12px 16px;
-        margin-bottom: 16px;
-        box-shadow: var(--shadow-sm);
-        font-weight: 900;
-        font-size: 17px;
-        color: #78350F;
+        padding: 10px 14px;
+        margin-bottom: 14px;
+        font-weight: 800;
+        font-size: 15.5px;
+        color: #92400E;
     }
     .tags span {
         display: inline-block;
         background: #FFFFFF;
         color: var(--ink-main);
-        border: 2px solid var(--border-main);
-        box-shadow: 0 2px 0 var(--border-main);
+        border: 1px solid #F59E0B;
         border-radius: 8px;
-        padding: 4px 14px;
-        margin: 4px 5px;
-        font-weight: 900;
-        font-size: 18px;
+        padding: 2px 12px;
+        margin: 3px 4px;
+        font-weight: 800;
+        font-size: 16.5px;
     }
 
     .comment {
         background: #FFFFFF;
-        border: 3px solid var(--border-main);
-        border-left: 12px solid var(--emerald);
+        border: 1px solid var(--border-soft);
+        border-left: 5px solid var(--emerald);
         border-radius: var(--radius-md);
-        padding: 16px 20px;
-        font-size: 17.5px;
-        line-height: 1.8;
+        padding: 14px 18px;
+        font-size: 16.5px;
+        line-height: 1.75;
         color: var(--ink-main);
-        box-shadow: var(--shadow-sm);
     }
-    .comment p { margin: 8px 0; }
+    .comment p { margin: 6px 0; }
     .heard {
         color: var(--ink-main);
-        font-size: 17px;
-        font-weight: 800;
+        font-size: 16px;
+        font-weight: 700;
         background: #F8FAFC;
-        border-radius: 12px;
-        padding: 14px 18px;
-        border: 2px dashed #64748B;
+        border-radius: 10px;
+        padding: 12px 16px;
+        border: 1px dashed #94A3B8;
     }
 
     .reward {
         text-align: center;
         border-radius: var(--radius-lg);
-        padding: 22px 18px 18px;
-        margin: 14px 0 20px;
-        background: linear-gradient(180deg, #FEF9C3 0%, #FDE047 100%);
-        border: 3px solid var(--border-main);
+        padding: 18px 16px;
+        margin: 10px 0 16px;
+        background: linear-gradient(180deg, #FEFCE8 0%, #FEF08A 100%);
+        border: 1.5px solid #FACC15;
         box-shadow: var(--shadow-card);
     }
     .reward .big {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 800;
         color: var(--ink-main);
     }
-    .reward .sub { color: #78350F; font-size: 17px; font-weight: 800; margin-top: 5px; }
-    .star { font-size: 46px; display: inline-block; margin: 0 3px; }
-    .star.on { animation: pop .55s cubic-bezier(.2,1.6,.4,1) both; filter: drop-shadow(0 4px 0 #1E293B); }
+    .reward .sub { color: #78350F; font-size: 16px; font-weight: 700; margin-top: 4px; }
+    .star { font-size: 40px; display: inline-block; margin: 0 2px; }
+    .star.on { animation: pop .5s cubic-bezier(.2,1.6,.4,1) both; }
     .star.off { filter: grayscale(1); opacity: .22; }
-    @keyframes pop { 0% { transform: scale(0) rotate(-35deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+    @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
     .xp-wrap {
-        background: var(--border-main);
-        border: 3px solid var(--border-main);
-        border-radius: 12px;
-        height: 28px;
+        background: #E2E8F0;
+        border-radius: 999px;
+        height: 24px;
         position: relative;
         overflow: hidden;
-        margin: 10px 0;
+        margin: 8px 0;
     }
     .xp-fill {
-        background: repeating-linear-gradient(90deg, #34D399 0px, #34D399 20px, #10B981 20px, #10B981 24px);
+        background: linear-gradient(90deg, #10B981, #059669);
         height: 100%;
         transition: width .4s ease;
     }
@@ -567,138 +451,124 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 900;
-        font-size: 14px;
-        color: #FEF08A;
-        text-shadow: 1px 1px 0 #000;
+        font-weight: 800;
+        font-size: 13px;
+        color: #0F172A;
     }
 
     .chest-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 10px;
-        margin: 12px 0;
+        margin: 10px 0;
     }
     .chest-item {
         border-radius: var(--radius-md);
-        padding: 12px;
-        font-weight: 800;
-        border: 2.5px solid var(--border-main);
+        padding: 10px;
+        font-weight: 700;
+        border: 1px solid var(--border-soft);
         background: #F8FAFC;
         text-align: center;
-        box-shadow: var(--shadow-sm);
     }
     .chest-item.unlocked {
-        background: linear-gradient(180deg, #FEF9C3 0%, #D1FAE5 100%);
+        background: #ECFDF5;
+        border-color: #6EE7B7;
         color: #064E3B;
     }
     .chest-item.locked {
-        opacity: 0.55;
-        filter: grayscale(0.85);
-        box-shadow: none;
+        opacity: 0.5;
+        filter: grayscale(0.8);
     }
 
     [data-testid="stMetric"] {
         background: #FFFFFF;
-        border: 2.5px solid var(--border-main);
+        border: 1px solid var(--border-soft);
         border-radius: var(--radius-md);
-        padding: 12px 16px;
+        padding: 10px 14px;
         box-shadow: var(--shadow-sm);
     }
+
+    /* Thanh Tab điều hướng gọn gàng, hiện đại */
     div[data-baseweb="tab-list"] {
         gap: 8px !important;
-        background: transparent !important;
+        background: #F1F5F9 !important;
+        border-radius: 12px !important;
+        padding: 5px !important;
         overflow-x: auto !important;
         flex-wrap: nowrap !important;
-        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        padding: 4px 2px 10px 2px !important;
+        margin-bottom: 10px !important;
     }
     div[data-baseweb="tab-list"]::-webkit-scrollbar { display: none; }
     button[data-baseweb="tab"] {
-        background: #FFFFFF !important;
-        border: 2.5px solid var(--border-main) !important;
-        border-radius: var(--radius-md) !important;
-        padding: 11px 18px !important;
-        font-weight: 900 !important;
-        font-size: 16px !important;
-        color: var(--ink-main) !important;
-        box-shadow: var(--shadow-sm) !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 9px !important;
+        padding: 9px 16px !important;
+        font-weight: 800 !important;
+        font-size: 15.5px !important;
+        color: #475569 !important;
         white-space: nowrap !important;
         flex-shrink: 0 !important;
-        transition: all .12s ease !important;
+        transition: all .15s ease !important;
     }
     button[data-baseweb="tab"][aria-selected="true"] {
-        background: #FDE047 !important;
-        color: var(--ink-main) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 0 var(--border-main) !important;
+        background: #FFFFFF !important;
+        color: #059669 !important;
+        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08) !important;
     }
     div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
         display: none !important;
     }
 
     div.stButton > button, div.stFormSubmitButton > button {
-        border-radius: var(--radius-md) !important;
-        font-weight: 900 !important;
-        font-size: 17px !important;
-        padding: 0.65rem 1.35rem !important;
-        border: 2.5px solid var(--border-main) !important;
-        box-shadow: 0 5px 0 var(--border-main) !important;
+        border-radius: 10px !important;
+        font-weight: 800 !important;
+        font-size: 16px !important;
+        padding: 0.55rem 1.2rem !important;
+        border: 1.5px solid var(--border-mid) !important;
+        box-shadow: var(--shadow-sm) !important;
         cursor: pointer !important;
-        transition: transform .12s ease, box-shadow .12s ease !important;
     }
-    div.stButton > button:hover, div.stFormSubmitButton > button:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: 0 6px 0 var(--border-main) !important;
-    }
-    div.stButton > button:active, div.stFormSubmitButton > button:active {
-        transform: translateY(3px) !important;
-        box-shadow: 0 2px 0 var(--border-main) !important;
+    div.stButton > button[kind="primary"], div.stFormSubmitButton > button[kind="primary"] {
+        background: var(--emerald-dark) !important;
+        color: #FFFFFF !important;
+        border-color: var(--emerald-dark) !important;
     }
 
     [data-testid="stAudioInput"] {
-        background: #ECFDF5;
-        border: 3px solid var(--border-main);
-        border-radius: var(--radius-lg);
-        padding: 12px 16px;
-        box-shadow: var(--shadow-card);
+        background: #F0FDF4;
+        border: 1.5px solid #86EFAC;
+        border-radius: var(--radius-md);
+        padding: 8px 12px;
     }
 
     .footer-pro {
         text-align: center;
-        margin: 34px 0 10px;
-        padding: 18px 20px;
-        border-radius: var(--radius-lg);
-        color: var(--ink-main);
+        margin: 28px 0 8px;
+        padding: 14px 16px;
+        border-radius: var(--radius-md);
+        color: var(--ink-sub);
         background: #FFFFFF;
-        border: 3px solid var(--border-main);
-        border-bottom: 7px solid var(--emerald);
-        box-shadow: var(--shadow-card);
-        font-weight: 900;
+        border: 1px solid var(--border-soft);
+        font-weight: 700;
+        font-size: 14.5px;
     }
     .footer-pro .sch-name {
         color: #065F46;
-        font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 20px;
         font-weight: 800;
+        font-size: 16px;
     }
 
-    @media (max-width: 640px) {
-        .block-container { padding-top: 0.45rem; padding-left: 0.6rem; padding-right: 0.6rem; }
-        .unified-hero { padding: 14px 14px; }
-        .unified-hero h1 { font-size: 22px; }
-        .dino-logo-card { width: 56px; height: 56px; }
-        .podium-grid { grid-template-columns: 1fr; gap: 8px; }
-        .quest-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .reading-header-title { font-size: 19px; }
-        .reading-box { font-size: 24px !important; padding: 18px 16px 20px 20px; line-height: 1.95; }
-        button[data-baseweb="tab"] { padding: 9px 13px !important; font-size: 14.5px !important; }
-        div.stButton > button, div.stFormSubmitButton > button {
-            width: 100%;
-            min-height: 50px !important;
-            font-size: 16.5px !important;
-        }
+    @media (max-width: 680px) {
+        .block-container { padding-top: 0.4rem; padding-left: 0.55rem; padding-right: 0.55rem; }
+        .compact-header { padding: 12px 14px; }
+        .app-title { font-size: 19px; }
+        .podium-strip-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .reading-card-title { font-size: 18.5px; }
+        .reading-box { font-size: 24px !important; padding: 18px 16px; line-height: 1.95; }
+        button[data-baseweb="tab"] { padding: 8px 12px !important; font-size: 14px !important; }
+        div.stButton > button, div.stFormSubmitButton > button { width: 100%; min-height: 46px !important; }
         .chest-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 </style>
@@ -1177,17 +1047,16 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
   * {{ box-sizing: border-box; user-select: none; -webkit-user-select: none; }}
   body {{
     margin: 0;
-    padding: 4px 2px 8px;
+    padding: 2px;
     background: transparent;
     font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #535353;
   }}
   .offline-wrapper {{
     background: #f7f7f7;
-    border: 3px solid #1E293B;
-    border-radius: 18px;
-    padding: 16px 18px;
-    box-shadow: 0 5px 0 #1E293B;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 14px 16px;
     transition: background-color 0.45s ease, color 0.45s ease;
     position: relative;
     overflow: hidden;
@@ -1195,32 +1064,27 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
   .offline-wrapper.inverted {{
     background: #202124;
     color: #e8eaed;
-    border-color: #535353;
+    border-color: #3c4043;
   }}
 
-  /* Thanh hiển thị Từ Khó chữ cực to và rõ ràng */
   .dino-top-bar {{
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 2px dashed #cbd5e1;
+    margin-bottom: 10px;
   }}
-  .inverted .dino-top-bar {{ border-bottom-color: #3c4043; }}
-
   .word-prompt-box {{
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
   }}
   .prompt-label {{
-    font-size: 16px;
-    font-weight: 900;
-    color: #1E293B;
+    font-size: 15.5px;
+    font-weight: 800;
+    color: #334155;
   }}
   .inverted .prompt-label {{ color: #e8eaed; }}
 
@@ -1228,39 +1092,33 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
     font-family: 'Baloo 2', 'Nunito', sans-serif;
     background: #FEF08A;
     color: #0F172A;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 800;
-    line-height: 1.2;
-    padding: 4px 22px;
-    border-radius: 12px;
-    border: 3px solid #0F172A;
-    box-shadow: 0 4px 0 #0F172A;
+    line-height: 1.15;
+    padding: 4px 20px;
+    border-radius: 10px;
+    border: 2px solid #F59E0B;
   }}
   .inverted .target-word-pill {{
     background: #FDE047;
     color: #0F172A;
-    border-color: #ffffff;
   }}
 
   .status-chip {{
-    font-size: 15px;
-    font-weight: 900;
-    padding: 7px 14px;
-    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 8px;
     background: #ffffff;
-    color: #0F172A;
-    border: 2px solid #1E293B;
-    box-shadow: 0 2px 0 #1E293B;
+    color: #334155;
+    border: 1px solid #cbd5e1;
   }}
   .status-chip.listening {{
     background: #FEE2E2;
     color: #B91C1C;
-    border-color: #B91C1C;
-    animation: blinkMic 1s infinite;
+    border-color: #FCA5A5;
   }}
-  @keyframes blinkMic {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.7; }} }}
 
-  /* Tăng chiều cao khung trò chơi Khủng Long lên 280px để thoáng, rõ chữ và nhảy mượt */
   .runner-container {{
     position: relative;
     width: 100%;
@@ -1271,13 +1129,11 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
     cursor: pointer;
     touch-action: manipulation;
     border-radius: 12px;
-    border: 2px solid #cbd5e1;
-    background: rgba(255,255,255,0.45);
-    transform-origin: top center;
-    transition: transform 0.2s ease;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
   }}
   .inverted .runner-container {{
-    background: rgba(0,0,0,0.25);
+    background: #171717;
     border-color: #3c4043;
   }}
   .runner-canvas {{
@@ -1286,61 +1142,56 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
     display: block;
   }}
 
-  /* Nút bấm to, rõ ràng, đồng bộ */
   .dino-controls {{
     display: flex;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: 10px;
     flex-wrap: wrap;
   }}
   .c-btn {{
     flex: 1;
-    min-width: 150px;
-    min-height: 48px;
-    padding: 10px 14px;
-    border-radius: 12px;
+    min-width: 140px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 10px;
     font-family: inherit;
-    font-weight: 900;
-    font-size: 16px;
+    font-weight: 800;
+    font-size: 15.5px;
     cursor: pointer;
-    border: 2.5px solid #1E293B;
+    border: 1.5px solid #cbd5e1;
     background: #ffffff;
     color: #0F172A;
-    box-shadow: 0 4px 0 #1E293B;
-    transition: transform 0.08s;
     touch-action: manipulation;
   }}
-  .c-btn:active {{
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 #1E293B;
-  }}
   .c-btn-primary {{
-    background: #10B981;
-    color: #0F172A;
-    flex: 1.5;
+    background: #059669;
+    border-color: #059669;
+    color: #ffffff;
+    flex: 1.4;
   }}
   .c-btn-mic {{
     background: #EF4444;
+    border-color: #EF4444;
     color: #ffffff;
   }}
   .dino-footer {{
-    margin-top: 10px;
-    font-size: 14.5px;
-    font-weight: 800;
-    color: #334155;
+    margin-top: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #64748B;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 6px;
   }}
-  .inverted .dino-footer {{ color: #cbd5e1; }}
+  .inverted .dino-footer {{ color: #9aa0a6; }}
 
   @media (max-width: 600px) {{
-    .offline-wrapper {{ padding: 12px; border-radius: 14px; }}
-    .target-word-pill {{ font-size: 24px; padding: 3px 14px; }}
+    .offline-wrapper {{ padding: 10px; }}
+    .target-word-pill {{ font-size: 23px; padding: 3px 14px; }}
     .runner-container, .runner-canvas {{ height: 240px; }}
-    .c-btn {{ min-width: 46%; font-size: 15px; padding: 8px 10px; }}
-    .c-btn-primary {{ min-width: 100%; font-size: 16.5px; }}
+    .c-btn {{ min-width: 46%; font-size: 14.5px; }}
+    .c-btn-primary {{ min-width: 100%; }}
   }}
 </style>
 </head>
@@ -1348,10 +1199,10 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
 <div id="outer-container" class="offline-wrapper">
   <div class="dino-top-bar">
     <div class="word-prompt-box">
-      <span class="prompt-label">🦖 ĐỌC TO TỪ KHÓ ĐỂ NHẢY:</span>
+      <span class="prompt-label">🦖 Từ cần đọc:</span>
       <span class="target-word-pill" id="targetWordEl">...</span>
     </div>
-    <div class="status-chip" id="micStatusEl">🎙️ Bấm Micro hoặc Chạm màn hình / Phím Cách</div>
+    <div class="status-chip" id="micStatusEl">🎙️ Đọc to hoặc chạm vào màn hình / phím Cách</div>
   </div>
 
   <div id="runner-container" class="runner-container" title="Chạm vào màn hình hoặc bấm Phím Cách (Space) để nhảy">
@@ -1359,13 +1210,13 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
   </div>
 
   <div class="dino-controls">
-    <button class="c-btn c-btn-mic" id="btnMic" onclick="runner.toggleVoice()">🎤 Bật Micro Đọc Tự Động</button>
-    <button class="c-btn" onclick="runner.speakWord()">🔊 Nghe Đọc Mẫu Từ</button>
-    <button class="c-btn c-btn-primary" onclick="runner.onAction()">⬆️ Đã Đọc To! Nhảy Qua (Phím Cách / Chạm)</button>
+    <button class="c-btn c-btn-mic" id="btnMic" onclick="runner.toggleVoice()">🎤 Bật Micro Đọc</button>
+    <button class="c-btn" onclick="runner.speakWord()">🔊 Nghe Đọc Mẫu</button>
+    <button class="c-btn c-btn-primary" onclick="runner.onAction()">⬆️ Đã Đọc! Nhảy Qua (Space)</button>
   </div>
 
   <div class="dino-footer">
-    <span id="heardLog">👂 Máy nghe: (Bấm "Bật Micro" rồi đọc to từ màu vàng, hoặc chạm thẳng vào khủng long để nhảy!)</span>
+    <span id="heardLog">👂 Máy nghe: (Chưa bật Micro tự động)</span>
     <span>👤 {safe_student} ({safe_class})</span>
   </div>
 </div>
@@ -2059,8 +1910,8 @@ def compute_leaderboards(all_records, students_by_class):
 
 
 # =====================================================================
-# 8. BẢNG XẾP HẠNG TRỰC QUAN NGAY TRANG CHỦ & BỘ CHỌN KHỐI / LỚP / TÊN HỌC SINH
-#    (Giữ nguyên trạng thái chờ "-- Chọn Khối / Lớp / Học sinh --" khi mới vào web)
+# 8. BỐ CỤC TRANG CHỦ GỌN GÀNG, TỐI ƯU:
+#    Header 1 dòng -> Bảng xếp hạng mini -> Khung chọn Khối/Lớp/Tên -> Khu vực đọc
 # =====================================================================
 st.session_state.setdefault("history", [])
 st.session_state.setdefault("rec_n", 0)
@@ -2068,7 +1919,6 @@ st.session_state.setdefault("rec_n", 0)
 STUDENTS_BY_CLASS = load_students_by_class()
 ALL_CLASSES = sorted(STUDENTS_BY_CLASS.keys())
 
-# Mẹo tự động cho trình duyệt Zalo trên điện thoại
 components.html("""
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
 <style>
@@ -2076,16 +1926,16 @@ components.html("""
   .zalo-tip {
     display: none;
     background: #FEF3C7;
-    border: 2px solid #0F172A;
-    border-radius: 12px;
+    border: 1px solid #F59E0B;
+    border-radius: 10px;
     padding: 8px 12px;
     color: #78350F;
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 13.5px;
+    font-weight: 700;
   }
 </style></head><body>
 <div id="zaloBox" class="zalo-tip">
-  📱 <b>Mẹo cho điện thoại phụ huynh:</b> Nếu mở trong <b>Zalo</b> mà bấm Micro chưa thu âm được, phụ huynh bấm biểu tượng <b>⋯ (góc trên bên phải)</b> chọn <b>"Mở bằng trình duyệt" (Chrome / Safari)</b> nhé!
+  📱 <b>Mẹo cho điện thoại:</b> Nếu mở trong <b>Zalo</b> mà bấm Micro chưa thu âm được, phụ huynh bấm biểu tượng <b>⋯ (góc trên bên phải)</b> chọn <b>"Mở bằng trình duyệt" (Chrome / Safari)</b> nhé!
 </div>
 <script>
   if (/Zalo|FBAN|FBAV/i.test(navigator.userAgent || "")) {
@@ -2094,18 +1944,17 @@ components.html("""
 </script></body></html>
 """, height=0)
 
-hero_placeholder = st.empty()
-live_leaderboard_placeholder = st.empty()
+header_placeholder = st.empty()
+leaderboard_strip_placeholder = st.empty()
 
-# ---- Khung chọn Khối, Lớp, Họ tên học sinh: giữ nguyên nút chọn "-- Chọn ... --" khi mới truy cập ----
+# ---- Khung chọn Khối, Lớp, Họ tên học sinh & Bài đọc (Gọn gàng 2 hàng, giữ nguyên "-- Chọn ... --") ----
 GRADE_PLACEHOLDER = "-- Chọn Khối --"
 CLASS_PLACEHOLDER = "-- Chọn Lớp --"
 STUDENT_PLACEHOLDER = "-- Chọn tên học sinh --"
 OTHER_OPTION = "➕ Học sinh khác (tự nhập tên)..."
 
 with st.container(border=True):
-    st.markdown("### 🎮 BƯỚC CHUẨN BỊ: CHỌN KHỐI, LỚP, TÊN HỌC SINH & BÀI ĐỌC")
-    col_grade, col_class, col_name = st.columns([1.05, 1.05, 2.1])
+    col_grade, col_class, col_name = st.columns([1.0, 1.0, 2.0])
 
     grade_options = [GRADE_PLACEHOLDER] + list(GRADES.keys())
     with col_grade:
@@ -2117,7 +1966,6 @@ with st.container(border=True):
         grade_num = GRADE_OF[grade_key]
         classes_for_select = [CLASS_PLACEHOLDER] + [c for c in ALL_CLASSES if c.startswith(grade_num)]
     else:
-        # Khi chưa chọn Khối, vẫn cho phép bấm chọn trực tiếp bất kỳ lớp nào trong 20 lớp (mặc định là "-- Chọn Lớp --")
         classes_for_select = [CLASS_PLACEHOLDER] + ALL_CLASSES
         grade_label = "Lớp 1"
         grade_key = GRADES[grade_label]
@@ -2128,7 +1976,6 @@ with st.container(border=True):
 
     if picked_class != CLASS_PLACEHOLDER:
         selected_class = picked_class
-        # Nếu học sinh chọn Lớp trước (ví dụ 3A1) mà chưa chọn Khối -> tự động đồng bộ Khối theo Lớp đó
         if selected_class[:1] in PROFILES:
             grade_num = selected_class[:1]
             grade_label = f"Lớp {grade_num}"
@@ -2144,7 +1991,7 @@ with st.container(border=True):
 
     with col_name:
         picked_student = st.selectbox(
-            f"🧒 3. Chọn tên học sinh{f' (Lớp {selected_class} - {len(roster_for_class)} em)' if selected_class else ''}:",
+            f"🧒 3. Tên học sinh{f' (Lớp {selected_class})' if selected_class else ''}:",
             student_options,
             index=0,
         )
@@ -2156,7 +2003,7 @@ with st.container(border=True):
             student_name = picked_student
 
     weeks = CURRICULUM[grade_key]
-    col_term, col_week, col_lesson = st.columns([1.2, 1.1, 1.9])
+    col_term, col_week, col_lesson = st.columns([1.0, 1.0, 2.0])
     with col_term:
         selected_term = st.selectbox("🗓️ 4. Học kỳ:", ["Học kỳ 1 (Tuần 1 - 18)", "Học kỳ 2 (Tuần 19 - 35)"])
     term_filter = "Học kỳ 1" if "Học kỳ 1" in selected_term else "Học kỳ 2"
@@ -2166,103 +2013,96 @@ with st.container(border=True):
     readings = weeks[selected_week]["readings"]
     reading_titles = [r["title"] for r in readings]
     with col_lesson:
-        picked_title = st.selectbox("📚 6. Chọn bài đọc:", reading_titles)
+        picked_title = st.selectbox("📚 6. Bài luyện đọc:", reading_titles)
 
 lesson = readings[reading_titles.index(picked_title)]
 target_wpm = lesson.get("target_wpm", 40)
 lesson_id = lesson.get("lesson_code", lesson["title"])
 
-# Tính dữ liệu Bảng xếp hạng để hiển thị NGAY NGOÀI MÀN HÌNH CHÍNH
+# ---- Tính dữ liệu cho Header & Thanh Bảng xếp hạng gọn gàng ----
 all_hist_now = get_all_history()
 student_rows_main, class_rows_main = compute_leaderboards(all_hist_now, STUDENTS_BY_CLASS)
 cur_stars_hud, cur_lessons_hud = student_total_stars(all_hist_now, student_name, selected_class)
 cur_rank_hud, _ = rank_of(cur_stars_hud)
 
-display_student_hud = student_name if student_name else "Em hãy chọn Lớp & Tên ở bên dưới nhé"
-display_class_hud = f"Lớp {selected_class}" if selected_class else "Chưa chọn lớp"
+if student_name and selected_class:
+    status_cls = "student-status-pill active"
+    status_html = f"🧒 <b>{student_name}</b> ({selected_class}) · ⭐ <b>{cur_stars_hud} sao</b> · {cur_rank_hud[2]} {cur_rank_hud[1]}"
+else:
+    status_cls = "student-status-pill"
+    status_html = "👆 Em hãy chọn <b>Khối, Lớp & Tên</b> ở khung bên dưới để bắt đầu"
 
-hero_placeholder.markdown(f"""
-<div class="unified-hero" translate="no">
-  <div class="hero-top-row">
-    <div class="hero-brand">
-      <div class="dino-logo-card">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 2H21V9H16V11H19V13H15V17H13V21H10V17H8V21H5V15H3V11H6V9H11V2Z" fill="#535353"/>
-          <rect x="13" y="4" width="2" height="2" fill="#F7F7F7"/>
-        </svg>
-      </div>
-      <div>
-        <div class="school-badge">🏫 {SCHOOL} · {LOCATION.upper()}</div>
-        <h1>ĐẤU TRƯỜNG DINO · LUYỆN ĐỌC TIẾNG VIỆT</h1>
-        <p class="hero-sub">Đọc to rõ ràng · Nhảy qua Từ Khó cùng Khủng Long Chrome · Vinh danh Bảng Vàng toàn trường!</p>
-      </div>
+header_placeholder.markdown(f"""
+<div class="compact-header" translate="no">
+  <div class="header-left">
+    <div class="dino-avatar">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 2H21V9H16V11H19V13H15V17H13V21H10V17H8V21H5V15H3V11H6V9H11V2Z" fill="#475569"/>
+        <rect x="13" y="4" width="2" height="2" fill="#FFFFFF"/>
+      </svg>
+    </div>
+    <div>
+      <div class="school-sub">🏫 {SCHOOL} · {LOCATION}</div>
+      <div class="app-title">Luyện Đọc Tiếng Việt & Trò Chơi Khủng Long</div>
     </div>
   </div>
-  <div class="player-hud-bar">
-    <div class="hud-pill">🧒 Học sinh: <b>{display_student_hud}</b> ({display_class_hud})</div>
-    <div class="hud-pill">{cur_rank_hud[2]} Cấp bậc: <b>{cur_rank_hud[1]}</b></div>
-    <div class="hud-pill">⭐ Tổng sao của em: <b>{cur_stars_hud}</b> ({cur_lessons_hud} bài)</div>
-    <div class="hud-pill">💎 Điểm XP: <b>{cur_stars_hud * 10} XP</b></div>
-  </div>
+  <div class="{status_cls}">{status_html}</div>
 </div>
 """, unsafe_allow_html=True)
 
-# ----------------- BẢNG XẾP HẠNG TRỰC QUAN ĐƯA RA NGOÀI MÀN HÌNH CHÍNH -----------------
-with live_leaderboard_placeholder.container():
-    podium_items = []
+# ---- Thanh Bảng Xếp Hạng Mini (Gọn gàng 1 hàng ngay ngoài trang chủ) ----
+with leaderboard_strip_placeholder.container():
+    mini_cards = []
     medals_cfg = [
-        ("🥇", "podium-1", "Quán Quân Toàn Trường"),
-        ("🥈", "podium-2", "Á Quân Toàn Trường"),
-        ("🥉", "podium-3", "Hạng Ba Toàn Trường"),
+        ("🥇", "mp-1", "Hạng 1 Toàn Trường"),
+        ("🥈", "mp-2", "Hạng 2 Toàn Trường"),
+        ("🥉", "mp-3", "Hạng 3 Toàn Trường"),
     ]
     for idx in range(3):
-        medal_icon, p_cls, default_role = medals_cfg[idx]
+        m_icon, m_cls, m_label = medals_cfg[idx]
         if idx < len(student_rows_main):
             st_row = student_rows_main[idx]
-            p_name = f"{st_row['Họ và tên']} ({st_row['Lớp']})"
-            p_meta = f"⭐ {st_row['Tổng sao ⭐']} sao · {st_row['Số bài đã đọc']} bài · {st_row['Tốc độ tốt nhất']}"
+            m_title = f"{st_row['Họ và tên']} ({st_row['Lớp']})"
+            m_sub = f"⭐ {st_row['Tổng sao ⭐']} sao · {st_row['Số bài đã đọc']} bài"
         else:
-            p_name = f"Đang chờ {default_role}..."
-            p_meta = "Đọc bài ngay để ghi tên lên Bảng Vàng!"
-        podium_items.append(
-            f'<div class="podium-card {p_cls}">'
-            f'<div class="podium-medal">{medal_icon}</div>'
-            f'<div class="podium-info">'
-            f'<div class="podium-name">{p_name}</div>'
-            f'<div class="podium-meta">{p_meta}</div>'
-            f'</div></div>'
-        )
-
-    chips_html = []
-    for c_idx, c_row in enumerate(class_rows_main[:12]):
-        is_cur = "active-cls" if selected_class and c_row["Lớp"] == selected_class else ""
-        crown = "🏆 " if c_idx == 0 and c_row["_stars"] > 0 else ""
-        chips_html.append(
-            f'<div class="class-chip {is_cur}">'
-            f'{crown}Lớp <b>{c_row["Lớp"]}</b>: ⭐ {c_row["Tổng sao của lớp ⭐"]} ({c_row["Học sinh đã tham gia"]})'
+            m_title = m_label
+            m_sub = "Đang chờ vinh danh..."
+        mini_cards.append(
+            f'<div class="mini-podium {m_cls}">'
+            f'<div class="mp-icon">{m_icon}</div>'
+            f'<div class="mp-body"><div class="mp-title">{m_title}</div><div class="mp-sub">{m_sub}</div></div>'
             f'</div>'
         )
 
+    if class_rows_main and class_rows_main[0]["_stars"] > 0:
+        top_c = class_rows_main[0]
+        cls_title = f"Lớp dẫn đầu: {top_c['Lớp']}"
+        cls_sub = f"⭐ {top_c['Tổng sao của lớp ⭐']} sao ({top_c['Học sinh đã tham gia']})"
+    else:
+        cls_title = "Thi đua 20 Lớp"
+        cls_sub = "Đọc bài để mang sao về cho lớp!"
+
+    mini_cards.append(
+        f'<div class="mini-podium mp-cls">'
+        f'<div class="mp-icon">🏆</div>'
+        f'<div class="mp-body"><div class="mp-title">{cls_title}</div><div class="mp-sub">{cls_sub}</div></div>'
+        f'</div>'
+    )
+
     total_school_stars = sum(r["Tổng sao ⭐"] for r in student_rows_main)
     st.markdown(f"""
-<div class="live-board-wrap" translate="no">
-  <div class="live-board-header">
-    <div class="live-board-title">🏆 BẢNG XẾP HẠNG THI ĐUA TRỰC TIẾP · {SCHOOL}</div>
-    <div style="font-size:15px;font-weight:900;color:#065F46;background:#ECFDF5;padding:5px 12px;border-radius:10px;border:2px solid #059669">
-      🌟 Toàn trường: {total_school_stars} Sao · {len(student_rows_main)} Học sinh đã lên bảng
-    </div>
+<div class="top-leaderboard-strip" translate="no">
+  <div class="strip-header">
+    <span>🏆 BẢNG VÀNG THI ĐUA TRỰC TIẾP</span>
+    <span style="color:#059669">🌟 Toàn trường: {total_school_stars} Sao ({len(student_rows_main)} học sinh đã tham gia)</span>
   </div>
-  <div class="podium-grid">
-    {"".join(podium_items)}
-  </div>
-  <div style="font-size:14.5px;font-weight:900;color:#334155;margin-bottom:4px">🏰 Thi đua giữa các lớp trong trường:</div>
-  <div class="class-chips-row">
-    {"".join(chips_html)}
+  <div class="podium-strip-grid">
+    {"".join(mini_cards)}
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-    with st.expander("📊 Xem bảng xếp hạng chi tiết theo Lớp & toàn bộ 20 Lớp ngay tại đây"):
+    with st.expander("📊 Xem chi tiết Bảng xếp hạng Lớp & 20 Lớp toàn trường"):
         b_col1, b_col2 = st.columns(2)
         with b_col1:
             preview_cls = selected_class if selected_class else "1A1"
@@ -2279,131 +2119,110 @@ with live_leaderboard_placeholder.container():
                     "Danh hiệu": r_match["Danh hiệu Dino"] if r_match else "🥚 Trứng Khủng Long",
                 })
             quick_cls_rows.sort(key=lambda x: (-x["Sao ⭐"], -x["Số bài"], x["Họ và tên"]))
-            st.dataframe(quick_cls_rows, hide_index=True, use_container_width=True, height=240)
+            st.dataframe(quick_cls_rows, hide_index=True, use_container_width=True, height=220)
         with b_col2:
-            st.markdown("**🏰 Bảng xếp hạng Thi Đua 20 Lớp Toàn Trường**")
+            st.markdown("**🏰 Thi đua giữa 20 Lớp toàn trường**")
             quick_arena = [{
                 "Hạng": f"#{i+1}",
                 "Lớp": c["Lớp"],
                 "Tổng sao ⭐": c["Tổng sao của lớp ⭐"],
                 "Tham gia": c["Học sinh đã tham gia"],
             } for i, c in enumerate(class_rows_main)]
-            st.dataframe(quick_arena, hide_index=True, use_container_width=True, height=240)
+            st.dataframe(quick_arena, hide_index=True, use_container_width=True, height=220)
 
-# Cỡ chữ bài đọc (Tăng cỡ chữ mặc định để học sinh nhìn thật rõ)
+# Cỡ chữ bài đọc to và rõ ràng
 FONT_SIZES = {"Vừa (26px)": 26, "Lớn (32px)": 32, "Rất lớn (40px)": 40}
 font_label = st.session_state.get(f"fs_{grade_num}", list(FONT_SIZES)[P["fs"]])
 st.markdown(f"""<style>
 div.reading-box {{
     border-left-color: {P['accent']} !important;
-    font-size: clamp(22px, 5.5vw, {FONT_SIZES.get(font_label, 28)}px) !important;
+    font-size: clamp(22px, 5.2vw, {FONT_SIZES.get(font_label, 28)}px) !important;
 }}
 </style>""", unsafe_allow_html=True)
 
-# 5 Tabs điều hướng
-tab_read, tab_dino, tab_board, tab_teacher, tab_help = st.tabs([
-    "📖 1. Đọc Bài & Luyện Từ Khó",
-    "🦖 2. Trò Chơi Khủng Long Dino",
-    "🏆 3. Kho Báu & Bảng Vàng",
-    "👩‍🏫 4. Quản Lý & CSDL",
-    "ℹ️ 5. Hướng Dẫn",
+# 4 Tabs điều hướng gọn gàng, rõ mục đích
+tab_read, tab_dino, tab_board, tab_teacher = st.tabs([
+    "📖 Luyện Đọc Bài",
+    "🦖 Trò Chơi Khủng Long",
+    "🏆 Bảng Xếp Hạng & Kho Báu",
+    "👩‍🏫 Giáo Viên & CSDL",
 ])
 
 
 # =====================================================================
-# TAB 1: LUYỆN ĐỌC VÀ CHẤM ĐIỂM TỰ ĐỘNG
+# TAB 1: LUYỆN ĐỌC BÀI (GỌN GÀNG, TẬP TRUNG VÀO VĂN BẢN & GHI ÂM)
 # =====================================================================
 def reading_flow():
-    st.markdown("""
-<div class="quest-bar" translate="no">
-  <div class="quest-step qs-1"><span class="q-num">1</span><span>🎧 Nghe đọc mẫu</span></div>
-  <div class="quest-step qs-2"><span class="q-num">2</span><span>🎙️ Ghi âm đọc bài</span></div>
-  <div class="quest-step qs-3"><span class="q-num">3</span><span>🦖 Nhảy qua Từ Khó</span></div>
-  <div class="quest-step qs-4"><span class="q-num">4</span><span>🏆 Lên Bảng Xếp Hạng</span></div>
-</div>""", unsafe_allow_html=True)
-
-    c_info, c_size = st.columns([2.1, 1.4])
+    c_info, c_size = st.columns([2.0, 1.4])
     with c_info:
         st.markdown(
-            f'<div style="margin-top:6px;font-size:18px;font-weight:900;color:#0F172A">'
-            f'📌 Bài đang chọn: <span style="color:{P["border"]}">{grade_label} · {selected_week}</span> · '
-            f'Tốc độ chuẩn: <b>{target_wpm} tiếng/phút</b></div>',
+            f'<div style="padding-top:6px;font-size:16px;font-weight:800;color:#334155">'
+            f'📌 Đang mở: <b style="color:#0F172A">{grade_label} · {selected_week}</b> · '
+            f'Chuẩn tốc độ: <b>{target_wpm} tiếng/phút</b></div>',
             unsafe_allow_html=True,
         )
     with c_size:
-        st.radio("🔎 Chọn cỡ chữ bài đọc:", list(FONT_SIZES), index=P["fs"], horizontal=True, key=f"fs_{grade_num}")
+        st.radio("🔎 Cỡ chữ bài đọc:", list(FONT_SIZES), index=P["fs"], horizontal=True, key=f"fs_{grade_num}")
 
-    stu_badge_str = f"Lớp {selected_class} · {student_name}" if (selected_class and student_name) else "Chưa chọn Lớp & Tên học sinh"
+    stu_badge_str = f"Lớp {selected_class} · {student_name}" if (selected_class and student_name) else "Chưa chọn học sinh"
     st.markdown(f"""
-<div class="reading-header-bar" translate="no">
-  <div class="reading-header-title">{P['emoji']} {lesson['title']}</div>
-  <div style="font-size:15px;font-weight:900;color:#A7F3D0">{stu_badge_str}</div>
+<div class="reading-card-header" translate="no">
+  <div class="reading-card-title">{P['emoji']} {lesson['title']}</div>
+  <div class="reading-card-meta">{stu_badge_str}</div>
 </div>
 <div class="reading-box" translate="no">{lesson["text"]}</div>
 """, unsafe_allow_html=True)
 
     if lesson.get("difficult_words"):
         tags = "".join(f"<span>{w}</span>" for w in lesson["difficult_words"])
-        st.markdown(f'<div class="tags" translate="no">🌵 Từ khó cần chú ý (xuất hiện trong trò chơi Khủng Long): {tags}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="tags" translate="no">🌵 Từ khó cần lưu ý: {tags}</div>', unsafe_allow_html=True)
 
-    # ---- Bước 1: Nghe đọc mẫu ----
-    with st.container(border=True):
-        st.markdown("### 🔊 Bước 1: Nghe Thầy/Cô AI đọc mẫu")
-        v1, v2 = st.columns(2)
-        with v1:
-            voice_label = st.radio("Chọn giọng đọc:", list(VOICES), horizontal=False)
-        with v2:
-            speed_label = st.radio("Chọn tốc độ đọc:", list(SPEEDS), horizontal=False)
+    # ---- Bố cục 2 cột song song gọn gàng: Cột 1 Nghe mẫu | Cột 2 Ghi âm ----
+    col_listen, col_record = st.columns([1.0, 1.15])
 
-        tts_key = f"{lesson_id}|{voice_label}|{speed_label}"
-        if st.button("▶️ Bấm nghe đọc mẫu ngay", type="primary"):
-            st.session_state["tts_play"] = tts_key
-        if st.session_state.get("tts_play") == tts_key:
-            try:
-                with st.spinner("Đang chuẩn bị giọng đọc mẫu..."):
-                    audio_bytes, engine, edge_err = synth_vi(lesson["text"], VOICES[voice_label], SPEEDS[speed_label])
+    with col_listen:
+        with st.container(border=True):
+            st.markdown("#### 🎧 Bước 1: Nghe đọc mẫu")
+            voice_label = st.selectbox("Giọng đọc:", list(VOICES), label_visibility="collapsed")
+            speed_label = st.radio("Tốc độ:", list(SPEEDS), horizontal=True)
+
+            tts_key = f"{lesson_id}|{voice_label}|{speed_label}"
+            if st.button("▶️ Nghe AI đọc mẫu", type="primary", use_container_width=True):
+                st.session_state["tts_play"] = tts_key
+            if st.session_state.get("tts_play") == tts_key:
                 try:
-                    st.audio(audio_bytes, format="audio/mp3", autoplay=True)
-                except TypeError:
-                    st.audio(audio_bytes, format="audio/mp3")
-                if engine == "edge":
-                    st.caption(f"Đang phát: {voice_label}")
-                else:
-                    st.warning("Giọng chuẩn đang bận, hệ thống tạm phát giọng dự phòng của Google.")
-            except Exception:
-                st.warning("Tạm phát bằng giọng đọc trực tiếp trên trình duyệt:")
-                browser_tts_button(lesson["text"])
+                    with st.spinner("Đang tải giọng đọc..."):
+                        audio_bytes, engine, edge_err = synth_vi(lesson["text"], VOICES[voice_label], SPEEDS[speed_label])
+                    try:
+                        st.audio(audio_bytes, format="audio/mp3", autoplay=True)
+                    except TypeError:
+                        st.audio(audio_bytes, format="audio/mp3")
+                except Exception:
+                    browser_tts_button(lesson["text"])
 
-    # ---- Bước 2: Ghi âm và chấm điểm ----
-    with st.container(border=True):
-        if student_name and selected_class:
-            st.markdown(f"### 🎙️ Bước 2: Em **{student_name}** (Lớp **{selected_class}**) bấm Micro đọc bài")
-        else:
-            st.markdown("### 🎙️ Bước 2: Bấm Micro đọc bài và nhận Sao thưởng")
-            st.info("👆 **Lưu ý:** Em nhớ chọn **Khối, Lớp và Tên của mình** ở khung phía trên trước khi bấm Micro đọc bài nhé!")
+    with col_record:
+        with st.container(border=True):
+            if student_name and selected_class:
+                st.markdown(f"#### 🎙️ Bước 2: Em **{student_name}** ({selected_class}) đọc bài")
+            else:
+                st.markdown("#### 🎙️ Bước 2: Bấm Micro đọc bài")
+                st.caption("👆 Em nhớ chọn **Khối, Lớp & Tên** ở trên trước khi đọc nhé.")
 
-        st.caption("💡 Mẹo nhỏ: Ngồi nơi yên tĩnh, bấm biểu tượng Micro, đọc to rõ ràng từ đầu đến cuối bài rồi bấm Dừng nhé!")
+            def reset_recording():
+                st.session_state["rec_n"] += 1
+                st.session_state.pop("result_key", None)
+                st.session_state.pop("result", None)
 
-        def reset_recording():
-            st.session_state["rec_n"] += 1
-            st.session_state.pop("result_key", None)
-            st.session_state.pop("result", None)
-
-        audio_file = st.audio_input(
-            "🎤 Bấm vào Micro bên dưới để bắt đầu đọc bài:",
-            key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
-        )
+            audio_file = st.audio_input(
+                "Bấm biểu tượng Micro để bắt đầu đọc bài:",
+                key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
+            )
 
     if not audio_file:
-        # Khung trò chơi Khủng Long hiển thị trực tiếp bên dưới để học sinh luyện đọc từ khó
-        with st.container(border=True):
-            st.markdown("### 🦖 Bước 3: Trò chơi Khủng Long Chrome Vượt Từ Khó")
-            st.caption("Đọc to từ khó trong ô màu vàng vào Micro (hoặc đọc to rồi chạm màn hình / bấm phím Cách) để chú Khủng Long nhảy qua xương rồng:")
-            render_dino_game(lesson.get("difficult_words", []), student_name, selected_class, lesson["title"])
         return
 
     if not student_name or not selected_class:
-        st.warning("⚠️ Em chưa chọn Lớp và Họ tên! Hãy kéo lên mục **BƯỚC CHUẨN BỊ** ở trên để chọn Lớp và Tên của em nhé!")
+        st.warning("⚠️ Em chưa chọn Lớp và Tên học sinh! Hãy chọn **Khối, Lớp và Tên của em** ở khung phía trên để hệ thống chấm điểm nhé.")
         return
 
     wav_bytes = audio_file.getvalue()
@@ -2471,22 +2290,15 @@ def reading_flow():
   <div>{stars_html(n)}</div>
   <div class="big">{title} · {n}/5 SAO (+{n*10} XP 💎)</div>
   <div class="sub">{sub}</div>
-  <div class="sub" style="margin-top:8px">
-    <b>{cur_rank[2]} Cấp bậc: {cur_rank[1]}</b> · 🌟 Tổng sao tích lũy: <b>{total} sao</b> (qua {n_lessons} bài)
+  <div class="sub" style="margin-top:6px">
+    <b>{cur_rank[2]} {cur_rank[1]}</b> · 🌟 Tổng tích lũy: <b>{total} sao</b> ({n_lessons} bài)
   </div>
 </div>""", unsafe_allow_html=True)
 
-    st.markdown("### 📊 Bảng Chỉ Số Đánh Giá (Thông tư 27)")
     c1, c2, c3 = st.columns(3)
     c1.metric("Mức đánh giá", res["rating"])
     c2.metric("Tiếng đọc đúng", f"{res['n_ok'] + res['n_near']}/{res['total']} tiếng")
     c3.metric("Tốc độ đọc", f"{res['wpm']} tiếng/phút")
-    st.caption(f"Điểm quy đổi tham khảo: {res['score']}/4,0 · Chuẩn tốc độ {grade_label}: {target_wpm} tiếng/phút")
-
-    if res["saved"]:
-        st.success("📊 Kết quả đã được cập nhật ngay lên Bảng Xếp Hạng ở đầu trang và Sổ theo dõi Google Sheet!")
-    else:
-        st.success("🏆 Kết quả đã được cập nhật ngay lên Bảng Xếp Hạng Trực Tiếp ở đầu trang!")
 
     st.button(
         "🔄 Đọc lại lần nữa để nâng Sao",
@@ -2495,55 +2307,49 @@ def reading_flow():
         key="retry_ok",
     )
 
-    st.markdown("### 🔍 Chi Tiết Từng Tiếng Trong Bài Đọc Của Em")
-    st.markdown(f'<div class="reading-box" style="border-radius:18px" translate="no">{render_marked(res["tokens"])}</div>', unsafe_allow_html=True)
-    st.caption("Chữ xanh: Đọc chuẩn · Nền vàng: Gần đúng (lệch dấu nhẹ) · Nền đỏ gạch chân: Cần luyện đọc lại")
+    st.markdown("#### 🔍 Chi tiết từng tiếng trong bài đọc")
+    st.markdown(f'<div class="reading-box" style="border-radius:16px" translate="no">{render_marked(res["tokens"])}</div>', unsafe_allow_html=True)
+    st.caption("Chữ xanh: Đọc đúng · Nền vàng: Gần đúng · Nền đỏ gạch chân: Cần luyện lại")
 
-    # ---- Mở ngay màn chơi Chrome Dino với các từ vừa đọc nhầm ----
+    # ---- Luyện các từ vừa đọc nhầm với Khủng Long Chrome ----
     practice_now = list(dict.fromkeys((res["wrong"] + res["near"])[:6] + list(lesson.get("difficult_words", []))))
     if practice_now:
         with st.container(border=True):
-            st.markdown("### 🦖 Luyện Tập Ngay: Đọc To Các Từ Cần Rèn Để Giúp Khủng Long Nhảy Qua Xương Rồng!")
+            st.markdown("#### 🦖 Luyện đọc lại các từ cần rèn cùng Khủng Long")
             render_dino_game(practice_now, student_name, selected_class, lesson["title"])
 
-    st.markdown("### 📝 Nhận Xét Học Tập (Theo Thông tư 27/2020/TT-BGDĐT)")
-    cm = build_comment(student_name, lesson["title"], res, target_wpm)
-    li = lambda xs: "<br>".join("• " + x for x in xs)
-    st.markdown(
-        '<div class="comment">'
-        f'<p><b>Mức đạt được:</b> {cm["level"]}</p>'
-        f'<p><b>Kết quả:</b> {cm["result"]}</p>'
-        f'<p><b>Ưu điểm:</b><br>{li(cm["strengths"])}</p>'
-        f'<p><b>Điểm cần cố gắng:</b><br>{li(cm["weaknesses"])}</p>'
-        f'<p><b>Hướng khắc phục:</b><br>{li(cm["plan"])}</p>'
-        '</div>',
-        unsafe_allow_html=True,
-    )
-    with st.expander("👂 Xem văn bản máy nhận dạng được từ giọng đọc của em"):
-        st.markdown(f'<div class="heard">{res["heard"]}</div>', unsafe_allow_html=True)
+    with st.expander("📝 Xem nhận xét chi tiết (Thông tư 27) & Văn bản máy nghe được"):
+        cm = build_comment(student_name, lesson["title"], res, target_wpm)
+        li = lambda xs: "<br>".join("• " + x for x in xs)
+        st.markdown(
+            '<div class="comment">'
+            f'<p><b>Mức đạt được:</b> {cm["level"]} ({cm["result"]})</p>'
+            f'<p><b>Ưu điểm:</b><br>{li(cm["strengths"])}</p>'
+            f'<p><b>Cần cố gắng:</b><br>{li(cm["weaknesses"])}</p>'
+            f'<p><b>Hướng khắc phục:</b><br>{li(cm["plan"])}</p>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(f'<div class="heard" style="margin-top:8px">👂 <b>Máy nghe được:</b> {res["heard"]}</div>', unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.markdown("### ❓ Thử Thách Đọc Hiểu")
-    st.markdown(f"**Câu hỏi: {lesson['question']}**")
-    with st.form(key=f"form_{key}"):
-        answer_input = st.text_input("Em gõ câu trả lời ngắn gọn vào đây:", placeholder="Ví dụ: Bạn nhỏ cảm thấy ...")
-        submitted = st.form_submit_button("✅ Nộp câu trả lời đọc hiểu", type="primary")
-    if submitted:
-        if not answer_input.strip():
-            st.warning("Em hãy nhập câu trả lời trước khi bấm nộp nhé.")
-        else:
-            cr = check_answer(answer_input, lesson["text"], lesson["expected_answer"], P["comp_cov"])
-            kind, paras = comprehension_feedback(cr, student_name)
-            body = "".join(f"<p>{p}</p>" for p in paras)
-            (st.success if kind == "success" else st.warning)(
-                "🎉 Tuyệt vời! Em trả lời đúng ý rồi!" if kind == "success" else "Em đọc kỹ lại gợi ý rồi thử lại nhé!"
-            )
-            st.markdown(f'<div class="comment">{body}</div>', unsafe_allow_html=True)
-            if res.get("record_id"):
-                save_comprehension_to_sheet(selected_class, student_name, lesson["title"], answer_input.strip(), COMP_LABEL[cr["level"]])
-            if cr["level"] != "sai":
-                with st.expander("💡 Xem đáp án chuẩn của bài"):
-                    st.markdown(cr["sample"])
+    with st.expander("❓ Câu hỏi Đọc hiểu của bài", expanded=True):
+        st.markdown(f"**Câu hỏi: {lesson['question']}**")
+        with st.form(key=f"form_{key}"):
+            answer_input = st.text_input("Em gõ câu trả lời ngắn gọn vào đây:", placeholder="Ví dụ: Bạn nhỏ cảm thấy ...")
+            submitted = st.form_submit_button("✅ Nộp câu trả lời", type="primary")
+        if submitted:
+            if not answer_input.strip():
+                st.warning("Em hãy nhập câu trả lời trước khi bấm nộp nhé.")
+            else:
+                cr = check_answer(answer_input, lesson["text"], lesson["expected_answer"], P["comp_cov"])
+                kind, paras = comprehension_feedback(cr, student_name)
+                body = "".join(f"<p>{p}</p>" for p in paras)
+                (st.success if kind == "success" else st.warning)(
+                    "🎉 Tuyệt vời! Em trả lời đúng ý rồi!" if kind == "success" else "Em đọc kỹ lại gợi ý rồi thử lại nhé!"
+                )
+                st.markdown(f'<div class="comment">{body}</div>', unsafe_allow_html=True)
+                if res.get("record_id"):
+                    save_comprehension_to_sheet(selected_class, student_name, lesson["title"], answer_input.strip(), COMP_LABEL[cr["level"]])
 
 
 with tab_read:
@@ -2554,18 +2360,16 @@ with tab_read:
 # TAB 2: TRÒ CHƠI CHROME DINO VƯỢT TỪ KHÓ (`chrome://dino` EDITION)
 # =====================================================================
 with tab_dino:
-    st.markdown("### 🦖 Trò Chơi Khủng Long Chrome (`chrome://dino`) — Đọc Từ Khó Vượt Chướng Ngại Vật")
-    st.markdown(
-        "Khi **Xương rồng** hoặc **Thằn lằn bay** mang theo **Từ Khó** tiến lại gần, "
-        "em hãy bấm **🎤 Bật Micro Đọc Tự Động** và đọc to từ đó (hoặc **chạm tay vào màn hình / bấm phím Cách**) "
-        "để Khủng Long nhảy qua! Đạt mỗi mốc **100 điểm** màn hình sẽ chuyển chế độ **Ngày / Đêm**!"
+    st.markdown("#### 🦖 Trò Chơi Khủng Long Vượt Từ Khó (`chrome://dino`)")
+    st.caption(
+        "Đọc to từ khó trong ô màu vàng vào Micro (hoặc chạm màn hình / bấm phím Cách) để chú Khủng Long nhảy qua xương rồng."
     )
 
     default_words = st.session_state.get("practice_words") or lesson.get("difficult_words") or [
         "xinh xắn", "ríu rít", "trong trẻo", "lấp lánh", "nghiêng nghiêng", "chăm chỉ"
     ]
     custom_words_str = st.text_input(
-        "🎯 Các từ khó gắn trên chướng ngại vật (tự động lấy từ bài đọc hoặc các từ em vừa đọc sai):",
+        "🎯 Các từ khó trong màn chơi (tự động lấy từ bài đọc hoặc từ em vừa đọc nhầm):",
         value=", ".join(default_words),
     )
     game_words = [w.strip() for w in custom_words_str.split(",") if w.strip()]
@@ -2585,13 +2389,13 @@ with tab_board:
         xp_now = my_stars * 10
         if nxt_rank:
             pct_xp = min(100, int(round((my_stars - cur_rank[0]) / max(1, (nxt_rank[0] - cur_rank[0])) * 100)))
-            xp_label = f"Cấp bậc: {cur_rank[2]} {cur_rank[1]} · {xp_now} XP (Còn {nxt_rank[0] - my_stars} sao lên {nxt_rank[2]} {nxt_rank[1]})"
+            xp_label = f"{cur_rank[2]} {cur_rank[1]} · {xp_now} XP (Còn {nxt_rank[0] - my_stars} sao lên {nxt_rank[1]})"
         else:
             pct_xp = 100
-            xp_label = f"👑 CẤP ĐỘ TỐI THƯỢNG: {cur_rank[1]} · {xp_now} XP"
+            xp_label = f"👑 {cur_rank[1]} · {xp_now} XP"
 
         with st.container(border=True):
-            st.markdown(f"### {cur_rank[2]} Hồ Sơ Chiến Binh: **{student_name}** · Lớp **{selected_class}**")
+            st.markdown(f"#### {cur_rank[2]} Thành tích của **{student_name}** (Lớp **{selected_class}**)")
             st.markdown(f"""
 <div class="xp-wrap" translate="no">
   <div class="xp-fill" style="width:{pct_xp}%"></div>
@@ -2601,37 +2405,32 @@ with tab_board:
             m1, m2, m3, m4 = st.columns(4)
             m1.metric("⭐ Tổng sao", my_stars)
             m2.metric("💎 Kinh nghiệm", f"{xp_now} XP")
-            m3.metric("📚 Bài hoàn thành", my_lessons)
-            m4.metric("🎁 Trang bị", cur_rank[3])
+            m3.metric("📚 Bài đã đọc", my_lessons)
+            m4.metric("🎁 Huy hiệu", cur_rank[3])
 
-            st.markdown("#### 🧰 Bộ Sưu Tập Kho Báu Của Em")
-            chest_html = ['<div class="chest-grid" translate="no">']
-            for req_stars, item_name, desc in MINECRAFT_TREASURES:
-                unlocked = my_stars >= req_stars
-                state_cls = "unlocked" if unlocked else "locked"
-                status_badge = "✅ Đã sở hữu!" if unlocked else f"🔒 Cần {req_stars} ⭐"
-                chest_html.append(
-                    f'<div class="chest-item {state_cls}">'
-                    f'<div style="font-size:17px">{item_name}</div>'
-                    f'<div style="font-size:13px;margin-top:4px">{desc}</div>'
-                    f'<div style="font-size:13px;margin-top:4px;color:#B45309">{status_badge}</div>'
-                    f'</div>'
-                )
-            chest_html.append("</div>")
-            st.markdown("".join(chest_html), unsafe_allow_html=True)
-    else:
-        st.info("👆 Em hãy chọn **Lớp** và **Tên học sinh** ở phía trên để xem Hồ sơ Chiến binh và Bộ sưu tập Kho Báu của riêng em nhé!")
+            with st.expander("🧰 Xem Bộ sưu tập Kho Báu của em"):
+                chest_html = ['<div class="chest-grid" translate="no">']
+                for req_stars, item_name, desc in MINECRAFT_TREASURES:
+                    unlocked = my_stars >= req_stars
+                    state_cls = "unlocked" if unlocked else "locked"
+                    status_badge = "✅ Đã mở" if unlocked else f"🔒 {req_stars} ⭐"
+                    chest_html.append(
+                        f'<div class="chest-item {state_cls}">'
+                        f'<div style="font-size:16px">{item_name}</div>'
+                        f'<div style="font-size:12.5px;margin-top:3px">{desc} · {status_badge}</div>'
+                        f'</div>'
+                    )
+                chest_html.append("</div>")
+                st.markdown("".join(chest_html), unsafe_allow_html=True)
 
-    st.markdown("---")
     view_cls_board = selected_class if selected_class else "1A1"
     sub_cls, sub_school, sub_arena = st.tabs([
         f"🏅 Bảng Vàng Lớp {view_cls_board}",
-        "🌍 Top Siêu Sao Toàn Trường",
-        "🏰 Đấu Trường 20 Lớp",
+        "🌍 Top Toàn Trường",
+        "🏰 Thi Đua 20 Lớp",
     ])
 
     with sub_cls:
-        st.markdown(f"#### 🏅 Bảng Xếp Hạng Học Sinh Lớp **{view_cls_board}**")
         cls_roster = STUDENTS_BY_CLASS.get(view_cls_board, [])
         recorded_map = {r["Họ và tên"].lower(): r for r in student_rows if r["Lớp"] == view_cls_board}
         full_class_board = []
@@ -2647,7 +2446,6 @@ with tab_board:
                     "XP 💎": 0,
                     "Số bài đã đọc": 0,
                     "Tốc độ tốt nhất": "0 tiếng/phút",
-                    "Lượt luyện": 0,
                 })
         for r in student_rows:
             if r["Lớp"] == view_cls_board and r["Họ và tên"].lower() not in {n.lower() for n in cls_roster}:
@@ -2661,67 +2459,53 @@ with tab_board:
             display_cls_board.append({
                 "Thứ hạng": rank_str,
                 "Họ và tên": r["Họ và tên"],
-                "Danh hiệu Dino": r["Danh hiệu Dino"],
+                "Danh hiệu": r["Danh hiệu Dino"],
                 "Tổng sao ⭐": r["Tổng sao ⭐"],
-                "XP 💎": r["XP 💎"],
                 "Số bài": r["Số bài đã đọc"],
                 "Tốc độ tốt nhất": r["Tốc độ tốt nhất"],
             })
         st.dataframe(display_cls_board, hide_index=True, use_container_width=True)
 
     with sub_school:
-        st.markdown(f"#### 🌍 Bảng Vàng Chiến Binh Đọc Sách Toàn Trường ({SCHOOL_DISPLAY})")
         if not student_rows:
-            st.info("Chưa có lượt đọc nào được ghi nhận. Hãy là Chiến binh đầu tiên ghi danh lên Bảng Vàng của Trường TH&THCS Tân An nhé!")
+            st.info("Chưa có lượt đọc nào được ghi nhận. Hãy là học sinh đầu tiên ghi danh lên Bảng Vàng nhé!")
         else:
             medals = {0: "🥇 Quán Quân", 1: "🥈 Á Quân", 2: "🥉 Hạng Ba"}
-            display_school = []
-            for idx, r in enumerate(student_rows[:50]):
-                display_school.append({
-                    "Thứ hạng": medals.get(idx, f"Hạng {idx + 1}"),
-                    "Họ và tên": r["Họ và tên"],
-                    "Lớp": r["Lớp"],
-                    "Danh hiệu Dino": r["Danh hiệu Dino"],
-                    "Tổng sao ⭐": r["Tổng sao ⭐"],
-                    "XP 💎": r["XP 💎"],
-                    "Số bài đã đọc": r["Số bài đã đọc"],
-                    "Tốc độ tốt nhất": r["Tốc độ tốt nhất"],
-                })
+            display_school = [{
+                "Thứ hạng": medals.get(idx, f"Hạng {idx + 1}"),
+                "Họ và tên": r["Họ và tên"],
+                "Lớp": r["Lớp"],
+                "Danh hiệu": r["Danh hiệu Dino"],
+                "Tổng sao ⭐": r["Tổng sao ⭐"],
+                "Số bài đã đọc": r["Số bài đã đọc"],
+                "Tốc độ tốt nhất": r["Tốc độ tốt nhất"],
+            } for idx, r in enumerate(student_rows[:50])]
             st.dataframe(display_school, hide_index=True, use_container_width=True)
 
     with sub_arena:
-        st.markdown("#### 🏰 Đấu Trường Thi Đua Giữa 20 Lớp (Khối 1 – Khối 5)")
-        display_arena = []
-        for idx, c in enumerate(class_rows):
-            badge = "🏆 Lớp Dẫn Đầu" if idx == 0 and c["_stars"] > 0 else (f"Hạng {idx + 1}" if c["_stars"] > 0 else "Đang khởi động")
-            display_arena.append({
-                "Thứ hạng": badge,
-                "Lớp": c["Lớp"],
-                "Khối": c["Khối"],
-                "Tổng sao của lớp ⭐": c["Tổng sao của lớp ⭐"],
-                "Học sinh tham gia": c["Học sinh đã tham gia"],
-                "Tổng bài hoàn thành": c["Số bài đã hoàn thành"],
-            })
+        display_arena = [{
+            "Thứ hạng": "🏆 Dẫn đầu" if idx == 0 and c["_stars"] > 0 else (f"Hạng {idx + 1}" if c["_stars"] > 0 else "-"),
+            "Lớp": c["Lớp"],
+            "Khối": c["Khối"],
+            "Tổng sao ⭐": c["Tổng sao của lớp ⭐"],
+            "Tham gia": c["Học sinh đã tham gia"],
+            "Số bài hoàn thành": c["Số bài đã hoàn thành"],
+        } for idx, c in enumerate(class_rows)]
         st.dataframe(display_arena, hide_index=True, use_container_width=True)
 
 
 # =====================================================================
-# TAB 4: QUẢN LÝ & ĐỒNG BỘ CSDL NGÀNH (CHỈ LẤY HỌ TÊN + MÃ LỚP)
+# TAB 4: GIÁO VIÊN, ĐỒNG BỘ CSDL NGÀNH & TIÊU CHÍ CHẤM
 # =====================================================================
 with tab_teacher:
-    st.markdown("### 👩‍🏫 Quản Lý & Đồng Bộ Danh Sách Học Sinh Từ Phần Mềm CSDL Ngành")
     total_stu_count = sum(len(v) for v in STUDENTS_BY_CLASS.values())
     st.success(
-        f"✅ Đang đồng bộ **{total_stu_count} học sinh** thuộc **{len(STUDENTS_BY_CLASS)} lớp** "
-        f"của **{SCHOOL_DISPLAY}** ({', '.join(ALL_CLASSES[:6])}... đến {ALL_CLASSES[-1] if ALL_CLASSES else ''})."
+        f"✅ Đang đồng bộ **{total_stu_count} học sinh** thuộc **{len(STUDENTS_BY_CLASS)} lớp** của **{SCHOOL_DISPLAY}**."
     )
 
     with st.container(border=True):
-        st.markdown("#### 📥 Tải file xuất trực tiếp từ phần mềm CSDL ngành (.xls, .xlsx, .csv)")
-        st.caption(
-            "Không cần chỉnh sửa hay xóa cột trong file xuất từ phần mềm CSDL ngành. "
-            "Hệ thống tự động bỏ qua các sheet danh mục, lọc bỏ học sinh chuyển đi và **chỉ trích xuất đúng 2 cột: Mã lớp + Họ tên**."
-        )
+        st.markdown("#### 📥 Đồng bộ file danh sách học sinh từ phần mềm CSDL ngành (.xls, .xlsx, .csv)")
+        st.caption("Chỉ trích xuất tự động 2 cột **Mã lớp** và **Họ tên**, không cần chỉnh sửa file xuất từ CSDL ngành.")
         uploaded_csdl = st.file_uploader(
             "Chọn file xuất từ CSDL ngành (.xls, .xlsx, .csv):",
             type=["xls", "xlsx", "csv", "txt"],
@@ -2733,37 +2517,28 @@ with tab_teacher:
             else:
                 n_cls = len(parsed_map)
                 n_stu = sum(len(v) for v in parsed_map.values())
-                st.info(f"🎉 Đã trích xuất thành công **{n_stu} học sinh** thuộc **{n_cls} lớp** từ file `{uploaded_csdl.name}`!")
-                preview_rows = [
-                    {"Mã lớp": k, "Sĩ số": len(v), "Danh sách học sinh (trích dẫn)": ", ".join(v[:6]) + ("..." if len(v) > 6 else "")}
-                    for k, v in parsed_map.items()
-                ]
-                st.dataframe(preview_rows, hide_index=True, use_container_width=True)
-                if st.button("💾 Lưu & Áp dụng danh sách học sinh này cho toàn trường", type="primary"):
+                st.info(f"🎉 Đã trích xuất **{n_stu} học sinh** thuộc **{n_cls} lớp** từ `{uploaded_csdl.name}`.")
+                if st.button("💾 Lưu & Áp dụng danh sách này", type="primary"):
                     if save_students_by_class(parsed_map):
-                        st.success("✅ Đã cập nhật danh sách học sinh toàn trường thành công!")
+                        st.success("✅ Đã cập nhật danh sách học sinh toàn trường!")
                         st.rerun()
-                    else:
-                        st.error("Không lưu được file trên máy chủ.")
 
         if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "custom_students.json")):
-            if st.button("🔄 Khôi phục danh sách CSDL mặc định (348 học sinh)"):
+            if st.button("🔄 Khôi phục danh sách mặc định (348 học sinh)"):
                 try:
                     os.remove(os.path.join(os.path.dirname(os.path.abspath(__file__)), "custom_students.json"))
                     st.rerun()
                 except Exception:
                     pass
 
-    with st.expander("📋 Xem danh sách học sinh từng lớp & Xuất báo cáo kết quả đọc (.CSV)"):
+    with st.expander("📋 Xem danh sách học sinh từng lớp & Xuất báo cáo Excel (.CSV)"):
         pick_view_cls = st.selectbox("Chọn lớp:", ALL_CLASSES, key="teacher_view_cls")
         cls_list = STUDENTS_BY_CLASS.get(pick_view_cls, [])
-        st.write(f"**Lớp {pick_view_cls}** có **{len(cls_list)} học sinh**:")
         st.dataframe(
             [{"STT": i + 1, "Mã lớp": pick_view_cls, "Họ và tên": name} for i, name in enumerate(cls_list)],
             hide_index=True,
             use_container_width=True,
         )
-
         all_hist_export = get_all_history()
         if all_hist_export:
             csv_buf = io.StringIO()
@@ -2775,48 +2550,23 @@ with tab_teacher:
             writer.writeheader()
             writer.writerows(all_hist_export)
             st.download_button(
-                "📥 Tải toàn bộ lịch sử đọc của trường (.CSV mở bằng Excel)",
+                "📥 Tải báo cáo kết quả đọc toàn trường (.CSV)",
                 data=csv_buf.getvalue().encode("utf-8-sig"),
                 file_name=f"ket_qua_luyen_doc_tan_an_{datetime.now(VN_TZ).strftime('%Y%m%d')}.csv",
                 mime="text/csv",
             )
 
+    with st.expander("📏 Bảng tiêu chí chấm theo Thông tư 27/2020/TT-BGDĐT"):
+        st.dataframe([{
+            "Khối": p["name"], "Cấp độ": p["level"].split("·")[1].strip(),
+            "Đọc đúng để trọn điểm": f"{round(p['full_acc'] * 100)}%",
+            "Đạt T khi đúng ≥": f"{round(p['t_th'] * 100)}%",
+            "Đạt H khi đúng ≥": f"{round(p['h_th'] * 100)}%",
+        } for p in PROFILES.values()], hide_index=True, use_container_width=True)
 
-# =====================================================================
-# TAB 5: HƯỚNG DẪN & TIÊU CHÍ CHẤM
-# =====================================================================
-with tab_help:
-    st.markdown("### 🌈 Hướng Dẫn Tham Gia Đấu Trường Luyện Đọc Dino")
-    st.markdown("""
-1. **Xem Bảng Xếp Hạng ngay đầu trang**: Vừa vào web, em đã thấy ngay **Top 3 Bục Vinh Quang** toàn trường và thứ hạng thi đua của 20 lớp.
-2. **Chọn Khối, Lớp & Tên học sinh**: Bấm vào ô `-- Chọn Khối --`, `-- Chọn Lớp --` và `-- Chọn tên học sinh --` để chọn đúng tên mình.
-3. **Nghe đọc mẫu & Thu âm**: Nghe giọng đọc mẫu trước, sau đó bấm Micro đọc to, rõ ràng cả bài để nhận **Sao thưởng ⭐** và **Kinh nghiệm XP 💎**.
-4. **Chơi Game 🦖 Khủng Long Chrome (`chrome://dino`)**: Đọc to các từ khó gắn trên Xương rồng / Thằn lằn bay (hoặc chạm tay vào màn hình trên điện thoại) để T-Rex nhảy qua!
-""")
-
-    st.markdown("### ⭐ Bảng Quy Đổi Sao Thưởng & Kinh Nghiệm XP")
-    st.dataframe([
-        {"Số sao": "⭐" * 5, "XP thưởng": "+50 XP 💎", "Điểm đọc /4": "4,0", "Danh hiệu": "Siêu cấp Kim Cương"},
-        {"Số sao": "⭐" * 4, "XP thưởng": "+40 XP 💎", "Điểm đọc /4": "3,5", "Danh hiệu": "Chiến binh Ngọc Lục Bảo"},
-        {"Số sao": "⭐" * 3, "XP thưởng": "+30 XP 💎", "Điểm đọc /4": "3,0", "Danh hiệu": "Hiệp sĩ Chăm Chỉ"},
-        {"Số sao": "⭐" * 2, "XP thưởng": "+20 XP 💎", "Điểm đọc /4": "2,0 - 2,5", "Danh hiệu": "Đang tiến bộ vượt bậc"},
-        {"Số sao": "⭐", "XP thưởng": "+10 XP 💎", "Điểm đọc /4": "dưới 2,0", "Danh hiệu": "Khởi đầu dũng cảm"},
-    ], hide_index=True, use_container_width=True)
-
-    st.markdown("### 📏 Bảng Tiêu Chí Chấm Theo Khối Lớp (Thông tư 27/2020/TT-BGDĐT)")
-    st.dataframe([{
-        "Khối": p["name"], "Cấp độ": p["level"].split("·")[1].strip(),
-        "Đọc đúng để trọn điểm": f"{round(p['full_acc'] * 100)}%",
-        "Tiếng gần đúng được": f"{p['near_credit']:.2f} tiếng",
-        "Tỉ trọng đúng / tốc độ": f"{round(p['w_acc'] * 100)} / {round(p['w_speed'] * 100)}",
-        "Đạt T khi đúng ≥": f"{round(p['t_th'] * 100)}%",
-        "Đạt H khi đúng ≥": f"{round(p['h_th'] * 100)}%",
-        "Tốc độ tối thiểu để đạt T": "không yêu cầu" if not p["t_speed"] else f"{round(p['t_speed'] * 100)}% mức chuẩn",
-    } for p in PROFILES.values()], hide_index=True, use_container_width=True)
-
-# Chân trang đồng nhất — Không có dòng tác giả
+# Chân trang gọn gàng — Không có dòng tác giả
 st.markdown(f"""
 <div class="footer-pro" translate="no">
   <div class="sch-name">🏫 {SCHOOL}</div>
-  <div style="font-size:15.5px;color:#334155;margin-top:4px">📍 {SCHOOL_DISPLAY}, {LOCATION}</div>
+  <div>📍 {SCHOOL_DISPLAY}, {LOCATION}</div>
 </div>""", unsafe_allow_html=True)
