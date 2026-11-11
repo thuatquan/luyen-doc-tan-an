@@ -59,7 +59,7 @@ PROFILES = {
 }
 
 STAR_INFO = {
-    5: ("SIÊU CẤP KIM CƯƠNG! 💎", "Em đọc rất chuẩn xác, rõ ràng và trôi chảy. Khủng long Dino thưởng tối đa 5 Sao & +50 XP!"),
+    5: ("SIÊU CẤP KIM CƯƠNG! 💎", "Em đọc rất chuẩn xác, rõ ràng và trôi chảy. Thưởng tối đa 5 Sao & +50 XP!"),
     4: ("CHIẾN BINH NGỌC LỤC BẢO! 💚", "Em đọc rất tốt, chỉ còn vài tiếng nhỏ để đạt mức hoàn hảo."),
     3: ("HIỆP SĨ CHĂM CHỈ! 🛡️", "Em đọc khá tốt rồi, luyện thêm một chút ở các từ khó để bứt phá nhé."),
     2: ("ĐANG TIẾN BỘ VƯỢT BẬC! 🌱", "Em đã đọc được nhiều tiếng, hãy chơi trò Dino Vượt Từ Khó để nhớ mặt chữ hơn nhé."),
@@ -67,22 +67,22 @@ STAR_INFO = {
 }
 
 RANKS = [
-    (0, "Trứng Khủng Long", "🥚", "Cúp Gỗ Tập Sự 🪵"),
-    (10, "Dino Con Hiếu Học", "🐣", "Kiếm Đá Chăm Chỉ 🗡️"),
-    (25, "Chiến Binh T-Rex", "🦖", "Giáp Sắt Kiên Cường 🛡️"),
-    (50, "Rồng Thần Ngữ Văn", "🐉", "Cúp Kim Cương Lấp Lánh 💎"),
-    (100, "Vua Khủng Long Tân An", "👑", "Vương Miện Ngọc Lục Bảo 👑"),
+    (0, "Trứng Khủng Long", "🥚", "Huy Hiệu Tập Sự 🪵"),
+    (10, "Dino Con Hiếu Học", "🐣", "Sao Đồng Chăm Chỉ 🥉"),
+    (25, "Chiến Binh T-Rex", "🦖", "Khiên Bạc Kiên Cường 🥈"),
+    (50, "Rồng Thần Ngữ Văn", "🐉", "Cúp Vàng Đọc Chuẩn 🥇"),
+    (100, "Vua Khủng Long Tân An", "👑", "Vương Miện Kim Cương 💎"),
 ]
 
 MINECRAFT_TREASURES = [
-    (1, "🪵 Cúp Gỗ Tập Sự", "Đạt 1 sao đầu tiên"),
+    (1, "🪵 Huy Hiệu Tập Sự", "Đạt 1 sao đầu tiên"),
     (5, "🍎 Táo Vàng Năng Lượng", "Tích lũy 5 sao"),
-    (10, "🗡️ Kiếm Đá Chăm Chỉ", "Tích lũy 10 sao"),
+    (10, "🗡️ Kiếm Ánh Sáng", "Tích lũy 10 sao"),
     (20, "🛡️ Khiên Hiệp Sĩ Dino", "Tích lũy 20 sao"),
     (35, "📗 Sách Phép Thuật Thông Thái", "Tích lũy 35 sao"),
     (50, "💎 Cúp Kim Cương Đọc Chuẩn", "Tích lũy 50 sao"),
     (75, "🦖 Trứng Rồng Thần Huyền Thoại", "Tích lũy 75 sao"),
-    (100, "👑 Vương Miện Ngọc Lục Bảo", "Tích lũy 100 sao"),
+    (100, "👑 Vương Miện Tân An", "Tích lũy 100 sao"),
 ]
 
 VOICES = {
@@ -92,32 +92,26 @@ VOICES = {
 SPEEDS = {"Đọc chậm (dễ nghe từng tiếng)": "-20%", "Đọc vừa (tốc độ tự nhiên)": "-8%"}
 
 st.set_page_config(
-    page_title=f"Đấu Trường Dino · Luyện Đọc Tiếng Việt - {SCHOOL_DISPLAY}",
+    page_title=f"Luyện Đọc & Đấu Trường Dino - {SCHOOL_DISPLAY}",
     page_icon="🦖",
     layout="centered",
 )
 
 # =====================================================================
-# GIAO DIỆN UI/UX PRO MAX: NEO-BRUTALIST GAMIFIED EDTECH × MINECRAFT DINO
+# GIAO DIỆN TRỰC QUAN UI/UX PRO MAX (BẢNG XẾP HẠNG TRỰC TIẾP + CHROME DINO)
 # =====================================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap');
 
     :root {
-        --bg-main: #F4F9F4;
         --ink: #0F172A;
         --ink-soft: #475569;
+        --dino-gray: #535353;
+        --dino-bg: #F7F7F7;
         --emerald: #10B981;
-        --emerald-dark: #047857;
-        --grass-top: #22C55E;
-        --earth-border: #1E293B;
         --gold: #F59E0B;
-        --gold-light: #FEF3C7;
         --sky: #0EA5E9;
-        --card-bg: #FFFFFF;
-        --shadow-brutal: 0 5px 0 #0F172A;
-        --shadow-brutal-sm: 0 3px 0 #0F172A;
     }
 
     html, body, [class*="css"] {
@@ -150,77 +144,60 @@ st.markdown("""
         pointer-events: none !important;
     }
 
-    /* Nền trang UI/UX Pro Max: Lưới Pixel mờ tinh tế trên nền thảo nguyên sáng dịu mắt */
     .stApp {
-        background-color: #EEF7EE;
+        background-color: #F4F6F8;
         background-image:
-            radial-gradient(at 12% 10%, rgba(16, 185, 129, 0.14) 0px, transparent 50%),
-            radial-gradient(at 88% 15%, rgba(14, 165, 233, 0.14) 0px, transparent 50%),
-            radial-gradient(at 50% 90%, rgba(245, 158, 11, 0.12) 0px, transparent 55%),
+            radial-gradient(at 10% 5%, rgba(16, 185, 129, 0.10) 0px, transparent 45%),
+            radial-gradient(at 90% 10%, rgba(14, 165, 233, 0.10) 0px, transparent 45%),
             linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px),
             linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
-        background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+        background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px;
         background-attachment: fixed;
     }
     .block-container {
-        padding-top: 0.9rem;
+        padding-top: 0.8rem;
         padding-bottom: 2.5rem;
-        max-width: 960px;
+        max-width: 980px;
     }
 
-    /* Tối ưu thao tác cảm ứng trên Điện thoại (0ms tap delay) */
     button, a, input, select, [role="tab"], [data-testid="stAudioInput"] {
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* ================= HERO BENTO HEADER MỚI HOÀN TOÀN ================= */
+    /* ================= BANNER CHÍNH TRỰC QUAN ================= */
     .pro-hero {
-        background: linear-gradient(135deg, #064E3B 0%, #047857 52%, #0F766E 100%);
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 60%, #064E3B 100%);
         border: 3px solid #0F172A;
-        border-radius: 22px;
-        padding: 20px 22px 18px;
+        border-radius: 20px;
+        padding: 18px 20px 16px;
         color: #FFFFFF;
-        box-shadow: 0 7px 0 #0F172A, 0 14px 28px rgba(15, 23, 42, 0.16);
-        margin-bottom: 16px;
+        box-shadow: 0 6px 0 #0F172A, 0 12px 24px rgba(15, 23, 42, 0.14);
+        margin-bottom: 14px;
         position: relative;
         overflow: hidden;
-    }
-    .pro-hero::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 10px;
-        background: repeating-linear-gradient(
-            90deg,
-            #4ADE80 0px, #4ADE80 28px,
-            #22C55E 28px, #22C55E 56px,
-            #86EFAC 56px, #86EFAC 84px
-        );
-        border-bottom: 2px solid #0F172A;
     }
     .hero-top-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 14px;
         flex-wrap: wrap;
-        margin-top: 4px;
     }
     .hero-brand {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 14px;
         flex: 1;
-        min-width: 260px;
+        min-width: 250px;
     }
     .dino-avatar-box {
-        width: 68px;
-        height: 68px;
-        border-radius: 18px;
-        background: #FEF08A;
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: #F7F7F7;
         border: 3px solid #0F172A;
-        box-shadow: 0 4px 0 #0F172A;
+        box-shadow: 0 4px 0 #10B981;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -230,51 +207,47 @@ st.markdown("""
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(15, 23, 42, 0.55);
-        border: 2px solid #6EE7B7;
-        color: #FEF08A;
+        background: #10B981;
+        color: #0F172A;
         padding: 3px 12px;
         border-radius: 999px;
-        font-size: 13px;
+        font-size: 12.5px;
         font-weight: 900;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.6px;
         text-transform: uppercase;
         margin-bottom: 4px;
     }
     .pro-hero h1 {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 29px;
+        font-size: 27px;
         font-weight: 800;
         line-height: 1.15;
-        margin: 0 0 3px 0;
+        margin: 0 0 2px 0;
         padding: 0;
         color: #FFFFFF;
-        text-shadow: 0 2px 0 #0F172A;
     }
     .pro-hero .hero-sub {
         margin: 0;
-        font-size: 14.5px;
+        font-size: 14px;
         font-weight: 700;
-        color: #D1FAE5;
+        color: #CBD5E1;
     }
-
-    /* Thanh HUD Trạng Thái Chiến Binh ngay trên Banner */
     .player-hud-bar {
-        margin-top: 14px;
-        padding-top: 12px;
-        border-top: 2px dashed rgba(255, 255, 255, 0.22);
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1.5px dashed rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
+        gap: 8px;
         flex-wrap: wrap;
     }
     .hud-pill {
-        background: rgba(15, 23, 42, 0.48);
-        border: 2px solid rgba(255, 255, 255, 0.28);
-        border-radius: 12px;
-        padding: 6px 12px;
-        font-size: 13.5px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+        border-radius: 10px;
+        padding: 5px 11px;
+        font-size: 13px;
         font-weight: 800;
         color: #F8FAFC;
         display: inline-flex;
@@ -286,13 +259,107 @@ st.markdown("""
         font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ================= BENTO CARDS (NEO-BRUTALIST SOFT) ================= */
+    /* ================= BẢNG XẾP HẠNG TRỰC QUAN NGAY TRANG CHỦ ================= */
+    .live-board-wrap {
+        background: #FFFFFF;
+        border: 3px solid #0F172A;
+        border-radius: 20px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 6px 0 #0F172A;
+    }
+    .live-board-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #F1F5F9;
+    }
+    .live-board-title {
+        font-family: 'Baloo 2', 'Nunito', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: #0F172A;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .podium-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .podium-card {
+        border: 2.5px solid #0F172A;
+        border-radius: 14px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 3px 0 #0F172A;
+        position: relative;
+    }
+    .podium-1 { background: linear-gradient(135deg, #FEF9C3 0%, #FDE047 100%); }
+    .podium-2 { background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); }
+    .podium-3 { background: linear-gradient(135deg, #FFEDD5 0%, #FDBA74 100%); }
+    .podium-medal {
+        font-size: 28px;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .podium-info {
+        min-width: 0;
+        flex: 1;
+    }
+    .podium-name {
+        font-weight: 900;
+        font-size: 14.5px;
+        color: #0F172A;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .podium-meta {
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #334155;
+    }
+    .class-chips-row {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 4px 2px 2px;
+        scrollbar-width: none;
+    }
+    .class-chips-row::-webkit-scrollbar { display: none; }
+    .class-chip {
+        background: #F8FAFC;
+        border: 2px solid #CBD5E1;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #1E293B;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .class-chip.active-cls {
+        background: #ECFDF5;
+        border-color: #10B981;
+        color: #065F46;
+    }
+
+    /* ================= BENTO CARDS ================= */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: #FFFFFF !important;
         border: 3px solid #0F172A !important;
         border-radius: 20px !important;
         padding: 10px 14px !important;
-        box-shadow: 0 6px 0 #0F172A, 0 10px 20px rgba(15, 23, 42, 0.06) !important;
+        box-shadow: 0 5px 0 #0F172A !important;
         margin-bottom: 14px !important;
     }
 
@@ -301,32 +368,32 @@ st.markdown("""
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
-        margin: 8px 0 16px;
+        margin: 6px 0 14px;
     }
     .quest-step {
         background: #FFFFFF;
         border: 2.5px solid #0F172A;
         border-radius: 14px;
-        padding: 10px 12px;
+        padding: 9px 11px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        box-shadow: 0 4px 0 #0F172A;
+        gap: 9px;
+        box-shadow: 0 3px 0 #0F172A;
         font-weight: 800;
-        font-size: 14px;
+        font-size: 13.5px;
         color: #0F172A;
     }
     .quest-step .q-num {
-        width: 28px;
-        height: 28px;
-        border-radius: 9px;
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
         border: 2px solid #0F172A;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 800;
-        font-size: 14px;
+        font-size: 13px;
         flex-shrink: 0;
     }
     .qs-1 { background: #ECFDF5; } .qs-1 .q-num { background: #34D399; color: #064E3B; }
@@ -347,7 +414,7 @@ st.markdown("""
         border-radius: 18px 18px 0 0;
         border: 3px solid #0F172A;
         border-bottom: none;
-        margin-top: 6px;
+        margin-top: 4px;
     }
     .reading-header-title {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
@@ -392,13 +459,12 @@ st.markdown("""
         text-decoration: underline wavy #DC2626;
     }
 
-    /* Thẻ từ khó dạng Viên Ngọc Chướng Ngại Vật */
     .tags {
         background: #FFFBEB;
         border: 2.5px solid #0F172A;
         border-radius: 16px;
-        padding: 12px 16px;
-        margin-bottom: 16px;
+        padding: 10px 14px;
+        margin-bottom: 14px;
         box-shadow: 0 4px 0 #0F172A;
         font-weight: 800;
         color: #78350F;
@@ -406,23 +472,22 @@ st.markdown("""
     .tags span {
         display: inline-block;
         background: #FFFFFF;
-        color: #B91C1C;
+        color: #0F172A;
         border: 2px solid #0F172A;
-        box-shadow: 0 3px 0 #0F172A;
-        border-radius: 10px;
-        padding: 4px 13px;
-        margin: 4px 5px;
+        box-shadow: 0 2px 0 #0F172A;
+        border-radius: 8px;
+        padding: 3px 11px;
+        margin: 3px 4px;
         font-weight: 900;
-        font-size: 16px;
+        font-size: 15.5px;
     }
 
-    /* Khung Nhận xét TT27 & Kết quả */
     .comment {
         background: #FFFFFF;
         border: 3px solid #0F172A;
         border-left: 12px solid #10B981;
         border-radius: 16px;
-        padding: 16px 20px;
+        padding: 14px 18px;
         font-size: 16.5px;
         line-height: 1.75;
         color: #0F172A;
@@ -439,37 +504,35 @@ st.markdown("""
         border: 2px dashed #64748B;
     }
 
-    /* Bảng Vinh Danh Sao Thưởng & Ngọc Lục Bảo */
     .reward {
         text-align: center;
         border-radius: 22px;
-        padding: 22px 18px 18px;
-        margin: 14px 0 20px;
+        padding: 20px 16px 16px;
+        margin: 14px 0 18px;
         background: linear-gradient(180deg, #FEF9C3 0%, #FDE047 100%);
         border: 3.5px solid #0F172A;
         box-shadow: 0 7px 0 #0F172A;
     }
     .reward .big {
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 800;
         color: #0F172A;
     }
-    .reward .sub { color: #78350F; font-size: 16px; font-weight: 800; margin-top: 4px; }
-    .star { font-size: 46px; display: inline-block; margin: 0 4px; }
+    .reward .sub { color: #78350F; font-size: 15.5px; font-weight: 800; margin-top: 4px; }
+    .star { font-size: 44px; display: inline-block; margin: 0 3px; }
     .star.on { animation: pop .55s cubic-bezier(.2,1.6,.4,1) both; filter: drop-shadow(0 4px 0 #0F172A); }
     .star.off { filter: grayscale(1); opacity: .22; }
     @keyframes pop { 0% { transform: scale(0) rotate(-35deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
 
-    /* Thanh XP kiểu Blockcraft */
     .xp-wrap {
         background: #0F172A;
         border: 3px solid #0F172A;
         border-radius: 12px;
-        height: 28px;
+        height: 26px;
         position: relative;
         overflow: hidden;
-        margin: 10px 0 8px;
+        margin: 8px 0;
     }
     .xp-fill {
         background: repeating-linear-gradient(90deg, #34D399 0px, #34D399 20px, #10B981 20px, #10B981 24px);
@@ -483,21 +546,20 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         font-weight: 900;
-        font-size: 13.5px;
+        font-size: 13px;
         color: #FEF08A;
         text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
 
-    /* Rương kho báu Bento Grid */
     .chest-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
         gap: 10px;
-        margin: 12px 0;
+        margin: 10px 0;
     }
     .chest-item {
         border-radius: 14px;
-        padding: 12px;
+        padding: 10px;
         font-weight: 800;
         border: 2.5px solid #0F172A;
         background: #F1F5F9;
@@ -514,7 +576,6 @@ st.markdown("""
         box-shadow: none;
     }
 
-    /* Hệ thống Nút bấm & Tabs Neo-Brutalist Tactile 3D */
     [data-testid="stMetric"] {
         background: #FFFFFF;
         border: 2.5px solid #0F172A;
@@ -556,34 +617,22 @@ st.markdown("""
     }
 
     div.stButton > button, div.stFormSubmitButton > button {
-        border-radius: 16px !important;
+        border-radius: 14px !important;
         font-weight: 900 !important;
         font-size: 16px !important;
-        padding: 0.6rem 1.3rem !important;
-        border: 3px solid #0F172A !important;
+        padding: 0.55rem 1.25rem !important;
+        border: 2.5px solid #0F172A !important;
         box-shadow: 0 5px 0 #0F172A, inset 0 2px 0 rgba(255,255,255,0.45) !important;
         cursor: pointer !important;
         transition: transform .15s ease-out, box-shadow .15s ease-out !important;
     }
     div.stButton > button:hover, div.stFormSubmitButton > button:hover {
         transform: translateY(-1px) !important;
-        box-shadow: 0 6px 0 #0F172A, inset 0 2px 0 rgba(255,255,255,0.6) !important;
+        box-shadow: 0 6px 0 #0F172A !important;
     }
     div.stButton > button:active, div.stFormSubmitButton > button:active {
         transform: translateY(3px) !important;
         box-shadow: 0 2px 0 #0F172A !important;
-    }
-    button:focus-visible, input:focus-visible, select:focus-visible, [role="tab"]:focus-visible {
-        outline: 3px solid #2563EB !important;
-        outline-offset: 2px !important;
-    }
-    @media (prefers-reduced-motion: reduce) {
-        *, ::before, ::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-        }
     }
 
     [data-testid="stAudioInput"] {
@@ -594,36 +643,33 @@ st.markdown("""
         box-shadow: 0 5px 0 #0F172A;
     }
 
-    /* Chân trang mới (Không có dòng tác giả) */
     .footer-pro {
         text-align: center;
-        margin: 34px 0 10px;
-        padding: 18px 20px;
+        margin: 32px 0 10px;
+        padding: 16px 20px;
         border-radius: 18px;
         color: #FFFFFF;
-        background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);
+        background: #0F172A;
         border: 3px solid #0F172A;
-        box-shadow: 0 6px 0 #0F172A;
+        box-shadow: 0 5px 0 #10B981;
         font-weight: 800;
     }
     .footer-pro .sch-name {
         color: #FDE047;
         font-family: 'Baloo 2', 'Nunito', sans-serif;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 800;
-        letter-spacing: 0.5px;
     }
 
-    /* Responsive chuẩn cho Điện thoại Phụ huynh */
     @media (max-width: 640px) {
-        .block-container { padding-top: 0.45rem; padding-left: 0.6rem; padding-right: 0.6rem; }
-        .pro-hero { padding: 16px 14px 14px; border-radius: 18px; }
-        .pro-hero h1 { font-size: 21px; }
-        .dino-avatar-box { width: 54px; height: 54px; border-radius: 14px; }
+        .block-container { padding-top: 0.4rem; padding-left: 0.55rem; padding-right: 0.55rem; }
+        .pro-hero { padding: 14px 12px; border-radius: 16px; }
+        .pro-hero h1 { font-size: 20px; }
+        .dino-avatar-box { width: 52px; height: 52px; }
+        .podium-grid { grid-template-columns: 1fr; gap: 8px; }
         .quest-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .quest-step { padding: 8px 10px; font-size: 13px; }
         .reading-header-title { font-size: 18px; }
-        .reading-box { font-size: 22px !important; padding: 16px 15px 18px 20px; line-height: 1.88; }
+        .reading-box { font-size: 22px !important; padding: 16px 14px 18px 18px; line-height: 1.88; }
         button[data-baseweb="tab"] { padding: 8px 12px !important; font-size: 13.5px !important; }
         div.stButton > button, div.stFormSubmitButton > button {
             width: 100%;
@@ -952,13 +998,13 @@ def build_comment(name, lesson_title, res, target):
 
     plan = []
     if need:
-        plan.append("Chơi trò chơi <b>🦖 Khủng Long Dino Vượt Từ Khó</b> ngay bên dưới để luyện phát âm chuẩn từng từ còn sai.")
+        plan.append("Chơi trò chơi <b>🦖 Chrome Dino Vượt Từ Khó</b> ngay bên dưới để luyện phát âm chuẩn từng từ còn sai.")
     if wpm < target * 0.7:
         plan.append("Đọc thành tiếng bài đọc khoảng 5–10 phút mỗi ngày, tập đọc theo cụm từ để đọc trôi chảy hơn.")
     if wpm > max(130, target * 2.5):
         plan.append("Đọc chậm hơn, ngắt nghỉ ở dấu phẩy, dấu chấm.")
     if is_t and not plan:
-        plan.append("Tiếp tục duy trì, đọc thêm các bài khác để nâng cấp Khủng Long và mở khóa Rương Kho Báu!")
+        plan.append("Tiếp tục duy trì, đọc thêm các bài khác để nâng cấp Khủng Long và giữ vững vị trí trên Bảng Xếp Hạng!")
     if not (is_t or is_h):
         plan.append("Nghe đọc mẫu và đọc lại bài; gia đình và giáo viên hỗ trợ em luyện đọc thêm.")
     return dict(level=rating, result=result, strengths=strengths, weaknesses=weaknesses, plan=plan)
@@ -1080,9 +1126,18 @@ COMP_LABEL = {"daydu": "Đúng, đầy đủ ý", "dung": "Đúng một phần �
 
 
 # =====================================================================
-# 6. TRÒ CHƠI KHỦNG LONG DINO VƯỢT TỪ KHÓ BẰNG GIỌNG ĐỌC (HTML5 CANVAS PRO MAX)
+# 6. GAME KHỦNG LONG CHROME DINO (`chrome://dino` / `offline.js` ARCHITECTURE)
+#    Tích hợp nhận diện giọng đọc Từ Khó Tiếng Việt + Arcade Mode Scaling
 # =====================================================================
 def render_dino_game(words_list, student_name, selected_class, lesson_title):
+    """
+    Mô phỏng sát nguyên bản Chromium `components/neterror/resources/offline.js` (chrome://dino):
+    - Cấu trúc lớp `Runner`, `Runner.config`, `Runner.defaultDimensions` (600x150), `Runner.classes` (`runner-container`, `runner-canvas`, `arcade-mode`, `inverted`).
+    - Đồ họa Pixel Monochrome #535353 trên nền #f7f7f7 (có hiệu ứng đảo màu Ngày/Đêm `inverted` mỗi 100 điểm và điểm cao `HI 00000 00000`).
+    - T-Rex pixel sprite chuẩn của Chrome (nháy mắt, chạy 2 chân luân phiên, cúi người `duck`, chạm xương rồng `crashed`).
+    - Cải tiến Giáo dục: Mỗi chướng ngại vật (Xương rồng đơn/kép, Thằn lằn bay Pterodactyl) mang theo 1 Từ Khó.
+      Khi chướng ngại vật tiến vào vùng đọc, nếu học sinh đọc đúng từ khó qua Micro (hoặc chạm màn hình/bấm Space), T-Rex nhảy vọt qua!
+    """
     if not words_list:
         words_list = ["xinh xắn", "ríu rít", "trong trẻo", "lấp lánh", "chăm chỉ", "nghiêng nghiêng"]
     clean_words = []
@@ -1094,7 +1149,7 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
         clean_words = ["chăm chỉ", "rõ ràng", "trôi chảy", "xuất sắc"]
 
     words_json = json.dumps(clean_words, ensure_ascii=False)
-    safe_student = (student_name or "Chiến binh Nhí").replace('"', "")
+    safe_student = (student_name or "Chiến binh").replace('"', "")
     safe_class = (selected_class or "Lớp").replace('"', "")
 
     components.html(f"""
@@ -1103,229 +1158,264 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
 <head>
 <meta charset="utf-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@700;800;900&display=swap');
-  * {{ box-sizing: border-box; user-select: none; }}
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@700;800;900&display=swap');
+  * {{ box-sizing: border-box; user-select: none; -webkit-user-select: none; }}
   body {{
     margin: 0;
-    padding: 4px 2px 8px;
-    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    padding: 2px;
     background: transparent;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #535353;
   }}
-  .game-card {{
-    background: #0F172A;
-    border: 3.5px solid #0F172A;
-    border-radius: 20px;
-    padding: 14px;
-    color: #fff;
-    box-shadow: 0 7px 0 #0F172A;
+  .offline-wrapper {{
+    background: #f7f7f7;
+    border: 3px solid #0F172A;
+    border-radius: 18px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 0 #0F172A;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+    position: relative;
+    overflow: hidden;
   }}
-  .top-hud {{
+  .offline-wrapper.inverted {{
+    background: #202124;
+    color: #e8eaed;
+    border-color: #535353;
+  }}
+  .offline-wrapper.arcade-mode {{
+    padding: 18px;
+  }}
+
+  /* Thanh thông tin kiểu Chrome Dino Header */
+  .dino-top-bar {{
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px dashed #dadce0;
   }}
-  .hud-badge {{
-    background: #1E293B;
-    border: 2px solid #475569;
-    border-radius: 10px;
-    padding: 5px 12px;
-    font-weight: 900;
-    font-size: 13.5px;
-    color: #FDE047;
-  }}
-  .target-banner {{
-    background: linear-gradient(90deg, #064E3B 0%, #047857 100%);
-    border: 2.5px solid #34D399;
-    border-radius: 14px;
-    padding: 10px 14px;
-    margin-bottom: 10px;
+  .inverted .dino-top-bar {{ border-bottom-color: #3c4043; }}
+
+  .word-prompt-box {{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
     gap: 10px;
+    flex-wrap: wrap;
   }}
-  .target-label {{
-    font-size: 12.5px;
-    color: #A7F3D0;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }}
-  .target-word {{
-    font-family: 'Baloo 2', 'Nunito', sans-serif;
-    font-size: 27px;
-    font-weight: 800;
-    color: #FEF08A;
-    background: #022C22;
-    padding: 2px 16px;
-    border-radius: 10px;
-    border: 2px solid #34D399;
-    display: inline-block;
-    margin-top: 2px;
-  }}
-  .mic-status {{
+  .prompt-label {{
     font-size: 13px;
     font-weight: 800;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: #1E293B;
-    border: 2px solid #38BDF8;
-    color: #E0F2FE;
+    color: #535353;
+    text-transform: uppercase;
   }}
-  .mic-status.listening {{
-    background: #991B1B;
-    border-color: #FCA5A5;
-    color: #FEF2F2;
-    animation: pulse 1.2s infinite;
+  .inverted .prompt-label {{ color: #9aa0a6; }}
+
+  .target-word-pill {{
+    background: #535353;
+    color: #f7f7f7;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 3px 16px;
+    border-radius: 6px;
+    letter-spacing: 0.4px;
+    border: 2px solid #202124;
+    box-shadow: 0 3px 0 #202124;
   }}
-  @keyframes pulse {{
-    0%, 100% {{ transform: scale(1); }}
-    50% {{ transform: scale(1.04); }}
+  .inverted .target-word-pill {{
+    background: #e8eaed;
+    color: #202124;
+    border-color: #9aa0a6;
   }}
-  canvas {{
+
+  .status-chip {{
+    font-size: 12.5px;
+    font-weight: 800;
+    padding: 5px 11px;
+    border-radius: 6px;
+    background: #e8eaed;
+    color: #202124;
+    border: 1.5px solid #535353;
+  }}
+  .status-chip.listening {{
+    background: #fce8e6;
+    color: #c5221f;
+    border-color: #c5221f;
+    animation: blinkMic 1s infinite;
+  }}
+  @keyframes blinkMic {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.65; }} }}
+
+  /* Runner Container & Canvas chuẩn offline.js */
+  .runner-container {{
+    position: relative;
     width: 100%;
-    height: 215px;
-    display: block;
-    border-radius: 14px;
-    border: 3px solid #334155;
-    background: #E0F2FE;
-    image-rendering: pixelated;
+    max-width: 860px;
+    margin: 0 auto;
+    height: 190px;
+    overflow: hidden;
     cursor: pointer;
     touch-action: manipulation;
+    transform-origin: top center;
+    transition: transform 0.2s ease;
   }}
-  .controls {{
+  .runner-canvas {{
+    width: 100%;
+    height: 190px;
+    display: block;
+    image-rendering: pixelated;
+  }}
+
+  /* Hệ thống nút điều khiển Chrome Dino */
+  .dino-controls {{
     display: flex;
     gap: 8px;
     margin-top: 10px;
     flex-wrap: wrap;
   }}
-  .btn {{
+  .c-btn {{
     flex: 1;
-    min-width: 140px;
-    min-height: 46px;
-    padding: 10px 12px;
-    border-radius: 12px;
+    min-width: 135px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 8px;
     font-family: inherit;
     font-weight: 900;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
-    border: 2.5px solid #000;
-    transition: transform 0.1s;
-    text-align: center;
+    border: 2px solid #535353;
+    background: #ffffff;
+    color: #202124;
+    box-shadow: 0 3px 0 #535353;
+    transition: transform 0.08s;
     touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
   }}
-  .btn:active {{ transform: translateY(3px); }}
-  .btn-mic {{
-    background: #EF4444;
-    color: #fff;
-    box-shadow: 0 4px 0 #7F1D1D;
+  .c-btn:active {{
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #535353;
   }}
-  .btn-jump {{
-    background: #22C55E;
-    color: #052E16;
-    box-shadow: 0 4px 0 #14532D;
+  .c-btn-primary {{
+    background: #535353;
+    color: #ffffff;
+    border-color: #202124;
+    box-shadow: 0 3px 0 #202124;
   }}
-  .btn-speak {{
-    background: #38BDF8;
-    color: #0F172A;
-    box-shadow: 0 4px 0 #0369A1;
+  .c-btn-mic {{
+    background: #d93025;
+    color: #ffffff;
+    border-color: #75140c;
+    box-shadow: 0 3px 0 #75140c;
   }}
-  .heard-bar {{
+  .dino-footer {{
     margin-top: 8px;
     font-size: 12.5px;
-    color: #94A3B8;
     font-weight: 700;
+    color: #5f6368;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 4px;
   }}
+  .inverted .dino-footer {{ color: #9aa0a6; }}
+
   @media (max-width: 600px) {{
-    .game-card {{ padding: 10px; border-radius: 16px; }}
-    .target-banner {{ padding: 8px 10px; }}
-    .target-word {{ font-size: 22px; padding: 2px 12px; }}
-    .mic-status {{ font-size: 12px; width: 100%; text-align: center; }}
-    canvas {{ height: 180px; }}
-    .btn {{ min-width: 45%; font-size: 13.5px; padding: 8px; }}
-    .btn-jump {{ min-width: 100%; font-size: 15px; }}
+    .offline-wrapper {{ padding: 10px; border-radius: 14px; }}
+    .target-word-pill {{ font-size: 19px; padding: 2px 12px; }}
+    .runner-container, .runner-canvas {{ height: 165px; }}
+    .c-btn {{ min-width: 46%; font-size: 13px; padding: 7px 8px; }}
+    .c-btn-primary {{ min-width: 100%; font-size: 14.5px; }}
   }}
 </style>
 </head>
 <body>
-<div class="game-card">
-  <div class="top-hud">
-    <div class="hud-badge">🦖 Chiến binh: {safe_student} ({safe_class})</div>
-    <div class="hud-badge" id="scoreHud">💎 Ngọc: 0 | 🔥 Combo: x1 | 🏆 Vượt: 0 từ</div>
-  </div>
-
-  <div class="target-banner">
-    <div>
-      <div class="target-label">🎯 ĐỌC TO TỪ KHÓ ĐỂ KHỦNG LONG NHẢY:</div>
-      <div class="target-word" id="targetWordDisplay">...</div>
+<div id="outer-container" class="offline-wrapper">
+  <div class="dino-top-bar">
+    <div class="word-prompt-box">
+      <span class="prompt-label">🦖 TỪ KHÓ CẦN ĐỌC ĐỂ NHẢY:</span>
+      <span class="target-word-pill" id="targetWordEl">...</span>
     </div>
-    <div class="mic-status" id="micStatus">🎙️ Bấm Micro hoặc Chạm màn hình để Nhảy</div>
+    <div class="status-chip" id="micStatusEl">🎙️ Bấm Micro hoặc Chạm màn hình / Phím Cách</div>
   </div>
 
-  <canvas id="dinoCanvas" width="820" height="215" title="Chạm vào màn hình để Khủng Long nhảy"></canvas>
-
-  <div class="controls">
-    <button class="btn btn-mic" id="btnMic" onclick="toggleVoice()">🎤 Bật Micro Đọc</button>
-    <button class="btn btn-speak" onclick="speakCurrentWord()">🔊 Nghe Mẫu Từ</button>
-    <button class="btn btn-jump" onclick="manualReadJump()">⬆️ Đã Đọc To! Chạm Để Nhảy (Space)</button>
+  <div id="runner-container" class="runner-container" title="Chạm vào màn hình hoặc bấm Phím Cách (Space) để nhảy">
+    <canvas id="runner-canvas" class="runner-canvas" width="760" height="190"></canvas>
   </div>
 
-  <div class="heard-bar">
-    <span id="heardText">👂 Máy nghe: (Bấm Bật Micro hoặc đọc to rồi chạm vào hình Khủng Long để nhảy!)</span>
-    <span>📱 Điện thoại: Chạm vào hình Khủng Long để nhảy · 💻 Laptop: Phím Cách</span>
+  <div class="dino-controls">
+    <button class="c-btn c-btn-mic" id="btnMic" onclick="runner.toggleVoice()">🎤 Bật Micro Đọc Từ</button>
+    <button class="c-btn" onclick="runner.speakWord()">🔊 Nghe Đọc Mẫu Từ</button>
+    <button class="c-btn" onclick="runner.toggleArcade()">⛶ Chế Độ Arcade</button>
+    <button class="c-btn c-btn-primary" onclick="runner.onAction()">⬆️ Đọc To & Nhảy (Space / Chạm)</button>
+  </div>
+
+  <div class="dino-footer">
+    <span id="heardLog">👂 Máy nghe: (Bật Micro rồi đọc to từ khó, hoặc chạm thẳng vào khủng long để nhảy!)</span>
+    <span>👤 {safe_student} ({safe_class}) · Chrome Dino Voice Edition</span>
   </div>
 </div>
 
 <script>
+/**
+ * CHROMIUM OFFLINE.JS RUNNER IMPLEMENTATION (VOICE READING EDITION)
+ * Dựa trên kiến trúc chuẩn của components/neterror/resources/offline.js
+ */
 const WORDS = {words_json};
-let wordIdx = 0;
-let emeralds = 0;
-let clearedCount = 0;
-let combo = 1;
-let listening = false;
-let recognition = null;
+const IS_IOS = /iPad|iPhone|iPod/.test(window.navigator.platform);
+const IS_MOBILE = /Android/.test(window.navigator.userAgent) || IS_IOS;
+const IS_TOUCH_ENABLED = 'ontouchstart' in window;
+const ARCADE_MODE_URL = 'chrome://dino/';
+const DEFAULT_WIDTH = 760;
 
-const canvas = document.getElementById("dinoCanvas");
-const ctx = canvas.getContext("2d");
-
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
-let audioCtx = null;
-function playTone(freq, dur, type="square") {{
-  try {{
-    if (!audioCtx) audioCtx = new AudioCtx();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.11, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + dur);
-  }} catch(e) {{}}
-}}
-function sfxJump() {{
-  playTone(520, 0.08, "square");
-  setTimeout(() => playTone(780, 0.13, "square"), 65);
-}}
-function sfxEmerald() {{
-  playTone(660, 0.07, "triangle");
-  setTimeout(() => playTone(880, 0.11, "triangle"), 75);
-  setTimeout(() => playTone(1180, 0.16, "triangle"), 150);
-}}
-function sfxBump() {{
-  playTone(180, 0.16, "sawtooth");
-}}
+// Bảng vẽ Pixel Art 2D nguyên bản của Khủng long Chrome T-Rex (20x22 logical pixels, scale 2.2x)
+const TREX_HEAD_NORMAL = [
+  "00000000001111111110",
+  "00000000011111111111",
+  "00000000011011111111",
+  "00000000011111111111",
+  "00000000011111111111",
+  "00000000011111000000",
+  "00000000011111111000"
+];
+const TREX_HEAD_CRASHED = [
+  "00000000001111111110",
+  "00000000011111111111",
+  "00000000010101111111",
+  "00000000011011111111",
+  "00000000010101111111",
+  "00000000011111000000",
+  "00000000011111111000"
+];
+const TREX_TORSO = [
+  "00000000111111000000",
+  "10000001111111000000",
+  "10000011111111110000",
+  "11000111111111010000",
+  "11101111111111000000",
+  "11111111111111000000",
+  "01111111111110000000",
+  "00111111111100000000",
+  "00011111111000000000",
+  "00001111110000000000"
+];
+const TREX_LEGS_1 = [
+  "00001110011000000000",
+  "00001100001100000000",
+  "00001000000000000000",
+  "00001100000000000000"
+];
+const TREX_LEGS_2 = [
+  "00001100011100000000",
+  "00000110001000000000",
+  "00000000001000000000",
+  "00000000001100000000"
+];
+const TREX_LEGS_JUMP = [
+  "00001110011100000000",
+  "00001100001100000000",
+  "00001100001100000000",
+  "00001110001110000000"
+];
 
 function stripVN(str) {{
   return (str || "").toLowerCase()
@@ -1340,11 +1430,9 @@ function isWordMatch(spokenRaw, targetRaw) {{
   const tFull = (targetRaw || "").toLowerCase().trim();
   if (!sFull || !tFull) return false;
   if (sFull.includes(tFull)) return true;
-
   const sNo = stripVN(sFull);
   const tNo = stripVN(tFull);
   if (sNo.includes(tNo)) return true;
-
   const tParts = tNo.split(" ").filter(Boolean);
   const sParts = sNo.split(" ").filter(Boolean);
   let matched = 0;
@@ -1356,399 +1444,538 @@ function isWordMatch(spokenRaw, targetRaw) {{
   return matched >= Math.max(1, Math.ceil(tParts.length * 0.6));
 }}
 
-const GROUND_Y = 172;
-const dino = {{
-  x: 88,
-  y: GROUND_Y - 48,
-  w: 44,
-  h: 48,
-  vy: 0,
-  jumping: false,
-  legFrame: 0,
-  speechBubble: "",
-  speechTimer: 0
-}};
+function Runner(outerContainerId, opt_config) {{
+  this.outerContainerEl = document.getElementById(outerContainerId);
+  this.containerEl = document.getElementById('runner-container');
+  this.canvas = document.getElementById('runner-canvas');
+  this.ctx = this.canvas.getContext('2d');
+  this.config = opt_config || Runner.config;
+  this.dimensions = Object.assign({{}}, Runner.defaultDimensions);
 
-let obstacle = {{
-  x: 760,
-  w: 42,
-  h: 46,
-  type: "cactus",
-  word: WORDS[0],
-  passed: false,
-  waitingForRead: false
-}};
+  this.wordIndex = 0;
+  this.currentWord = WORDS[0];
+  this.distanceRan = 0;
+  this.highestScore = 0;
+  this.wordsCleared = 0;
+  this.currentSpeed = this.config.SPEED;
+  this.crashed = false;
+  this.inverted = false;
+  this.invertTimer = 0;
+  this.arcadeMode = false;
+  this.listening = false;
+  this.recognition = null;
+  this.audioCtx = null;
 
-let clouds = [
-  {{x: 110, y: 28, w: 64}},
-  {{x: 400, y: 46, w: 80}},
-  {{x: 680, y: 24, w: 60}}
-];
-let particles = [];
-
-function updateTargetUI() {{
-  document.getElementById("targetWordDisplay").textContent = obstacle.word;
-  document.getElementById("scoreHud").textContent = `💎 Ngọc: ${{emeralds}} | 🔥 Combo: x${{combo}} | 🏆 Vượt: ${{clearedCount}} từ`;
-}}
-updateTargetUI();
-
-function spawnParticles(x, y, color) {{
-  for (let i = 0; i < 12; i++) {{
-    particles.push({{
-      x, y,
-      vx: (Math.random() - 0.5) * 6,
-      vy: -Math.random() * 5 - 1,
-      size: 5 + Math.random() * 4,
-      color,
-      life: 26
-    }});
-  }}
-}}
-
-function triggerDinoJump(reasonText) {{
-  if (!dino.jumping) {{
-    dino.vy = -12.6;
-    dino.jumping = true;
-    sfxJump();
-  }}
-  obstacle.waitingForRead = false;
-  dino.speechBubble = reasonText || ("Chuẩn: " + obstacle.word + "!");
-  dino.speechTimer = 50;
-  spawnParticles(dino.x + 20, dino.y + 20, "#34D399");
-}}
-
-function manualReadJump() {{
-  triggerDinoJump("🦖 Nhảy vượt: " + obstacle.word + "!");
-}}
-
-canvas.addEventListener("touchstart", (e) => {{
-  e.preventDefault();
-  manualReadJump();
-}}, {{ passive: false }});
-canvas.addEventListener("mousedown", (e) => {{
-  e.preventDefault();
-  manualReadJump();
-}});
-window.addEventListener("keydown", (e) => {{
-  if (e.code === "Space" || e.code === "ArrowUp") {{
-    e.preventDefault();
-    manualReadJump();
-  }}
-}});
-
-function speakCurrentWord() {{
-  try {{
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(obstacle.word);
-    const vs = window.speechSynthesis.getVoices().filter(x => x.lang.toLowerCase().startsWith("vi"));
-    if (vs.length) u.voice = vs[0];
-    u.lang = "vi-VN";
-    u.rate = 0.85;
-    window.speechSynthesis.speak(u);
-  }} catch(e) {{}}
-}}
-
-function toggleVoice() {{
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const statusEl = document.getElementById("micStatus");
-  const btnMic = document.getElementById("btnMic");
-  if (!SR) {{
-    statusEl.textContent = "⚠️ Trình duyệt chưa hỗ trợ Micro tự động - Em hãy đọc to rồi chạm vào hình Khủng Long để nhảy!";
-    return;
-  }}
-  if (listening && recognition) {{
-    listening = false;
-    recognition.stop();
-    statusEl.textContent = "🎙️ Đã tắt Micro tự động";
-    statusEl.classList.remove("listening");
-    btnMic.textContent = "🎤 Bật Micro Đọc";
-    return;
-  }}
-
-  recognition = new SR();
-  recognition.lang = "vi-VN";
-  recognition.continuous = true;
-  recognition.interimResults = true;
-
-  recognition.onstart = () => {{
-    listening = true;
-    statusEl.textContent = "🔴 Đang nghe từ: “" + obstacle.word + "”...";
-    statusEl.classList.add("listening");
-    btnMic.textContent = "⏹️ Dừng Micro";
+  this.tRex = {{
+    x: 56,
+    y: this.dimensions.GROUND_Y - 46,
+    groundY: this.dimensions.GROUND_Y - 46,
+    w: 44,
+    h: 46,
+    vy: 0,
+    jumping: false,
+    ducking: false,
+    stepFrame: 0,
+    blinkTimer: 0,
+    bubbleText: "",
+    bubbleTimer: 0
   }};
 
-  recognition.onresult = (event) => {{
-    let transcript = "";
-    for (let i = event.resultIndex; i < event.results.length; i++) {{
-      transcript += event.results[i][0].transcript + " ";
+  this.horizonOffset = 0;
+  this.bumps = [18, 95, 210, 340, 490, 620, 710];
+  this.clouds = [
+    {{ x: 140, y: 28, speed: 0.9 }},
+    {{ x: 420, y: 46, speed: 0.7 }},
+    {{ x: 670, y: 22, speed: 1.0 }}
+  ];
+  this.obstacle = this.createObstacle(this.dimensions.WIDTH + 40);
+
+  this.init();
+}}
+
+Runner.config = {{
+  ACCELERATION: 0.001,
+  GRAVITY: 0.62,
+  INITIAL_JUMP_VELOCITY: 12.6,
+  INVERT_DISTANCE: 100,
+  MAX_SPEED: 11,
+  MOBILE_SPEED_COEFFICIENT: 1.2,
+  SPEED: 5.2,
+  SPEED_DROP_COEFFICIENT: 3,
+  ARCADE_MODE_TOP_POSITION_PERCENT: 0.1
+}};
+
+Runner.defaultDimensions = {{
+  WIDTH: DEFAULT_WIDTH,
+  HEIGHT: 190,
+  GROUND_Y: 158
+}};
+
+Runner.classes = {{
+  ARCADE_MODE: 'arcade-mode',
+  CANVAS: 'runner-canvas',
+  CONTAINER: 'runner-container',
+  CRASHED: 'crashed',
+  INVERTED: 'inverted'
+}};
+
+Runner.prototype = {{
+  init: function() {{
+    this.updateWordHUD();
+    this.bindEvents();
+    this.scheduleNextFrame();
+  }},
+
+  createObstacle: function(startX) {{
+    const types = ['CACTUS_SMALL', 'CACTUS_LARGE', 'CACTUS_CLUSTER', 'PTERODACTYL'];
+    const t = types[this.wordIndex % types.length];
+    const h = t === 'CACTUS_LARGE' ? 46 : (t === 'PTERODACTYL' ? 34 : 38);
+    const w = t === 'CACTUS_CLUSTER' ? 48 : (t === 'CACTUS_LARGE' ? 28 : 24);
+    const yOffset = t === 'PTERODACTYL' ? 18 : 0;
+    return {{
+      x: startX,
+      y: this.dimensions.GROUND_Y - h - yOffset,
+      w: w,
+      h: h,
+      type: t,
+      word: this.currentWord,
+      passed: false,
+      slowZone: false,
+      wingFrame: 0
+    }};
+  }},
+
+  updateWordHUD: function() {{
+    document.getElementById('targetWordEl').textContent = this.currentWord;
+    if (this.listening) {{
+      document.getElementById('micStatusEl').textContent = '🔴 Đang nghe từ: “' + this.currentWord + '”';
     }}
-    transcript = transcript.trim();
-    if (transcript) {{
-      document.getElementById("heardText").textContent = "👂 Máy nghe: “" + transcript + "”";
-      if (isWordMatch(transcript, obstacle.word)) {{
-        triggerDinoJump("🎉 Đọc chuẩn: " + obstacle.word + "!");
+  }},
+
+  playSound: function(type) {{
+    try {{
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!this.audioCtx) this.audioCtx = new AudioContext();
+      const ctx = this.audioCtx;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      gain.gain.setValueAtTime(0.09, ctx.currentTime);
+      if (type === 'JUMP') {{
+        osc.frequency.setValueAtTime(540, ctx.currentTime);
+        osc.frequency.setValueAtTime(760, ctx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 0.14);
+      }} else if (type === 'SCORE') {{
+        osc.frequency.setValueAtTime(880, ctx.currentTime);
+        osc.frequency.setValueAtTime(1174, ctx.currentTime + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 0.25);
+      }} else if (type === 'HIT') {{
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(160, ctx.currentTime);
+        osc.frequency.setValueAtTime(110, ctx.currentTime + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 0.22);
+      }}
+    }} catch (e) {{}}
+  }},
+
+  onAction: function(spokenBadge) {{
+    if (this.crashed) {{
+      this.restart();
+      return;
+    }}
+    if (!this.tRex.jumping) {{
+      this.tRex.vy = -this.config.INITIAL_JUMP_VELOCITY;
+      this.tRex.jumping = true;
+      this.playSound('JUMP');
+    }}
+    this.obstacle.slowZone = false;
+    this.tRex.bubbleText = spokenBadge || ('✓ ' + this.currentWord);
+    this.tRex.bubbleTimer = 45;
+  }},
+
+  restart: function() {{
+    this.crashed = false;
+    this.outerContainerEl.classList.remove(Runner.classes.CRASHED);
+    this.obstacle.x = this.dimensions.WIDTH + 50;
+    this.obstacle.passed = false;
+    this.tRex.y = this.tRex.groundY;
+    this.tRex.vy = 0;
+    this.tRex.jumping = false;
+    this.playSound('JUMP');
+  }},
+
+  isArcadeMode: function() {{
+    return this.arcadeMode || document.title === ARCADE_MODE_URL;
+  }},
+
+  setArcadeMode: function() {{
+    this.outerContainerEl.classList.toggle(Runner.classes.ARCADE_MODE, this.arcadeMode);
+    this.setArcadeModeContainerScale();
+  }},
+
+  setArcadeModeContainerScale: function() {{
+    if (!this.arcadeMode) {{
+      this.containerEl.style.transform = '';
+      return;
+    }}
+    const scale = Math.min(1.06, Math.max(1.0, this.outerContainerEl.offsetWidth / this.dimensions.WIDTH));
+    this.containerEl.style.transform = 'scale(' + scale + ')';
+  }},
+
+  toggleArcade: function() {{
+    this.arcadeMode = !this.arcadeMode;
+    this.setArcadeMode();
+  }},
+
+  speakWord: function() {{
+    try {{
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(this.currentWord);
+      const vs = window.speechSynthesis.getVoices().filter(x => x.lang.toLowerCase().startsWith('vi'));
+      if (vs.length) u.voice = vs[0];
+      u.lang = 'vi-VN';
+      u.rate = 0.85;
+      window.speechSynthesis.speak(u);
+    }} catch (e) {{}}
+  }},
+
+  toggleVoice: function() {{
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const statusEl = document.getElementById('micStatusEl');
+    const btnMic = document.getElementById('btnMic');
+    if (!SR) {{
+      statusEl.textContent = '⚠️ Trình duyệt chưa hỗ trợ Micro tự động - Em đọc to rồi chạm màn hình nhé!';
+      return;
+    }}
+    if (this.listening && this.recognition) {{
+      this.listening = false;
+      this.recognition.stop();
+      statusEl.textContent = '🎙️ Đã tắt Micro tự động';
+      statusEl.classList.remove('listening');
+      btnMic.textContent = '🎤 Bật Micro Đọc Từ';
+      return;
+    }}
+    const self = this;
+    this.recognition = new SR();
+    this.recognition.lang = 'vi-VN';
+    this.recognition.continuous = true;
+    this.recognition.interimResults = true;
+
+    this.recognition.onstart = function() {{
+      self.listening = true;
+      statusEl.textContent = '🔴 Đang nghe từ: “' + self.currentWord + '”';
+      statusEl.classList.add('listening');
+      btnMic.textContent = '⏹️ Dừng Micro';
+    }};
+    this.recognition.onresult = function(event) {{
+      let transcript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {{
+        transcript += event.results[i][0].transcript + ' ';
+      }}
+      transcript = transcript.trim();
+      if (transcript) {{
+        document.getElementById('heardLog').textContent = '👂 Máy nghe: “' + transcript + '”';
+        if (isWordMatch(transcript, self.currentWord)) {{
+          self.onAction('🎉 Đọc đúng: ' + self.currentWord);
+        }}
+      }}
+    }};
+    this.recognition.onerror = function() {{}};
+    this.recognition.onend = function() {{
+      if (self.listening) {{
+        try {{ self.recognition.start(); }} catch (e) {{}}
+      }}
+    }};
+    try {{ this.recognition.start(); }} catch (e) {{}}
+  }},
+
+  bindEvents: function() {{
+    const self = this;
+    this.containerEl.addEventListener('touchstart', function(e) {{
+      e.preventDefault();
+      self.onAction();
+    }}, {{ passive: false }});
+    this.containerEl.addEventListener('mousedown', function(e) {{
+      e.preventDefault();
+      self.onAction();
+    }});
+    window.addEventListener('keydown', function(e) {{
+      if (e.code === 'Space' || e.code === 'ArrowUp') {{
+        e.preventDefault();
+        self.onAction();
+      }} else if (e.code === 'ArrowDown') {{
+        self.tRex.ducking = true;
+      }}
+    }});
+    window.addEventListener('keyup', function(e) {{
+      if (e.code === 'ArrowDown') self.tRex.ducking = false;
+    }});
+  }},
+
+  drawBitmap: function(rows, startX, startY, scale, color) {{
+    this.ctx.fillStyle = color;
+    for (let r = 0; r < rows.length; r++) {{
+      const row = rows[r];
+      for (let c = 0; c < row.length; c++) {{
+        if (row[c] === '1') {{
+          this.ctx.fillRect(startX + c * scale, startY + r * scale, scale, scale);
+        }}
       }}
     }}
-  }};
+  }},
 
-  recognition.onerror = () => {{}};
-  recognition.onend = () => {{
-    if (listening) {{
-      try {{ recognition.start(); }} catch(e) {{}}
+  drawTRex: function(fgColor) {{
+    const scale = 2.15;
+    const x = this.tRex.x;
+    const y = this.tRex.y;
+    const head = this.crashed ? TREX_HEAD_CRASHED : TREX_HEAD_NORMAL;
+    const legs = (this.tRex.jumping || this.crashed)
+      ? TREX_LEGS_JUMP
+      : (Math.floor(this.tRex.stepFrame / 6) % 2 === 0 ? TREX_LEGS_1 : TREX_LEGS_2);
+    const bitmap = head.concat(TREX_TORSO, legs);
+    this.drawBitmap(bitmap, x, y, scale, fgColor);
+  }},
+
+  drawCloud: function(x, y, cloudColor) {{
+    this.ctx.fillStyle = cloudColor;
+    this.ctx.fillRect(x + 8, y, 28, 6);
+    this.ctx.fillRect(x + 2, y + 6, 42, 6);
+    this.ctx.fillRect(x, y + 12, 46, 4);
+  }},
+
+  drawObstacleSprite: function(obs, fgColor, bgColor) {{
+    const x = obs.x;
+    const y = obs.y;
+    this.ctx.fillStyle = fgColor;
+
+    if (obs.type === 'PTERODACTYL') {{
+      obs.wingFrame++;
+      const wingUp = Math.floor(obs.wingFrame / 10) % 2 === 0;
+      // Đầu & thân thằn lằn bay Chrome Dino
+      this.ctx.fillRect(x, y + 12, 10, 4);
+      this.ctx.fillRect(x + 8, y + 10, 22, 8);
+      if (wingUp) {{
+        this.ctx.fillRect(x + 14, y, 8, 10);
+      }} else {{
+        this.ctx.fillRect(x + 14, y + 18, 8, 10);
+      }}
+    }} else if (obs.type === 'CACTUS_CLUSTER') {{
+      // Cụm 3 cây xương rồng Chrome
+      for (let k = 0; k < 3; k++) {{
+        const cx = x + k * 15;
+        this.ctx.fillRect(cx + 5, y + (k % 2) * 6, 6, obs.h - (k % 2) * 6);
+        this.ctx.fillRect(cx, y + 10, 4, 10);
+        this.ctx.fillRect(cx, y + 18, 6, 4);
+        this.ctx.fillRect(cx + 12, y + 8, 4, 12);
+        this.ctx.fillRect(cx + 10, y + 18, 6, 4);
+      }}
+    }} else {{
+      // Xương rồng đơn chuẩn Chrome Dino
+      const midX = x + Math.floor(obs.w / 2) - 4;
+      this.ctx.fillRect(midX, y, 8, obs.h);
+      this.ctx.fillRect(x, y + 10, 5, 14);
+      this.ctx.fillRect(x, y + 20, midX - x + 2, 5);
+      this.ctx.fillRect(midX + 10, y + 8, 5, 14);
+      this.ctx.fillRect(midX + 6, y + 18, 9, 5);
     }}
-  }};
 
-  try {{
-    recognition.start();
-  }} catch(e) {{}}
-}}
+    // Nhãn Từ Khó kiểu Pixel Tag gắn phía trên chướng ngại vật
+    this.ctx.save();
+    this.ctx.font = "900 16px 'Nunito', sans-serif";
+    const textW = Math.max(76, this.ctx.measureText(obs.word).width + 20);
+    const tagX = x + obs.w / 2 - textW / 2;
+    const tagY = y - 34;
 
-function nextObstacle() {{
-  wordIdx = (wordIdx + 1) % WORDS.length;
-  const types = ["cactus", "tnt", "creeper"];
-  obstacle = {{
-    x: canvas.width + 40,
-    w: 42,
-    h: 46,
-    type: types[wordIdx % types.length],
-    word: WORDS[wordIdx],
-    passed: false,
-    waitingForRead: false
-  }};
-  updateTargetUI();
-  if (listening) {{
-    document.getElementById("micStatus").textContent = "🔴 Đang nghe từ: “" + obstacle.word + "”...";
-  }}
-}}
+    this.ctx.fillStyle = fgColor;
+    this.ctx.fillRect(tagX, tagY, textW, 26);
+    this.ctx.fillStyle = bgColor;
+    this.ctx.fillRect(tagX + 2, tagY + 2, textW - 4, 22);
+    this.ctx.fillStyle = fgColor;
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText(obs.word, x + obs.w / 2, tagY + 18);
+    this.ctx.restore();
+  }},
 
-function drawPixelDino(x, y) {{
-  ctx.save();
-  ctx.fillStyle = "#10B981";
-  ctx.fillRect(x + 16, y, 26, 18);
-  ctx.fillRect(x + 28, y + 10, 16, 6);
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillRect(x + 30, y + 4, 6, 6);
-  ctx.fillStyle = "#0F172A";
-  ctx.fillRect(x + 33, y + 5, 3, 4);
-  ctx.fillStyle = "#059669";
-  ctx.fillRect(x + 8, y + 16, 24, 20);
-  // Khăn quàng đỏ Chiến binh Tân An
-  ctx.fillStyle = "#EF4444";
-  ctx.fillRect(x + 12, y + 15, 20, 5);
-  ctx.fillRect(x + 6, y + 17, 6, 7);
-  ctx.fillStyle = "#059669";
-  ctx.fillRect(x, y + 20, 10, 10);
-  ctx.fillRect(x - 6, y + 16, 8, 8);
-  ctx.fillStyle = "#34D399";
-  ctx.fillRect(x + 30, y + 22, 8, 5);
-  ctx.fillStyle = "#FACC15";
-  ctx.fillRect(x + 12, y + 4, 4, 5);
-  ctx.fillRect(x + 6, y + 12, 4, 5);
-  ctx.fillStyle = "#064E3B";
-  const step = Math.floor(dino.legFrame / 6) % 2;
-  if (dino.jumping) {{
-    ctx.fillRect(x + 10, y + 36, 7, 10);
-    ctx.fillRect(x + 22, y + 36, 7, 10);
-  }} else if (step === 0) {{
-    ctx.fillRect(x + 10, y + 36, 7, 12);
-    ctx.fillRect(x + 22, y + 36, 7, 7);
-  }} else {{
-    ctx.fillRect(x + 10, y + 36, 7, 7);
-    ctx.fillRect(x + 22, y + 36, 7, 12);
-  }}
-  ctx.restore();
-}}
+  update: function() {{
+    const fgColor = this.inverted ? '#e8eaed' : '#535353';
+    const bgColor = this.inverted ? '#202124' : '#f7f7f7';
+    const cloudColor = this.inverted ? '#5f6368' : '#d3d3d3';
 
-function drawObstacle(obs) {{
-  const x = obs.x;
-  const y = GROUND_Y - obs.h;
-  ctx.save();
-  if (obs.type === "tnt") {{
-    ctx.fillStyle = "#DC2626";
-    ctx.fillRect(x, y, obs.w, obs.h);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(x, y + 14, obs.w, 16);
-    ctx.fillStyle = "#0F172A";
-    ctx.font = "900 13px Nunito, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("TNT", x + obs.w / 2, y + 26);
-  }} else if (obs.type === "creeper") {{
-    ctx.fillStyle = "#16A34A";
-    ctx.fillRect(x, y, obs.w, obs.h);
-    ctx.fillStyle = "#0F172A";
-    ctx.fillRect(x + 8, y + 10, 8, 8);
-    ctx.fillRect(x + 26, y + 10, 8, 8);
-    ctx.fillRect(x + 16, y + 20, 10, 12);
-  }} else {{
-    ctx.fillStyle = "#047857";
-    ctx.fillRect(x + 12, y, 16, obs.h);
-    ctx.fillRect(x + 2, y + 12, 10, 8);
-    ctx.fillRect(x + 2, y + 6, 6, 12);
-    ctx.fillRect(x + 28, y + 16, 10, 8);
-    ctx.fillRect(x + 32, y + 8, 6, 14);
-  }}
+    this.ctx.fillStyle = bgColor;
+    this.ctx.fillRect(0, 0, this.dimensions.WIDTH, this.dimensions.HEIGHT);
 
-  ctx.font = "900 18px Nunito, sans-serif";
-  const tw = Math.max(84, ctx.measureText(obs.word).width + 24);
-  const bx = x + obs.w / 2 - tw / 2;
-  const by = y - 40;
-  ctx.fillStyle = "#FEF08A";
-  ctx.fillRect(bx, by, tw, 30);
-  ctx.lineWidth = 2.5;
-  ctx.strokeStyle = "#0F172A";
-  ctx.strokeRect(bx, by, tw, 30);
-  ctx.fillStyle = "#0F172A";
-  ctx.textAlign = "center";
-  ctx.fillText(obs.word, x + obs.w / 2, by + 21);
-  ctx.restore();
-}}
-
-function updateAndDraw() {{
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const skyGrad = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
-  skyGrad.addColorStop(0, "#BAE6FD");
-  skyGrad.addColorStop(1, "#FEF9C3");
-  ctx.fillStyle = skyGrad;
-  ctx.fillRect(0, 0, canvas.width, GROUND_Y);
-
-  ctx.fillStyle = "#FDE047";
-  ctx.fillRect(canvas.width - 70, 16, 34, 34);
-
-  ctx.fillStyle = "rgba(255,255,255,0.9)";
-  for (const c of clouds) {{
-    c.x -= 0.55;
-    if (c.x + c.w < 0) c.x = canvas.width + 30;
-    ctx.fillRect(c.x, c.y, c.w, 16);
-    ctx.fillRect(c.x + 10, c.y - 8, c.w - 20, 10);
-  }}
-
-  ctx.fillStyle = "#22C55E";
-  ctx.fillRect(0, GROUND_Y, canvas.width, 10);
-  ctx.fillStyle = "#15803D";
-  for (let gx = 0; gx < canvas.width; gx += 28) {{
-    ctx.fillRect(gx, GROUND_Y + 10, 14, 5);
-  }}
-  ctx.fillStyle = "#78350F";
-  ctx.fillRect(0, GROUND_Y + 10, canvas.width, canvas.height - GROUND_Y - 10);
-
-  const distToDino = obstacle.x - (dino.x + dino.w);
-  if (!dino.jumping && !obstacle.passed && distToDino <= 58 && distToDino > 8) {{
-    obstacle.waitingForRead = true;
-    obstacle.x -= 0.35;
-  }} else {{
-    obstacle.waitingForRead = false;
-    obstacle.x -= 3.1;
-  }}
-
-  if (dino.jumping) {{
-    dino.y += dino.vy;
-    dino.vy += 0.62;
-    if (dino.y >= GROUND_Y - dino.h) {{
-      dino.y = GROUND_Y - dino.h;
-      dino.jumping = false;
-      dino.vy = 0;
+    // Mây trôi
+    for (let i = 0; i < this.clouds.length; i++) {{
+      const c = this.clouds[i];
+      if (!this.crashed) c.x -= c.speed;
+      if (c.x < -60) c.x = this.dimensions.WIDTH + 30;
+      this.drawCloud(c.x, c.y, cloudColor);
     }}
-  }} else {{
-    dino.legFrame++;
-  }}
 
-  if (!obstacle.passed && obstacle.x + obstacle.w < dino.x) {{
-    obstacle.passed = true;
-    emeralds += 10 * combo;
-    clearedCount += 1;
-    combo = Math.min(5, combo + 1);
-    sfxEmerald();
-    spawnParticles(dino.x + 30, dino.y, "#FACC15");
-    updateTargetUI();
-  }}
+    // Đường chân trời (Horizon Line) + sỏi cát chuẩn Chrome Dino
+    const gy = this.dimensions.GROUND_Y;
+    this.ctx.fillStyle = fgColor;
+    this.ctx.fillRect(0, gy, this.dimensions.WIDTH, 2);
+    for (let i = 0; i < this.bumps.length; i++) {{
+      if (!this.crashed) this.bumps[i] -= this.currentSpeed;
+      if (this.bumps[i] < -20) this.bumps[i] = this.dimensions.WIDTH + Math.random() * 40;
+      const bx = this.bumps[i];
+      this.ctx.fillRect(bx, gy + 5, (i % 2 === 0 ? 12 : 6), 2);
+      this.ctx.fillRect(bx + 22, gy + 9, 4, 2);
+    }}
 
-  if (!obstacle.passed &&
-      dino.x + dino.w - 8 > obstacle.x &&
-      dino.x + 8 < obstacle.x + obstacle.w &&
-      dino.y + dino.h - 6 > GROUND_Y - obstacle.h) {{
-    sfxBump();
-    combo = 1;
-    obstacle.x = dino.x + 215;
-    dino.speechBubble = "Đọc to “" + obstacle.word + "” để nhảy nhé!";
-    dino.speechTimer = 60;
-    updateTargetUI();
-  }}
+    if (!this.crashed) {{
+      // Khi chướng ngại vật đến sát T-Rex (vùng đọc từ khó), làm chậm nhẹ để học sinh kịp đọc to từ khó
+      const dist = this.obstacle.x - (this.tRex.x + this.tRex.w);
+      if (!this.tRex.jumping && !this.obstacle.passed && dist <= 62 && dist > 6) {{
+        this.obstacle.slowZone = true;
+        this.obstacle.x -= 0.45;
+      }} else {{
+        this.obstacle.slowZone = false;
+        this.obstacle.x -= this.currentSpeed;
+      }}
 
-  if (obstacle.x + obstacle.w < -20) {{
-    nextObstacle();
-  }}
+      this.distanceRan += 0.15;
+      const curScore = Math.floor(this.distanceRan);
+      if (curScore > 0 && curScore % this.config.INVERT_DISTANCE === 0 && this.invertTimer === 0) {{
+        this.inverted = !this.inverted;
+        this.outerContainerEl.classList.toggle(Runner.classes.INVERTED, this.inverted);
+        this.invertTimer = 40;
+        this.playSound('SCORE');
+      }}
+      if (this.invertTimer > 0) this.invertTimer--;
 
-  drawObstacle(obstacle);
-  drawPixelDino(dino.x, dino.y);
+      // Nhảy vật lý chuẩn Runner
+      if (this.tRex.jumping) {{
+        this.tRex.y += this.tRex.vy;
+        this.tRex.vy += this.config.GRAVITY;
+        if (this.tRex.y >= this.tRex.groundY) {{
+          this.tRex.y = this.tRex.groundY;
+          this.tRex.jumping = false;
+          this.tRex.vy = 0;
+        }}
+      }} else {{
+        this.tRex.stepFrame++;
+      }}
 
-  if (obstacle.waitingForRead) {{
-    ctx.save();
-    ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
-    ctx.fillRect(195, 12, 430, 32);
-    ctx.strokeStyle = "#34D399";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(195, 12, 430, 32);
-    ctx.fillStyle = "#FEF08A";
-    ctx.font = "900 15px Nunito, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("🎙️ Đọc to: “" + obstacle.word + "” hoặc Chạm vào màn hình để Nhảy!", 410, 33);
-    ctx.restore();
-  }}
+      // Vượt qua chướng ngại vật thành công
+      if (!this.obstacle.passed && this.obstacle.x + this.obstacle.w < this.tRex.x) {{
+        this.obstacle.passed = true;
+        this.wordsCleared++;
+        this.distanceRan += 15;
+        this.highestScore = Math.max(this.highestScore, Math.floor(this.distanceRan));
+        this.playSound('SCORE');
+      }}
 
-  if (dino.speechTimer > 0) {{
-    dino.speechTimer--;
-    ctx.save();
-    ctx.font = "900 14.5px Nunito, sans-serif";
-    const bw = ctx.measureText(dino.speechBubble).width + 20;
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(dino.x, dino.y - 34, bw, 26);
-    ctx.strokeStyle = "#0F172A";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(dino.x, dino.y - 34, bw, 26);
-    ctx.fillStyle = "#064E3B";
-    ctx.fillText(dino.speechBubble, dino.x + 10, dino.y - 16);
-    ctx.restore();
-  }}
+      // Kiểm tra va chạm (Collision box chuẩn Chrome Dino)
+      if (!this.obstacle.passed &&
+          this.tRex.x + this.tRex.w - 10 > this.obstacle.x + 4 &&
+          this.tRex.x + 10 < this.obstacle.x + this.obstacle.w - 4 &&
+          this.tRex.y + this.tRex.h - 8 > this.obstacle.y + 4) {{
+        this.crashed = true;
+        this.outerContainerEl.classList.add(Runner.classes.CRASHED);
+        this.highestScore = Math.max(this.highestScore, Math.floor(this.distanceRan));
+        this.playSound('HIT');
+      }}
 
-  for (let i = particles.length - 1; i >= 0; i--) {{
-    const p = particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.22;
-    p.life--;
-    ctx.fillStyle = p.color;
-    ctx.fillRect(p.x, p.y, p.size, p.size);
-    if (p.life <= 0) particles.splice(i, 1);
-  }}
+      if (this.obstacle.x + this.obstacle.w < -30) {{
+        this.wordIndex = (this.wordIndex + 1) % WORDS.length;
+        this.currentWord = WORDS[this.wordIndex];
+        this.obstacle = this.createObstacle(this.dimensions.WIDTH + 50);
+        this.updateWordHUD();
+      }}
+    }}
 
-  if (isGameVisible && !document.hidden) {{
-    animId = requestAnimationFrame(updateAndDraw);
-  }} else {{
-    animId = null;
-  }}
-}}
+    // Vẽ Chướng ngại vật & T-Rex
+    this.drawObstacleSprite(this.obstacle, fgColor, bgColor);
+    this.drawTRex(fgColor);
 
-let isGameVisible = true;
-let animId = null;
-function ensureLoop() {{
-  if (!animId && isGameVisible && !document.hidden) {{
-    animId = requestAnimationFrame(updateAndDraw);
+    // Bảng điểm góc phải trên cùng chuẩn Chrome Dino: HI 00000 00000
+    this.ctx.save();
+    this.ctx.fillStyle = fgColor;
+    this.ctx.font = "700 13px 'Press Start 2P', monospace";
+    this.ctx.textAlign = 'right';
+    const hiStr = String(this.highestScore).padStart(5, '0');
+    const scStr = String(Math.floor(this.distanceRan)).padStart(5, '0');
+    this.ctx.fillText(`TỪ:${{this.wordsCleared}}  HI ${{hiStr}}  ${{scStr}}`, this.dimensions.WIDTH - 14, 24);
+    this.ctx.restore();
+
+    // Thông báo nhắc đọc khi vào vùng nhảy
+    if (this.obstacle.slowZone && !this.crashed) {{
+      this.ctx.save();
+      this.ctx.fillStyle = fgColor;
+      this.ctx.font = "800 13.5px 'Nunito', sans-serif";
+      this.ctx.textAlign = 'left';
+      this.ctx.fillText('🎙️ Đọc to “' + this.currentWord + '” hoặc chạm để nhảy!', 14, 24);
+      this.ctx.restore();
+    }}
+
+    // Bong bóng khen khi T-Rex nhảy
+    if (this.tRex.bubbleTimer > 0) {{
+      this.tRex.bubbleTimer--;
+      this.ctx.save();
+      this.ctx.font = "900 13.5px 'Nunito', sans-serif";
+      this.ctx.fillStyle = fgColor;
+      this.ctx.fillText(this.tRex.bubbleText, this.tRex.x, Math.max(18, this.tRex.y - 8));
+      this.ctx.restore();
+    }}
+
+    // Màn hình GAME OVER chuẩn Chrome Dino (kèm nút Replay ở giữa)
+    if (this.crashed) {{
+      this.ctx.save();
+      this.ctx.fillStyle = fgColor;
+      this.ctx.font = "700 16px 'Press Start 2P', monospace";
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText('G A M E  O V E R', this.dimensions.WIDTH / 2, 62);
+      this.ctx.font = "800 14px 'Nunito', sans-serif";
+      this.ctx.fillText('Đọc lại từ “' + this.currentWord + '” rồi chạm vào đây (hoặc bấm Space) để tiếp tục!', this.dimensions.WIDTH / 2, 88);
+
+      // Nút Replay cổ điển của Chrome Dino
+      const rx = this.dimensions.WIDTH / 2 - 18;
+      const ry = 100;
+      this.ctx.fillRect(rx, ry, 36, 32);
+      this.ctx.fillStyle = bgColor;
+      this.ctx.fillRect(rx + 3, ry + 3, 30, 26);
+      this.ctx.fillStyle = fgColor;
+      this.ctx.font = "900 18px sans-serif";
+      this.ctx.fillText('↻', this.dimensions.WIDTH / 2, ry + 23);
+      this.ctx.restore();
+    }}
+
+    if (this.isVisible && !document.hidden) {{
+      this.raqId = requestAnimationFrame(this.update.bind(this));
+    }} else {{
+      this.raqId = null;
+    }}
+  }},
+
+  scheduleNextFrame: function() {{
+    if (!this.raqId && this.isVisible && !document.hidden) {{
+      this.raqId = requestAnimationFrame(this.update.bind(this));
+    }}
   }}
-}}
-document.addEventListener("visibilitychange", ensureLoop);
-if ("IntersectionObserver" in window) {{
-  const io = new IntersectionObserver((entries) => {{
-    isGameVisible = entries.some(e => e.isIntersecting);
-    ensureLoop();
+}};
+
+const runner = new Runner('outer-container');
+runner.isVisible = true;
+document.addEventListener('visibilitychange', function() {{ runner.scheduleNextFrame(); }});
+if ('IntersectionObserver' in window) {{
+  const io = new IntersectionObserver(function(entries) {{
+    runner.isVisible = entries.some(function(e) {{ return e.isIntersecting; }});
+    runner.scheduleNextFrame();
   }}, {{ threshold: 0.05 }});
-  io.observe(canvas);
+  io.observe(runner.canvas);
 }}
-ensureLoop();
 </script>
 </body>
 </html>
-""", height=445)
+""", height=345)
 
 
 # =====================================================================
@@ -1844,13 +2071,14 @@ def compute_leaderboards(all_records, students_by_class):
             "Số bài đã hoàn thành": sum(s["Số bài đã đọc"] for s in cls_students),
             "_stars": total_cls_stars,
             "_active": active_count,
+            "_roster": total_roster,
         })
     class_rows.sort(key=lambda x: (-x["_stars"], -x["_active"], x["Lớp"]))
     return student_rows, class_rows
 
 
 # =====================================================================
-# 8. TRẠM ĐIỀU KHIỂN CHIẾN BINH & BANNER ĐẤU TRƯỜNG TÂN AN
+# 8. BẢNG XẾP HẠNG TRỰC QUAN NGAY TRANG CHỦ & TRẠM ĐIỀU KHIỂN
 # =====================================================================
 st.session_state.setdefault("history", [])
 st.session_state.setdefault("rec_n", 0)
@@ -1858,7 +2086,7 @@ st.session_state.setdefault("rec_n", 0)
 STUDENTS_BY_CLASS = load_students_by_class()
 ALL_CLASSES = sorted(STUDENTS_BY_CLASS.keys())
 
-# Tự động nhận diện nếu phụ huynh mở link trực tiếp trong Zalo trên điện thoại
+# Mẹo tự động cho trình duyệt Zalo trên điện thoại
 components.html("""
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
 <style>
@@ -1884,11 +2112,11 @@ components.html("""
 </script></body></html>
 """, height=0)
 
-# Placeholder hiển thị Hero Header sau khi biết học sinh nào đang chọn
 hero_placeholder = st.empty()
+live_leaderboard_placeholder = st.empty()
 
 with st.container(border=True):
-    st.markdown("##### 🎮 TRẠM ĐIỀU KHIỂN CHIẾN BINH — CHỌN LỚP, TÊN HỌC SINH & NHIỆM VỤ ĐỌC")
+    st.markdown("##### 🎮 CHỌN LỚP, TÊN HỌC SINH & BÀI ĐỌC")
     col_grade, col_class, col_name = st.columns([1.0, 1.0, 2.2])
 
     grade_labels = list(GRADES)
@@ -1937,8 +2165,9 @@ lesson = readings[reading_titles.index(picked_title)]
 target_wpm = lesson.get("target_wpm", 40)
 lesson_id = lesson.get("lesson_code", lesson["title"])
 
-# Render Hero Header trực quan với SVG Mascot Khủng Long & HUD thông tin học sinh thực tế
+# Tính dữ liệu Bảng xếp hạng để hiển thị NGAY NGOÀI MÀN HÌNH CHÍNH
 all_hist_now = get_all_history()
+student_rows_main, class_rows_main = compute_leaderboards(all_hist_now, STUDENTS_BY_CLASS)
 cur_stars_hud, cur_lessons_hud = student_total_stars(all_hist_now, student_name or "", selected_class or "")
 cur_rank_hud, _ = rank_of(cur_stars_hud)
 
@@ -1947,31 +2176,111 @@ hero_placeholder.markdown(f"""
   <div class="hero-top-row">
     <div class="hero-brand">
       <div class="dino-avatar-box">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="9" y="2" width="11" height="8" fill="#10B981" stroke="#0F172A" stroke-width="1.6"/>
-          <rect x="14" y="4" width="2.5" height="2.5" fill="#0F172A"/>
-          <rect x="6" y="10" width="10" height="8" fill="#059669" stroke="#0F172A" stroke-width="1.6"/>
-          <rect x="7" y="9" width="9" height="2.5" fill="#EF4444"/>
-          <rect x="2" y="12" width="4" height="4" fill="#10B981" stroke="#0F172A" stroke-width="1.6"/>
-          <rect x="7" y="18" width="3" height="4" fill="#047857" stroke="#0F172A" stroke-width="1.6"/>
-          <rect x="12" y="18" width="3" height="4" fill="#047857" stroke="#0F172A" stroke-width="1.6"/>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2H21V9H16V11H19V13H15V17H13V21H10V17H8V21H5V15H3V11H6V9H11V2Z" fill="#535353"/>
+          <rect x="13" y="4" width="2" height="2" fill="#F7F7F7"/>
         </svg>
       </div>
       <div>
         <div class="school-tag">🏫 {SCHOOL} · {LOCATION.upper()}</div>
-        <h1>ĐẤU TRƯỜNG DINO · CHINH PHỤC TIẾNG VIỆT</h1>
-        <p class="hero-sub">Đọc chuẩn từng tiếng · Vượt chướng ngại vật Từ Khó · Thắp sáng Bảng Vàng toàn trường!</p>
+        <h1>ĐẤU TRƯỜNG DINO · LUYỆN ĐỌC TIẾNG VIỆT</h1>
+        <p class="hero-sub">Đọc chuẩn từng tiếng · Nhảy qua Từ Khó cùng Khủng Long Chrome · Vinh danh Bảng Vàng toàn trường!</p>
       </div>
     </div>
   </div>
   <div class="player-hud-bar">
-    <div class="hud-pill">🧒 Chiến binh: <b>{student_name or "Chưa chọn"}</b> ({selected_class})</div>
+    <div class="hud-pill">🧒 Học sinh: <b>{student_name or "Chưa chọn"}</b> (Lớp {selected_class})</div>
     <div class="hud-pill">{cur_rank_hud[2]} Cấp bậc: <b>{cur_rank_hud[1]}</b></div>
-    <div class="hud-pill">⭐ Sao tích lũy: <b>{cur_stars_hud}</b> ({cur_lessons_hud} bài)</div>
-    <div class="hud-pill">💎 Kinh nghiệm: <b>{cur_stars_hud * 10} XP</b></div>
+    <div class="hud-pill">⭐ Tổng sao của em: <b>{cur_stars_hud}</b> ({cur_lessons_hud} bài)</div>
+    <div class="hud-pill">💎 Điểm XP: <b>{cur_stars_hud * 10} XP</b></div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+# ----------------- BẢNG XẾP HẠNG TRỰC QUAN ĐƯA RA NGOÀI MÀN HÌNH CHÍNH -----------------
+with live_leaderboard_placeholder.container():
+    # Chuẩn bị Top 3 Bục Vinh Quang (nếu chưa có ai đọc thì hiển thị 3 vị trí đang chờ chinh phục)
+    podium_items = []
+    medals_cfg = [
+        ("🥇", "podium-1", "Quán Quân Toàn Trường"),
+        ("🥈", "podium-2", "Á Quân Toàn Trường"),
+        ("🥉", "podium-3", "Hạng Ba Toàn Trường"),
+    ]
+    for idx in range(3):
+        medal_icon, p_cls, default_role = medals_cfg[idx]
+        if idx < len(student_rows_main):
+            st_row = student_rows_main[idx]
+            p_name = f"{st_row['Họ và tên']} ({st_row['Lớp']})"
+            p_meta = f"⭐ {st_row['Tổng sao ⭐']} sao · {st_row['Số bài đã đọc']} bài · {st_row['Tốc độ tốt nhất']}"
+        else:
+            p_name = f"Đang chờ vinh danh {default_role}..."
+            p_meta = "Hãy đọc bài ngay hôm nay để chiếm lĩnh vị trí này!"
+        podium_items.append(
+            f'<div class="podium-card {p_cls}">'
+            f'<div class="podium-medal">{medal_icon}</div>'
+            f'<div class="podium-info">'
+            f'<div class="podium-name">{p_name}</div>'
+            f'<div class="podium-meta">{p_meta}</div>'
+            f'</div></div>'
+        )
+
+    # Chuẩn bị dải huy hiệu thi đua 20 lớp
+    chips_html = []
+    for c_idx, c_row in enumerate(class_rows_main[:10]):
+        is_cur = "active-cls" if c_row["Lớp"] == selected_class else ""
+        crown = "🏆 " if c_idx == 0 and c_row["_stars"] > 0 else ""
+        chips_html.append(
+            f'<div class="class-chip {is_cur}">'
+            f'{crown}Lớp <b>{c_row["Lớp"]}</b>: ⭐ {c_row["Tổng sao của lớp ⭐"]} ({c_row["Học sinh đã tham gia"]})'
+            f'</div>'
+        )
+
+    total_school_stars = sum(r["Tổng sao ⭐"] for r in student_rows_main)
+    st.markdown(f"""
+<div class="live-board-wrap" translate="no">
+  <div class="live-board-header">
+    <div class="live-board-title">🏆 BẢNG XẾP HẠNG THI ĐUA TRỰC TIẾP · {SCHOOL}</div>
+    <div style="font-size:13px;font-weight:800;color:#047857;background:#ECFDF5;padding:4px 10px;border-radius:8px;border:1.5px solid #10B981">
+      🌟 Toàn trường: {total_school_stars} Sao · {len(student_rows_main)} Chiến binh đã lên bảng
+    </div>
+  </div>
+  <div class="podium-grid">
+    {"".join(podium_items)}
+  </div>
+  <div style="font-size:12.5px;font-weight:800;color:#475569;margin-bottom:4px">🏰 Đấu trường các lớp dẫn đầu (Đang chọn: Lớp {selected_class}):</div>
+  <div class="class-chips-row">
+    {"".join(chips_html)}
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    # Nút mở nhanh bảng chi tiết ngay tại trang chủ để học sinh không cần tìm tab
+    with st.expander(f"📊 Bấm để xem chi tiết Bảng Xếp Hạng Lớp {selected_class} & Bảng Vàng 20 Lớp ngay tại đây"):
+        b_col1, b_col2 = st.columns(2)
+        with b_col1:
+            st.markdown(f"**🏅 Xếp hạng trong Lớp {selected_class}**")
+            cls_roster_quick = STUDENTS_BY_CLASS.get(selected_class, [])
+            rec_map_quick = {r["Họ và tên"].lower(): r for r in student_rows_main if r["Lớp"] == selected_class}
+            quick_cls_rows = []
+            for s_name in cls_roster_quick:
+                r_match = rec_map_quick.get(s_name.lower())
+                quick_cls_rows.append({
+                    "Họ và tên": s_name,
+                    "Sao ⭐": r_match["Tổng sao ⭐"] if r_match else 0,
+                    "Số bài": r_match["Số bài đã đọc"] if r_match else 0,
+                    "Danh hiệu": r_match["Danh hiệu Dino"] if r_match else "🥚 Trứng Khủng Long",
+                })
+            quick_cls_rows.sort(key=lambda x: (-x["Sao ⭐"], -x["Số bài"], x["Họ và tên"]))
+            st.dataframe(quick_cls_rows, hide_index=True, use_container_width=True, height=230)
+        with b_col2:
+            st.markdown("**🏰 Xếp hạng Thi Đua 20 Lớp Toàn Trường**")
+            quick_arena = [{
+                "Hạng": f"#{i+1}",
+                "Lớp": c["Lớp"],
+                "Tổng sao ⭐": c["Tổng sao của lớp ⭐"],
+                "Tham gia": c["Học sinh đã tham gia"],
+            } for i, c in enumerate(class_rows_main)]
+            st.dataframe(quick_arena, hide_index=True, use_container_width=True, height=230)
 
 # Cỡ chữ bài đọc
 FONT_SIZES = {"Vừa": 24, "Lớn": 30, "Rất lớn": 38}
@@ -1983,11 +2292,11 @@ div.reading-box {{
 }}
 </style>""", unsafe_allow_html=True)
 
-# 5 Tabs điều hướng kiểu Neo-Brutalist Pills
+# 5 Tabs điều hướng
 tab_read, tab_dino, tab_board, tab_teacher, tab_help = st.tabs([
-    "📖 1. Đọc Bài",
-    "🦖 2. Game Dino Vượt Từ Khó",
-    "🏆 3. Bảng Xếp Hạng & Kho Báu",
+    "📖 1. Đọc Bài & Luyện Từ Khó",
+    "🦖 2. Game Chrome Dino (Full)",
+    "🏆 3. Kho Báu & Xếp Hạng Đầy Đủ",
     "👩‍🏫 4. Quản Lý & CSDL",
     "ℹ️ 5. Hướng Dẫn",
 ])
@@ -2002,21 +2311,20 @@ def reading_flow():
   <div class="quest-step qs-1"><span class="q-num">1</span><span>🎧 Nghe đọc mẫu</span></div>
   <div class="quest-step qs-2"><span class="q-num">2</span><span>🎙️ Ghi âm đọc bài</span></div>
   <div class="quest-step qs-3"><span class="q-num">3</span><span>🦖 Nhảy qua Từ Khó</span></div>
-  <div class="quest-step qs-4"><span class="q-num">4</span><span>🏆 Tích Sao & XP</span></div>
+  <div class="quest-step qs-4"><span class="q-num">4</span><span>🏆 Lên Bảng Xếp Hạng</span></div>
 </div>""", unsafe_allow_html=True)
 
     c_info, c_size = st.columns([2.2, 1.3])
     with c_info:
         st.markdown(
             f'<div style="margin-top:6px;font-weight:800;color:#0F172A">'
-            f'📌 Nhiệm vụ: <span style="color:{P["border"]}">{grade_label} · {selected_week}</span> · '
+            f'📌 Bài học: <span style="color:{P["border"]}">{grade_label} · {selected_week}</span> · '
             f'Tốc độ mục tiêu: <b>{target_wpm} tiếng/phút</b></div>',
             unsafe_allow_html=True,
         )
     with c_size:
         st.radio("🔎 Cỡ chữ trang sách", list(FONT_SIZES), index=P["fs"], horizontal=True, key=f"fs_{grade_num}")
 
-    # Khung trang sách mới có thanh tiêu đề đen-vàng nổi bật
     st.markdown(f"""
 <div class="reading-header-bar" translate="no">
   <div class="reading-header-title">{P['emoji']} {lesson['title']}</div>
@@ -2027,7 +2335,7 @@ def reading_flow():
 
     if lesson.get("difficult_words"):
         tags = "".join(f"<span>{w}</span>" for w in lesson["difficult_words"])
-        st.markdown(f'<div class="tags" translate="no">🌵 Chướng ngại vật Từ Khó cần chú ý: {tags}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="tags" translate="no">🌵 Từ khó trong bài (sẽ xuất hiện trong Game Chrome Dino): {tags}</div>', unsafe_allow_html=True)
 
     # ---- Bước 1: Nghe đọc mẫu ----
     with st.container(border=True):
@@ -2059,7 +2367,7 @@ def reading_flow():
 
     # ---- Bước 2: Ghi âm và chấm điểm ----
     with st.container(border=True):
-        st.markdown(f"#### 🎙️ Bước 2: Chiến binh **{student_name}** ({selected_class}) thu âm bài đọc")
+        st.markdown(f"#### 🎙️ Bước 2: Học sinh **{student_name}** ({selected_class}) thu âm bài đọc")
         st.caption("💡 Mẹo nhỏ: Ngồi nơi yên tĩnh, bấm biểu tượng Micro, đọc to rõ ràng từ đầu đến cuối bài rồi bấm Dừng nhé!")
 
         def reset_recording():
@@ -2072,16 +2380,19 @@ def reading_flow():
             key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
         )
     if not audio_file:
+        # Cho phép học sinh khởi động trước với Game Chrome Dino ngay dưới bước ghi âm nếu muốn luyện từ khó trước
+        with st.expander("🦖 Khởi động trước: Chơi Game Khủng Long Chrome Dino luyện đọc Từ Khó của bài này", expanded=True):
+            render_dino_game(lesson.get("difficult_words", []), student_name, selected_class, lesson["title"])
         return
     if not student_name or not selected_class:
-        st.warning("⚠️ Em hãy chọn Lớp và Họ tên ở Trạm Điều Khiển phía trên trước khi nộp bài nhé!")
+        st.warning("⚠️ Em hãy chọn Lớp và Họ tên ở phía trên trước khi nộp bài nhé!")
         return
 
     wav_bytes = audio_file.getvalue()
     key = hashlib.md5(wav_bytes + student_name.encode() + lesson_id.encode()).hexdigest()
 
     if st.session_state.get("result_key") != key:
-        with st.spinner("🦖 Khủng Long Dino đang lắng nghe và chấm điểm từng tiếng..."):
+        with st.spinner("🦖 Đang lắng nghe và chấm điểm từng tiếng..."):
             res = evaluate(lesson["text"], wav_bytes, target_wpm, P)
             if not res["err"]:
                 now = datetime.now(VN_TZ)
@@ -2155,12 +2466,12 @@ def reading_flow():
     st.caption(f"Điểm quy đổi tham khảo: {res['score']}/4,0 · Chuẩn tốc độ {grade_label}: {target_wpm} tiếng/phút")
 
     if res["saved"]:
-        st.success("📊 Kết quả đã được đồng bộ lên Bảng Xếp Hạng Toàn Trường và Sổ theo dõi Google Sheet!")
+        st.success("📊 Kết quả đã được cập nhật ngay lên Bảng Xếp Hạng ở đầu trang và Sổ theo dõi Google Sheet!")
     else:
-        st.success("🏆 Kết quả đã được ghi nhận vào Bảng Xếp Hạng Toàn Trường!")
+        st.success("🏆 Kết quả đã được cập nhật ngay lên Bảng Xếp Hạng Trực Tiếp ở đầu trang!")
 
     st.button(
-        "🔄 Đọc lại lần nữa để phá kỷ lục Sao",
+        "🔄 Đọc lại lần nữa để nâng Sao",
         type="primary" if res["rating"].startswith("Chưa") else "secondary",
         on_click=reset_recording,
         key="retry_ok",
@@ -2170,12 +2481,11 @@ def reading_flow():
     st.markdown(f'<div class="reading-box" style="border-radius:18px" translate="no">{render_marked(res["tokens"])}</div>', unsafe_allow_html=True)
     st.caption("Chữ xanh: Đọc chuẩn · Nền vàng: Gần đúng (lệch dấu nhẹ) · Nền đỏ gạch chân: Cần luyện đọc lại")
 
-    # ---- Mở ngay màn chơi Dino với các từ vừa đọc nhầm ----
+    # ---- Mở ngay màn chơi Chrome Dino với các từ vừa đọc nhầm ----
     practice_now = list(dict.fromkeys((res["wrong"] + res["near"])[:6] + list(lesson.get("difficult_words", []))))
     if practice_now:
         with st.container(border=True):
-            st.markdown("#### 🦖 Nhiệm Vụ Giải Cứu Dino: Đọc To Các Từ Cần Rèn Để Nhảy Qua Chướng Ngại Vật!")
-            st.caption("Hệ thống đã tự động nạp các tiếng em vừa đọc nhầm lên lưng Xương Rồng & Khối TNT:")
+            st.markdown("#### 🦖 Luyện Tập Ngay: Đọc To Các Từ Cần Rèn Để Giúp Chrome Dino Nhảy Qua Xương Rồng!")
             render_dino_game(practice_now, student_name, selected_class, lesson["title"])
 
     st.markdown("### 📝 Nhận Xét Học Tập (Theo Thông tư 27/2020/TT-BGDĐT)")
@@ -2223,21 +2533,22 @@ with tab_read:
 
 
 # =====================================================================
-# TAB 2: TRÒ CHƠI KHỦNG LONG DINO VƯỢT TỪ KHÓ
+# TAB 2: TRÒ CHƠI CHROME DINO VƯỢT TỪ KHÓ (`chrome://dino` EDITION)
 # =====================================================================
 with tab_dino:
-    st.markdown("### 🦖 Đấu Trường Khủng Long Dino Vượt Từ Khó")
+    st.markdown("### 🦖 Trò Chơi Khủng Long Chrome (`chrome://dino`) — Đọc Từ Khó Vượt Chướng Ngại Vật")
     st.markdown(
-        "Khi **Xương rồng, Khối TNT hoặc Creeper** mang theo **Từ Khó** chạy tới gần, "
-        "em hãy bấm **🎤 Bật Micro Đọc** và phát âm to rõ từ đó (hoặc đọc to rồi **chạm tay vào màn hình Khủng Long / bấm phím Cách**) "
-        "để Dino nhảy qua và nhân hệ số **Combo Ngọc Lục Bảo 💎**!"
+        "Thiết kế chuẩn theo trò chơi **Khủng Long Mất Mạng của Chrome (`offline.js`)**: "
+        "Khi **Xương rồng** hoặc **Thằn lằn bay** mang theo **Từ Khó** tiến lại gần, "
+        "em hãy bấm **🎤 Bật Micro Đọc Từ** và đọc to từ đó (hoặc **chạm tay vào màn hình / bấm phím Cách**) "
+        "để T-Rex nhảy qua! Đạt mỗi mốc **100 điểm** màn hình sẽ chuyển giao diện **Ngày / Đêm**!"
     )
 
     default_words = st.session_state.get("practice_words") or lesson.get("difficult_words") or [
         "xinh xắn", "ríu rít", "trong trẻo", "lấp lánh", "nghiêng nghiêng", "chăm chỉ"
     ]
     custom_words_str = st.text_input(
-        "🎯 Danh sách từ khó trên chướng ngại vật (tự động lấy từ bài đọc hoặc các từ em vừa đọc sai):",
+        "🎯 Các từ khó gắn trên chướng ngại vật (tự động lấy từ bài đọc hoặc các từ em vừa đọc sai):",
         value=", ".join(default_words),
     )
     game_words = [w.strip() for w in custom_words_str.split(",") if w.strip()]
@@ -2245,7 +2556,7 @@ with tab_dino:
 
 
 # =====================================================================
-# TAB 3: BẢNG XẾP HẠNG TOÀN TRƯỜNG & KHO BÁU MINECRAFT
+# TAB 3: BẢNG XẾP HẠNG ĐẦY ĐỦ & KHO BÁU
 # =====================================================================
 with tab_board:
     all_hist = get_all_history()
@@ -2284,8 +2595,8 @@ with tab_board:
                 status_badge = "✅ Đã sở hữu!" if unlocked else f"🔒 Cần {req_stars} ⭐"
                 chest_html.append(
                     f'<div class="chest-item {state_cls}">'
-                    f'<div style="font-size:16.5px">{item_name}</div>'
-                    f'<div style="font-size:12.5px;margin-top:4px">{desc}</div>'
+                    f'<div style="font-size:16px">{item_name}</div>'
+                    f'<div style="font-size:12px;margin-top:4px">{desc}</div>'
                     f'<div style="font-size:12px;margin-top:4px;color:#B45309">{status_badge}</div>'
                     f'</div>'
                 )
@@ -2457,10 +2768,10 @@ with tab_teacher:
 with tab_help:
     st.markdown("### 🌈 Hướng Dẫn Tham Gia Đấu Trường Luyện Đọc Dino")
     st.markdown("""
-1. **Chọn Lớp & Tên học sinh**: Danh sách 348 học sinh của 20 lớp đã được đồng bộ sẵn từ CSDL ngành — em chỉ cần chọn Lớp rồi chạm vào tên mình.
-2. **Nghe đọc mẫu & Thu âm**: Nghe giọng đọc mẫu trước, sau đó bấm Micro đọc to, rõ ràng cả bài để nhận **Sao thưởng ⭐** và **Kinh nghiệm XP 💎**.
-3. **Chơi Game 🦖 Khủng Long Dino Vượt Từ Khó**: Đọc to các từ khó trên lưng Xương rồng / Khối TNT (hoặc chạm tay vào màn hình Khủng Long trên điện thoại) để nhảy qua và nhân hệ số Combo!
-4. **Đua Top Bảng Xếp Hạng**: Tích lũy sao để tiến hóa từ *🥚 Trứng Khủng Long* lên *👑 Vua Khủng Long Tân An*.
+1. **Xem Bảng Xếp Hạng ngay đầu trang**: Vừa vào web, em đã thấy ngay **Top 3 Bục Vinh Quang** toàn trường và thứ hạng thi đua của 20 lớp.
+2. **Chọn Lớp & Tên học sinh**: Danh sách 348 học sinh của 20 lớp đã được đồng bộ sẵn từ CSDL ngành — em chỉ cần chọn Lớp rồi chạm vào tên mình.
+3. **Nghe đọc mẫu & Thu âm**: Nghe giọng đọc mẫu trước, sau đó bấm Micro đọc to, rõ ràng cả bài để nhận **Sao thưởng ⭐** và **Kinh nghiệm XP 💎**.
+4. **Chơi Game 🦖 Khủng Long Chrome (`chrome://dino`)**: Đọc to các từ khó gắn trên Xương rồng / Thằn lằn bay (hoặc chạm tay vào màn hình trên điện thoại) để T-Rex nhảy qua!
 """)
 
     st.markdown("### ⭐ Bảng Quy Đổi Sao Thưởng & Kinh Nghiệm XP")
@@ -2483,9 +2794,9 @@ with tab_help:
         "Tốc độ tối thiểu để đạt T": "không yêu cầu" if not p["t_speed"] else f"{round(p['t_speed'] * 100)}% mức chuẩn",
     } for p in PROFILES.values()], hide_index=True, use_container_width=True)
 
-# Chân trang mới hoàn toàn — Đã bỏ dòng tác giả theo đúng yêu cầu
+# Chân trang mới — Không có dòng tác giả
 st.markdown(f"""
 <div class="footer-pro" translate="no">
   <div class="sch-name">🏫 {SCHOOL}</div>
-  <div style="font-size:14.5px;color:#A7F3D0;margin-top:3px">📍 {SCHOOL_DISPLAY}, {LOCATION}</div>
+  <div style="font-size:14px;color:#A7F3D0;margin-top:3px">📍 {SCHOOL_DISPLAY}, {LOCATION}</div>
 </div>""", unsafe_allow_html=True)
