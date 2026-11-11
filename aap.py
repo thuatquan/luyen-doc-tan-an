@@ -461,10 +461,47 @@ st.markdown("""
         font-weight: 800;
     }
     .footer b { color: #FDE047; font-size: 17px; }
+
+    /* Tối ưu mượt mà cho Điện thoại (Android / iPhone) & Laptop */
+    button, a, input, select, [role="tab"], [data-testid="stAudioInput"] {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+    div[data-baseweb="tab-list"] {
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding-bottom: 2px;
+    }
+    div[data-baseweb="tab-list"] button[data-baseweb="tab"] {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+    [data-testid="stAudioInput"] {
+        background: #F0FDF4;
+        border: 3px solid #22C55E;
+        border-radius: 16px;
+        padding: 8px 12px;
+    }
+
     @media (max-width: 640px) {
-        .reading-box { font-size: 22px !important; padding: 16px; }
-        .hero h1 { font-size: 23px; }
-        .hero .school-pill { font-size: 13px; padding: 4px 10px; }
+        .block-container { padding-top: 0.5rem; padding-left: 0.65rem; padding-right: 0.65rem; }
+        .hero { padding: 16px 12px 14px; margin-bottom: 12px; border-radius: 14px; }
+        .hero h1 { font-size: 21px; line-height: 1.25; }
+        .hero p { font-size: 13.5px; }
+        .hero .school-pill { font-size: 12.5px; padding: 4px 10px; }
+        .hero::before, .hero::after { display: none; }
+        .reading-box { font-size: 22px !important; padding: 16px 15px; line-height: 1.85; }
+        .steps { gap: 6px; margin: 6px 0 12px; }
+        .steps .step-card { min-width: 46%; padding: 8px 10px; font-size: 13px; }
+        button[data-baseweb="tab"] { padding: 8px 11px !important; font-size: 13.5px !important; }
+        div.stButton > button, div.stFormSubmitButton > button {
+            width: 100%;
+            min-height: 48px !important;
+            font-size: 15.5px !important;
+        }
+        .chest-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -476,6 +513,34 @@ st.markdown(f"""
   <p>🌟 Đọc bài chuẩn xác · Giúp Khủng Long nhảy qua Từ Khó · Đua Top Bảng Xếp Hạng Toàn Trường! 🏆</p>
 </div>
 """, unsafe_allow_html=True)
+
+# Tự động nhận diện nếu phụ huynh mở link trực tiếp trong Zalo trên điện thoại để hướng dẫn bật Micro mượt mà
+components.html("""
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
+<style>
+  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: transparent; }
+  .zalo-tip {
+    display: none;
+    background: #FEF3C7;
+    border: 2px solid #F59E0B;
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: #78350F;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+</style></head><body>
+<div id="zaloBox" class="zalo-tip">
+  📱 <b>Mẹo cho điện thoại phụ huynh:</b> Bạn đang mở web bên trong ứng dụng <b>Zalo/Messenger</b>. Nếu bấm Micro chưa ghi âm được, hãy bấm biểu tượng <b>⋯ (3 chấm ở góc trên bên phải)</b> rồi chọn <b>"Mở bằng trình duyệt" (Chrome / Safari)</b> để đọc mượt nhất nhé!
+</div>
+<script>
+  const ua = navigator.userAgent || "";
+  if (/Zalo|FBAN|FBAV/i.test(ua)) {
+    document.getElementById("zaloBox").style.display = "block";
+  }
+</script></body></html>
+""", height=0)
 
 
 # =====================================================================
@@ -1038,23 +1103,26 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
   }}
   canvas {{
     width: 100%;
-    height: 230px;
+    height: 220px;
     display: block;
     border-radius: 12px;
     border: 3px solid #78350F;
     background: #E0F2FE;
     image-rendering: pixelated;
+    cursor: pointer;
+    touch-action: manipulation;
   }}
   .controls {{
     display: flex;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 10px;
     flex-wrap: wrap;
   }}
   .btn {{
     flex: 1;
-    min-width: 145px;
-    padding: 10px 14px;
+    min-width: 140px;
+    min-height: 46px;
+    padding: 10px 12px;
     border-radius: 12px;
     font-family: inherit;
     font-weight: 900;
@@ -1063,6 +1131,8 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
     border: 2px solid #000;
     transition: transform 0.1s;
     text-align: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }}
   .btn:active {{ transform: translateY(3px); }}
   .btn-mic {{
@@ -1085,12 +1155,22 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
   }}
   .heard-bar {{
     margin-top: 8px;
-    font-size: 13.5px;
+    font-size: 13px;
     color: #CBD5E1;
     font-weight: 700;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 4px;
+  }}
+  @media (max-width: 600px) {{
+    .game-card {{ padding: 10px; border-radius: 14px; }}
+    .target-banner {{ padding: 8px 10px; }}
+    .target-word {{ font-size: 22px; padding: 3px 12px; }}
+    .mic-status {{ font-size: 12.5px; width: 100%; text-align: center; }}
+    canvas {{ height: 185px; }}
+    .btn {{ min-width: 45%; font-size: 14px; padding: 9px 8px; }}
+    .btn-jump {{ min-width: 100%; font-size: 15.5px; }}
   }}
 </style>
 </head>
@@ -1108,20 +1188,20 @@ def render_dino_game(words_list, student_name, selected_class, lesson_title):
         <div class="target-word" id="targetWordDisplay">...</div>
       </div>
     </div>
-    <div class="mic-status" id="micStatus">🎙️ Bấm "Bật Micro Đọc" hoặc phím Cách</div>
+    <div class="mic-status" id="micStatus">🎙️ Bấm Micro hoặc Chạm màn hình để Nhảy</div>
   </div>
 
-  <canvas id="dinoCanvas" width="820" height="230"></canvas>
+  <canvas id="dinoCanvas" width="820" height="220" title="Chạm vào màn hình để Khủng Long nhảy"></canvas>
 
   <div class="controls">
-    <button class="btn btn-mic" id="btnMic" onclick="toggleVoice()">🎤 Bật Micro Đọc Tự Động</button>
-    <button class="btn btn-speak" onclick="speakCurrentWord()">🔊 Nghe Mẫu Từ Này</button>
-    <button class="btn btn-jump" onclick="manualReadJump()">⬆️ Em Đã Đọc To! Nhảy Qua (Space)</button>
+    <button class="btn btn-mic" id="btnMic" onclick="toggleVoice()">🎤 Bật Micro Đọc</button>
+    <button class="btn btn-speak" onclick="speakCurrentWord()">🔊 Nghe Mẫu Từ</button>
+    <button class="btn btn-jump" onclick="manualReadJump()">⬆️ Đã Đọc To! Chạm Để Nhảy (Space)</button>
   </div>
 
   <div class="heard-bar">
-    <span id="heardText">👂 Máy nghe được: (Hãy bấm Bật Micro rồi đọc to từ trên bảng!)</span>
-    <span>💡 Mẹo: Đọc đúng từ trước khi Khủng Long chạm xương rồng / khối TNT!</span>
+    <span id="heardText">👂 Máy nghe: (Bấm Bật Micro hoặc đọc to rồi chạm vào hình Khủng Long để nhảy!)</span>
+    <span>📱 Điện thoại: Chạm thẳng vào hình Khủng Long để nhảy · 💻 Laptop: Phím Cách (Space)</span>
   </div>
 </div>
 
@@ -1264,6 +1344,15 @@ function manualReadJump() {{
   triggerDinoJump("🦖 Nhảy vượt: " + obstacle.word + "!");
 }}
 
+// Hỗ trợ chạm trực tiếp vào màn hình Khủng Long trên điện thoại & phím Cách trên Laptop
+canvas.addEventListener("touchstart", (e) => {{
+  e.preventDefault();
+  manualReadJump();
+}}, {{ passive: false }});
+canvas.addEventListener("mousedown", (e) => {{
+  e.preventDefault();
+  manualReadJump();
+}});
 window.addEventListener("keydown", (e) => {{
   if (e.code === "Space" || e.code === "ArrowUp") {{
     e.preventDefault();
@@ -1576,13 +1665,33 @@ function updateAndDraw() {{
     if (p.life <= 0) particles.splice(i, 1);
   }}
 
-  requestAnimationFrame(updateAndDraw);
+  if (isGameVisible && !document.hidden) {{
+    animId = requestAnimationFrame(updateAndDraw);
+  }} else {{
+    animId = null;
+  }}
 }}
-requestAnimationFrame(updateAndDraw);
+
+let isGameVisible = true;
+let animId = null;
+function ensureLoop() {{
+  if (!animId && isGameVisible && !document.hidden) {{
+    animId = requestAnimationFrame(updateAndDraw);
+  }}
+}}
+document.addEventListener("visibilitychange", ensureLoop);
+if ("IntersectionObserver" in window) {{
+  const io = new IntersectionObserver((entries) => {{
+    isGameVisible = entries.some(e => e.isIntersecting);
+    ensureLoop();
+  }}, {{ threshold: 0.05 }});
+  io.observe(canvas);
+}}
+ensureLoop();
 </script>
 </body>
 </html>
-""", height=430)
+""", height=445)
 
 
 # =====================================================================
