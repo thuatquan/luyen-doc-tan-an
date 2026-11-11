@@ -316,18 +316,18 @@ st.markdown("""
         margin-bottom: 10px !important;
     }
 
-    /* ================= 4. THANH GHI ÂM NỔI (STICKY AUDIO DOCK) & TRANG SÁCH =================
-       Đặt Micro ngay phía trên bài đọc và ghim nổi khi cuộn để học sinh trên điện thoại
-       VỪA BẤM GHI ÂM VỪA NHÌN THẤY TOÀN BỘ BÀI ĐỌC BÊN DƯỚI!
+    /* ================= 4. THANH GHI ÂM DƯỚI BÀI ĐỌC GHIM ĐÁY MÀN HÌNH (STICKY BOTTOM DOCK) =================
+       Đặt Micro ở dưới bài đọc và ghim nổi ở mép dưới màn hình (bottom: 8px) để trên điện thoại
+       học sinh nhìn bài đọc ở trên mà nút Micro vẫn luôn hiển thị ngay dưới ngón tay cái!
     */
     [data-testid="stAudioInput"] {
         background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%) !important;
         border: 2px solid #10B981 !important;
         border-radius: 14px !important;
         padding: 6px 12px !important;
-        box-shadow: 0 6px 16px rgba(16, 185, 129, 0.14) !important;
+        box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(16, 185, 129, 0.15) !important;
         position: sticky !important;
-        top: 6px !important;
+        bottom: 8px !important;
         z-index: 98 !important;
     }
 
@@ -2216,18 +2216,7 @@ def reading_flow():
         except Exception:
             browser_tts_button(lesson["text"])
 
-    # 2. THANH MICRO THU ÂM ĐẶT NGAY PHÍA TRÊN BÀI ĐỌC (GHIM NỔI KHI CUỘN TRÊN ĐIỆN THOẠI)
-    mic_prompt = (
-        f"🎙️ Em {student_name} ({selected_class}) bấm Micro rồi nhìn bài đọc ngay bên dưới để đọc nhé:"
-        if (student_name and selected_class)
-        else "🎙️ Bấm Micro rồi nhìn bài đọc ngay bên dưới để đọc (Nhớ chọn Lớp & Tên ở trên nhé):"
-    )
-    audio_file = st.audio_input(
-        mic_prompt,
-        key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
-    )
-
-    # 3. KHUNG TRANG SÁCH BÀI ĐỌC NẰM NGAY SÁT DƯỚI NÚT GHI ÂM
+    # 2. KHUNG TRANG SÁCH BÀI ĐỌC HIỂN THỊ TRƯỚC
     stu_badge_str = (
         f"Lớp {selected_class} · {student_name} · Chuẩn {target_wpm} tiếng/phút"
         if (selected_class and student_name)
@@ -2244,6 +2233,17 @@ def reading_flow():
     if lesson.get("difficult_words"):
         tags = "".join(f"<span>{w}</span>" for w in lesson["difficult_words"])
         st.markdown(f'<div class="tags" translate="no">🌵 Từ khó cần lưu ý: {tags}</div>', unsafe_allow_html=True)
+
+    # 3. THANH MICRO THU ÂM ĐẶT Ở DƯỚI BÀI ĐỌC (GHIM NỔI Ở ĐÁY MÀN HÌNH ĐIỆN THOẠI KHI ĐỌC)
+    mic_prompt = (
+        f"🎙️ Em {student_name} ({selected_class}) bấm Micro bên dưới để đọc bài nhé:"
+        if (student_name and selected_class)
+        else "🎙️ Bấm Micro bên dưới để bắt đầu đọc bài (Nhớ chọn Lớp & Tên ở trên nhé):"
+    )
+    audio_file = st.audio_input(
+        mic_prompt,
+        key=f"audio_{st.session_state['rec_n']}_{lesson_id}",
+    )
 
     if not audio_file:
         return
